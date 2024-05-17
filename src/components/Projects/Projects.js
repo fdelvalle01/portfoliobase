@@ -2,14 +2,26 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import leaf from "../../Assets/Projects/leaf.png";
-import emotion from "../../Assets/Projects/emotion.png";
-import editor from "../../Assets/Projects/codeEditor.png";
-import chatify from "../../Assets/Projects/chatify.png";
-import suicide from "../../Assets/Projects/suicide.png";
-import bitsOfCode from "../../Assets/Projects/blog.png";
+import sebraht from "../../Assets/Projects/sebraht.png";
+import sebraht_siadus from "../../Assets/Projects/sebraht_siadus.png";
+
+import ProjectModal from './ProjectModal';
+import {useState} from "react";
 
 function Projects() {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    console.log("open")
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    console.log("open")
+    setModalOpen(false);
+  };
+
   return (
     <Container fluid className="project-section">
       <Particle />
@@ -23,16 +35,30 @@ function Projects() {
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={chatify}
+              imgPath={sebraht}
               isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              ghLink="https://github.com/soumyajit4419/Chatify"
-              demoLink="https://chatify-49.web.app/"
+              title="Stock Trading Platform: Integration for the Dominican Republic Market"
+              description="I developed and participated in the integration of a cutting-edge stock trading platform for the Dominican Republic market. This platform, designed with high-tech components and a highly competitive approach to financial software development, has been a significant advancement in the modernization and efficiency of the Dominican stock market"
+              ghLink="https://bvrd.com.do/bvrd-bsc/"
+              demoLink=""
+              openModal={handleOpenModal} 
             />
+           <ProjectModal open={modalOpen} handleClose={handleCloseModal} />
           </Col>
 
           <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={sebraht_siadus}
+              isBlog={false}
+              title="User management system for the Sebra HT trading platform"
+              description="In this project, I was the lead developer responsible for creating and implementing the user management system for the entire trading software. This system is the core component where all the trading entities are created and managed daily, ensuring comprehensive administration of these entities."
+              ghLink=""
+              demoLink=""
+              openModal={handleOpenModal} 
+            />
+           <ProjectModal open={modalOpen} handleClose={handleCloseModal} />
+          </Col>
+          {/* <Col md={4} className="project-card">
             <ProjectCard
               imgPath={bitsOfCode}
               isBlog={false}
@@ -41,52 +67,7 @@ function Projects() {
               ghLink="https://github.com/soumyajit4419/Bits-0f-C0de"
               demoLink="https://blogs.soumya-jit.tech/"
             />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={editor}
-              isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/soumyajit4419/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={leaf}
-              isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={suicide}
-              isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/soumyajit4419/AI_For_Social_Good"
-              // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={emotion}
-              isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              ghLink="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
-              // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
-            />
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </Container>

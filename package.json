@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.17",
+    "@mui/system": "^5.15.15",
     "@react-pdf/renderer": "^2.2.0",
+    "@react-spring/web": "^9.7.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -34,6 +39,10 @@
       "react-app/jest"
     ]
   },
+  "stats": {
+    "warningsFilter": "source-map-loader"
+  },
+  
   "browserslist": {
     "production": [
       ">0.2%",
@@ -46,4 +55,5 @@
       "last 1 safari version"
     ]
   }
+  
 }

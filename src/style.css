@@ -13,6 +13,15 @@ html {
 
   --imp-text-color: #c770f0;
 }
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	scrollbar-width: thin;
+	scrollbar-color: var(--tj-theme-primary) var(--tj-theme-secondary);
+}
+
 
 .purple {
   color: var(--imp-text-color) !important;
@@ -262,6 +271,9 @@ button:focus {
   background-repeat: no-repeat;
   padding-bottom: 30px !important;
   padding-top: 30px !important;
+  padding-bottom: 5vw; /* Utiliza un porcentaje del ancho de la pantalla */
+  padding-top: 5vw; /* Utiliza un porcentaje del ancho de la pantalla */
+  min-height: 100vh;
 }
 
 .home-content {
@@ -285,12 +297,12 @@ button:focus {
 }
 
 .Typewriter__wrapper {
-  font-size: 2.2em !important;
-  color: #be6adf !important;
+  font-size: 20px;
+  color: #fcfcfc !important;
   font-weight: 600 !important;
 }
 .Typewriter__cursor {
-  font-size: 2.4em !important;
+  font-size: 20px;
   color: #b562d6 !important;
 }
 
@@ -449,7 +461,11 @@ button:focus {
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
+
 
 .project-card {
   padding-top: 50px !important;
@@ -531,12 +547,44 @@ button:focus {
   outline: none !important;
   box-shadow: none !important;
 }
-.project-heading {
+.project-heading{
   color: white !important;
-  font-size: 2.3em !important;
   font-weight: 500 !important;
   padding-top: 10px !important;
+  font-size: 45px;
+  background: linear-gradient( to right, var(--tj-theme-primary) 0%, var(--tj-white) 100% );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  gap: 15px;
+  margin-bottom: 0;
+  font-family: var(--tj-ff-heading);
+  font-weight: var(--tj-fw-bold);
 }
+
+/* Experience  */
+.project-sectionEx {
+  position: relative !important;
+  padding-top: 20px !important;
+  padding-bottom: 30px !important;
+  background-image: var(--section-background-color) !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.heading-name {
+  color: white !important;
+  font-weight: 500 !important;
+  padding-top: 10px !important;
+  font-size: 45px;
+  background: linear-gradient( to right, var(--tj-theme-primary) 0%, var(--tj-white) 100% );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  gap: 15px;
+  margin-bottom: 0;
+  font-family: var(--tj-ff-heading);
+  font-weight: var(--tj-fw-bold);
+}
+
 
 /* --------- */
 /* About */
@@ -740,4 +788,60 @@ button:focus {
 }
 .fork-btn-inner::after {
   display: none !important;
+}
+
+
+
+
+:root {
+	/* ----------------------------------
+   @font family declaration
+  ------------------------------------ */
+	--tj-ff-body: "Sora", sans-serif;
+	--tj-ff-heading: "Sora", sans-serif;
+	--tj-ff-russo: "Russo One", sans-serif;
+	--tj-ff-fontawesome: "Font Awesome 6 Pro";
+	/* ----------------------------------
+   @color declaration
+  ------------------------------------ */
+	--tj-body: #dddddd;
+	--tj-white: #ffffff;
+	--tj-off-white: #f6f3fc;
+	--tj-black: #000000;
+	--tj-black-2: #050709;
+	--tj-heading-primary: #102039;
+	--tj-heading-secondary: #ea1826;
+	--tj-theme-primary: #8750f7;
+	--tj-theme-secondary: #2a1454;
+	--tj-theme-accent-1: #0f0715;
+	--tj-theme-accent-2: #140c1c;
+	--tj-grey-1: #747779;
+	--tj-grey-2: #d9d9d9;
+	--tj-grey-3: #dddddd;
+	--tj-grey-4: #22272c;
+	/* ----------------------------------
+   @font weight declaration
+  ------------------------------------ */
+	--tj-fw-normal: normal;
+	--tj-fw-elight: 200;
+	--tj-fw-light: 300;
+	--tj-fw-regular: 400;
+	--tj-fw-medium: 500;
+	--tj-fw-sbold: 600;
+	--tj-fw-bold: 700;
+	--tj-fw-ebold: 800;
+	--tj-fw-black: 900;
+	/* ----------------------------------
+    @font size declaration
+  ------------------------------------ */
+	--tj-fz-body: 16px;
+	--tj-fz-btn: 15px;
+	--tj-fz-p: 18px;
+	--tj-fz-h1: 65px;
+	--tj-fz-h2: 45px;
+	--tj-fz-h3: 30px;
+	--tj-fz-h4: 24px;
+	--tj-fz-h5: 22px;
+	--tj-fz-h6: 18px;
+	--tj-fz-sub-title: 36px;
 }
