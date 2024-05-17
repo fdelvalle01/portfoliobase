@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import sebraht from "../../Assets/Projects/sebraht.png";
 import sebraht_siadus from "../../Assets/Projects/sebraht_siadus.png";
-
+import lacteos_mant from "../../Assets/Projects/lacteos_mant.png";
 import ProjectModal from './ProjectModal';
 import {useState} from "react";
 
@@ -45,13 +45,25 @@ function Projects() {
             />
            <ProjectModal open={modalOpen} handleClose={handleCloseModal} />
           </Col>
-
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={sebraht_siadus}
               isBlog={false}
               title="User management system for the Sebra HT trading platform"
               description="In this project, I was the lead developer responsible for creating and implementing the user management system for the entire trading software. This system is the core component where all the trading entities are created and managed daily, ensuring comprehensive administration of these entities."
+              ghLink=""
+              demoLink=""
+              openModal={handleOpenModal} 
+            />
+           <ProjectModal open={modalOpen} handleClose={handleCloseModal} />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={lacteos_mant}
+              isBlog={false}
+              title="E-commerce Lácteos Del Valle"
+              description="This web platform is being developed using React JS, CSS, MUI, and Firebase for an e-commerce site specializing in dairy products. The platform showcases a diverse range of products, complete with a detailed product list. Users can easily browse, add items to their cart, and make purchases. (Project in development)"
               ghLink=""
               demoLink=""
               openModal={handleOpenModal} 
