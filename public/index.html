@@ -1,40 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
+  <meta name="theme-color" content="#140f23" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>Francisco Del Valle | Portfolio</title>
-  <meta name="description" content="Self Developed personal website build with React.js">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+  <script>
+    // Aplica el tema guardado antes del primer paint para evitar el parpadeo.
+    (function () {
+      try {
+        var t = localStorage.getItem("fdv-theme");
+        if (t !== "light" && t !== "dark") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { }
+    })();
+  </script>
 
-  <!-- Google / Search Engine Tags -->
-  <meta itemprop="name" content="Francisco Del Valle | Portfolio">
-  <meta itemprop="description" content="Self Developed personal website build with React.js">
-  <!-- <meta itemprop="image" 
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">-->
+  <title>Francisco Del Valle | Senior Software Engineer</title>
+  <meta name="description"
+    content="Francisco Del Valle, Senior Software Engineer especializado en plataformas de trading, backend y sistemas críticos.">
+  <meta name="author" content="Francisco Del Valle">
 
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="https://franciscodelvalle.netlify.app/">
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FDELVALLE | Portfolio">
-  <meta property="og:description" content="Self Developed personal website build with React.js">
-  <!-- <meta property="og:image" 
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">-->
+  <meta property="og:url" content="https://franciscodelvalle.netlify.app/">
+  <meta property="og:title" content="Francisco Del Valle | Senior Software Engineer">
+  <meta property="og:description"
+    content="Francisco Del Valle, Senior Software Engineer especializado en plataformas de trading, backend y sistemas críticos.">
+  <meta property="og:locale" content="es_CL">
+  <!-- TODO: crear una imagen social de 1200x630 (p. ej. public/og-image.png) y añadir
+       <meta property="og:image" content="https://<dominio>/og-image.png"> junto con
+       <meta name="twitter:image" content="...">. Sin imagen real no se declara el metadato. -->
 
-  <!-- Twitter Meta Tags 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="S0umyajit | Portfolio">
-  <meta name="twitter:description" content="Self Developed personal website build with React.js">
-  <meta name="twitter:image"
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">-->
+  <meta name="twitter:title" content="Francisco Del Valle | Senior Software Engineer">
+  <meta name="twitter:description"
+    content="Francisco Del Valle, Senior Software Engineer especializado en plataformas de trading, backend y sistemas críticos.">
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <noscript>Necesitas habilitar JavaScript para ver este sitio.</noscript>
   <div id="root"></div>
 </body>
 

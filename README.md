@@ -1,74 +1,72 @@
-<h2 align="center">
-  Portfolio Website - v3.0<br/>
-  <a href="https://franciscodelvalle.netlify.app/" target="_blank">Francisco Del Valle</a>
-</h2>
-<div align="center">
-  <!-- <img alt="Demo" src="./Images/readme-img1.png" /> -->
-</div>
+# Portafolio — Francisco Del Valle
 
-<br/>
+Sitio personal de **Francisco Del Valle**, Senior Software Engineer especializado en plataformas de
+trading e infraestructura bursátil.
 
-<center>
+Es una sola página con secciones ancladas, en **español e inglés**, con **tema claro y oscuro**
+persistidos en `localStorage`. Todo el contenido es estático: no hay data fetching ni backend.
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)] &nbsp;
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)] &nbsp;
-[![forthebadge](https://forthebadge.com/images/badges/made-with-react.svg)] &nbsp;
-[![forthebadge](https://forthebadge.com/images/badges/made-with-css.svg)] &nbsp;
-</center>
-<!-- 
-<h3 align="center">
-    🔹
-    <a href="https://github.com/soumyajit4419/Portfolio/issues">Report Bug</a> &nbsp; &nbsp;
-    🔹
-    <a href="https://github.com/soumyajit4419/Portfolio/issues">Request Feature</a>
-</h3> -->
+## Stack
 
-## TL;DR
+- **React 17** con Create React App (`react-scripts` 5)
+- CSS propio con design tokens en variables CSS (`src/site/styles/site.css`)
+- `react-icons` (Phosphor y Simple Icons)
+- Fondo de partículas en un `<canvas>` propio, sin librerías
+- Sin router: navegación por anclas y `scroll-behavior: smooth`
 
-<!-- You can fork this repo to modify and make changes of your own. Please give me proper credit by linking back to [Soumyajit4419](https://github.com/soumyajit4419/Portfolio). Thanks! -->
+## Estructura
 
-## Built With
+```
+src/
+  App.js                       → providers + <Site />
+  site/
+    Site.jsx                   → composición de la página
+    context/I18nContext.js     → { lang, setLang, t, L }   (es | en)
+    context/ThemeContext.js    → { theme, toggleTheme }    (dark | light)
+    data/content.js            → todo el contenido: textos es/en, trayectoria, casos, stack
+    styles/site.css            → tokens y estilos
+    components/                → Header, Hero, StatsBand, About, Timeline, Projects,
+                                 CaseStudyModal, Stack, Contact, Footer, ParticlesCanvas
+```
 
-<!-- My personal portfolio <a href="https://franciscodelvalle.netlify.app/" target="_blank">Francisco Del Valle</a> which features some of my github projects as well as my resume and technical skills.<br/> -->
+Para cambiar textos, proyectos o tecnologías basta con editar `src/site/data/content.js`.
 
-This project was built using these technologies.
+## Instalación y scripts
 
-- React.js
-- Node.js
-- Express.js
-- CSS3
-- VsCode
-- Vercel
+```bash
+npm install
+npm start                       # servidor de desarrollo en http://localhost:3000
+npm test -- --watchAll=false    # tests
+npm run build                   # build de producción en build/
+```
 
-## Features
+## Despliegue
 
-**📖 Multi-Page Layout**
+El sitio se publica en Netlify. La configuración vive en [`netlify.toml`](./netlify.toml):
+comando `npm run build`, carpeta `build`, Node 18, `GENERATE_SOURCEMAP=false` (para no publicar el
+código fuente), caché larga para `/static/*` y un redirect `/*` → `/index.html`.
 
-**🎨 Styled with React-Bootstrap and Css with easy to customize colors**
+Se puede desplegar conectando el repositorio, o arrastrando la carpeta `build` a Netlify Drop.
 
-**📱 Fully Responsive**
+## Pendientes conocidos
 
-## Getting Started
+- ⚠️ **El CV en PDF debe reemplazarse antes del despliegue definitivo.** El archivo actual
+  (`src/Assets/CV_Francisco_Del_Valle.pdf`) debe sustituirse por una versión **ATS-friendly con
+  texto seleccionable** — no una imagen escaneada ni exportada como mapa de bits —, ya que muchos
+  reclutadores y sistemas de selección procesan el PDF automáticamente. Basta con reemplazar el
+  archivo conservando el nombre.
+- **Imagen social**: falta crear una imagen Open Graph de 1200×630 y declarar `og:image` /
+  `twitter:image` en `public/index.html` (hay un TODO en el archivo).
+- **Formulario de contacto**: hoy abre el cliente de correo del visitante mediante `mailto:`. Si en
+  el futuro se quiere envío real desde el navegador, hay que conectar Formspree, EmailJS o una
+  función serverless.
+- **Dominio**: `public/index.html` apunta a `https://franciscodelvalle.netlify.app/` en `og:url`;
+  actualizar si se configura un dominio propio.
 
-Clone down this repository. You will need `node.js` and `git` installed globally on your machine.
+## Código heredado
 
-## 🛠 Installation and Setup Instructions
-
-1. Installation: `npm install`
-
-2. In the project directory, you can run: `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-The page will reload if you make edits.
-
-## Usage Instructions
-
-Open the project folder and Navigate to `/src/components/`. <br/>
-You will find all the components used and you can edit your information accordingly.
-
-### Show your support
-
-Give a ⭐ if you like this website!
-
-<!-- <a href="https://www.buymeacoffee.com/soumyajit4419" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="Buy Me A Coffee" height= "60px" width= "217px" ></a> -->
+`src/components/`, `src/style.css` y `src/App.css` son de la versión anterior del portafolio y **ya
+no se usan**: no son alcanzables desde `src/App.js` ni entran en el bundle. Se conservan por ahora
+como referencia y pueden eliminarse junto con las dependencias que solo ellos usaban
+(`react-router-dom`, `react-tsparticles`, `typewriter-effect`, `react-pdf`, `bootstrap`,
+`react-bootstrap`, `react-github-calendar`, `react-parallax-tilt`).

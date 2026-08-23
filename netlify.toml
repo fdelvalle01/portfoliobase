@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  CI = "false"
+  # Sin source maps: no se publica el código fuente y el deploy baja de 12 MB a ~2 MB.
+  GENERATE_SOURCEMAP = "false"
+
+# Una sola ruta con anclas: cualquier path desconocido cae en la home.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
