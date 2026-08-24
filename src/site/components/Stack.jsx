@@ -84,7 +84,7 @@ export default function Stack() {
   return (
     <section id="stack" className="section section--alt">
       <div className="section__inner">
-        <div className="kicker">04 — STACK</div>
+        <div className="kicker">05 — STACK</div>
         <h3 className="section-title">{t("stack.title")}</h3>
         <p className="section-lead">{t("stack.lead")}</p>
 

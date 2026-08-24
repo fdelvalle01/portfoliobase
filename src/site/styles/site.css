@@ -84,7 +84,8 @@ a:hover { color: var(--accent); }
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  overflow-x: hidden;
+  /* `hidden` crea un contenedor de scroll y puede romper el header sticky. */
+  overflow-x: clip;
 }
 .site__content { position: relative; z-index: 1; }
 
@@ -155,11 +156,9 @@ a:hover { color: var(--accent); }
 }
 .nav-links a:hover { color: var(--text); background: var(--surface-2); }
 
-.nav-links__cta { display: none; }
+.nav-links .nav-links__cta { display: none; }
 
 .header__actions { display: flex; align-items: center; gap: 8px; }
-.nav-toggle { display: none; }
-.nav-toggle svg { width: 19px; height: 19px; }
 
 .lang-toggle {
   display: flex;
@@ -195,6 +194,10 @@ a:hover { color: var(--accent); }
 }
 .theme-toggle:hover { background: var(--surface-2); }
 .theme-toggle svg { width: 17px; height: 17px; }
+
+/* Mayor especificidad que .theme-toggle para que gane sin depender del orden. */
+.theme-toggle.nav-toggle { display: none; }
+.nav-toggle svg { width: 19px; height: 19px; }
 
 /* -------------------------------------------------------------- botones -- */
 
@@ -519,6 +522,281 @@ a:hover { color: var(--accent); }
 .tag--lg { font-size: 12px; padding: 6px 12px; }
 .modal__visit svg { width: 15px; height: 15px; }
 
+/* --------------------------------------------------------- trading lab --- */
+
+.trading-lab-section { overflow: hidden; }
+.trading-lab {
+  --terminal-bg: #12131e;
+  --terminal-panel: #181a28;
+  --terminal-panel-2: #1d1f2f;
+  --terminal-line: rgba(170, 177, 211, .16);
+  --terminal-text: #e8eaf4;
+  --terminal-muted: #9298ad;
+  --terminal-buy: #4fd1a5;
+  --terminal-sell: #ff7180;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, .75fr);
+  grid-template-areas:
+    "market ticket"
+    "events education";
+  border: 1px solid var(--terminal-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--terminal-bg);
+  color: var(--terminal-text);
+  box-shadow: 0 24px 70px rgba(8, 6, 22, .28);
+}
+
+.market-terminal { grid-area: market; min-width: 0; border-right: 1px solid var(--terminal-line); }
+.market-toolbar {
+  min-height: 54px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--terminal-line);
+}
+.market-symbol { min-width: 0; flex: 1; display: flex; align-items: center; gap: 9px; }
+.market-symbol > span {
+  font-size: 10px;
+  color: var(--terminal-muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.market-symbol select,
+.order-ticket select,
+.ticket-field input {
+  border: 1px solid var(--terminal-line);
+  border-radius: 7px;
+  background: var(--terminal-panel);
+  color: var(--terminal-text);
+  font-family: inherit;
+}
+.market-symbol select { min-width: 0; width: min(270px, 100%); padding: 8px 10px; font-size: 12px; }
+.book-mode { display: flex; padding: 2px; border: 1px solid var(--terminal-line); border-radius: 7px; }
+.book-mode button,
+.terminal-reset {
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--terminal-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 7px 10px;
+}
+.book-mode button.is-active { background: #292943; color: #d9d5ff; }
+.terminal-reset { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.terminal-reset:hover { color: var(--terminal-text); background: var(--terminal-panel-2); }
+
+.market-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--terminal-line);
+  color: var(--terminal-muted);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.market-strip strong { color: var(--terminal-text); font-weight: 600; }
+.market-buy-text { color: var(--terminal-buy) !important; }
+.market-sell-text { color: var(--terminal-sell) !important; }
+
+.depth-table {
+  height: 310px;
+  padding-bottom: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #4b4564 transparent;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+.depth-table::-webkit-scrollbar { width: 7px; }
+.depth-table::-webkit-scrollbar-track { background: transparent; }
+.depth-table::-webkit-scrollbar-thumb { background: #4b4564; border-radius: 8px; }
+.depth-head,
+.depth-row { display: grid; grid-template-columns: minmax(90px, 1fr) 92px 92px minmax(90px, 1fr); }
+.depth-head {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 8px 0;
+  background: var(--terminal-bg);
+  color: var(--terminal-muted);
+  border-bottom: 1px solid var(--terminal-line);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.depth-head span { padding: 0 10px; }
+.depth-head span:nth-child(2) { color: var(--terminal-buy); text-align: right; }
+.depth-head span:nth-child(3) { color: var(--terminal-sell); }
+.depth-head span:nth-child(4) { text-align: right; }
+.depth-row { min-height: 43px; border-bottom: 1px solid rgba(170, 177, 211, .055); }
+.depth-qty,
+.depth-price {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  overflow: hidden;
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.depth-qty { color: #c4c8d7; }
+.depth-qty::before {
+  content: "";
+  position: absolute;
+  inset-block: 5px;
+  width: var(--depth);
+  z-index: 0;
+  opacity: .55;
+}
+.depth-qty--bid { justify-content: flex-end; }
+.depth-qty--bid::before { right: 0; background: rgba(79, 209, 165, .16); }
+.depth-qty--ask::before { left: 0; background: rgba(255, 113, 128, .16); }
+.depth-qty { isolation: isolate; }
+.depth-qty::before { z-index: -1; }
+.depth-price {
+  justify-content: flex-end;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.depth-price:disabled { cursor: default; }
+.depth-price--bid { color: var(--terminal-buy); }
+.depth-price--ask { justify-content: flex-start; color: var(--terminal-sell); }
+.depth-price:not(:disabled):hover { background: rgba(135, 80, 247, .16); }
+
+.order-ticket {
+  grid-area: ticket;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #141621;
+}
+.order-ticket__title,
+.lab-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--terminal-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.order-ticket__title svg,
+.lab-panel-title svg { width: 15px; height: 15px; color: #b99aff; }
+.side-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.side-toggle button {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--terminal-line);
+  border-radius: 8px;
+  background: var(--terminal-panel);
+  color: var(--terminal-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.side-toggle button:first-child.is-active { border-color: var(--terminal-buy); color: var(--terminal-buy); background: rgba(79, 209, 165, .1); }
+.side-toggle button:last-child.is-active { border-color: var(--terminal-sell); color: var(--terminal-sell); background: rgba(255, 113, 128, .1); }
+.ticket-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ticket-pair label,
+.ticket-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 11px;
+  border: 1px solid var(--terminal-line);
+  border-radius: 8px;
+  background: var(--terminal-panel);
+}
+.ticket-pair span,
+.ticket-field span { color: var(--terminal-muted); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+.ticket-pair strong { font-size: 13px; }
+.order-ticket select { width: 100%; padding: 2px 0; border: 0; font-size: 12px; }
+.ticket-field input { width: 100%; padding: 0; border: 0; outline: 0; font-size: 19px; font-weight: 700; }
+.ticket-error { color: var(--terminal-sell); font-size: 11px; }
+.ticket-submit {
+  min-height: 46px;
+  margin-top: auto;
+  border: 1px solid var(--terminal-buy);
+  border-radius: 8px;
+  background: rgba(79, 209, 165, .1);
+  color: var(--terminal-buy);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.order-ticket--sell .ticket-submit { border-color: var(--terminal-sell); background: rgba(255, 113, 128, .1); color: var(--terminal-sell); }
+.ticket-submit:hover { filter: brightness(1.22); }
+
+.lab-events {
+  grid-area: events;
+  min-height: 164px;
+  padding: 16px;
+  border-top: 1px solid var(--terminal-line);
+  border-right: 1px solid var(--terminal-line);
+}
+.lab-events > .lab-panel-title { margin-bottom: 12px; }
+.execution-event {
+  display: grid;
+  grid-template-columns: 110px 1fr 1.4fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(170, 177, 211, .1);
+  color: #c9ccda;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+}
+.event-side { font-weight: 700; text-transform: uppercase; }
+.event-side--buy { color: var(--terminal-buy); }
+.event-side--sell { color: var(--terminal-sell); }
+.event-result { color: var(--terminal-text); }
+.drop-copy-badge { padding: 4px 6px; border: 1px solid #7659ba; border-radius: 4px; color: #c6b1ff; font-size: 8px; letter-spacing: .08em; }
+.lab-events__empty { padding: 28px 0; color: var(--terminal-muted); font-size: 12px; }
+
+.market-education {
+  grid-area: education;
+  min-width: 0;
+  padding: 16px;
+  border-top: 1px solid var(--terminal-line);
+  background: #161722;
+}
+.concept-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 13px 0 16px; }
+.concept-tabs button {
+  padding: 6px 8px;
+  border: 1px solid var(--terminal-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--terminal-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 9px;
+}
+.concept-tabs button.is-active { border-color: #8e6ce8; background: rgba(142, 108, 232, .14); color: #d8caff; }
+.concept-copy h4 { margin-bottom: 8px; color: var(--terminal-text); font-size: 16px; }
+.concept-copy p { color: var(--terminal-muted); font-size: 12px; line-height: 1.65; }
+.lab-disclaimer { display: flex; gap: 8px; max-width: 920px; margin: 18px auto 0; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: center; }
+
 /* --------------------------------------------------------------- stack --- */
 
 .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 40px 30px; }
@@ -641,7 +919,7 @@ a:hover { color: var(--accent); }
 
 /* Menú móvil: los enlaces pasan a un panel desplegable bajo el header. */
 @media (max-width: 900px) {
-  .nav-toggle { display: flex; }
+  .theme-toggle.nav-toggle { display: flex; }
   .header__cta { display: none; }
   .header__nav { flex-wrap: nowrap; gap: 12px; }
 
@@ -661,12 +939,21 @@ a:hover { color: var(--accent); }
   }
   .nav-links.is-open { display: flex; }
   .nav-links a { padding: 12px; }
-  .nav-links__cta {
+  .nav-links .nav-links__cta {
     display: inline-flex;
     justify-content: center;
     margin-top: 8px;
     padding: 12px 16px;
   }
+
+  .trading-lab {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "market" "ticket" "events" "education";
+  }
+  .market-terminal,
+  .lab-events { border-right: 0; }
+  .order-ticket { border-top: 1px solid var(--terminal-line); }
+  .ticket-submit { margin-top: 8px; }
 }
 
 @media (max-width: 720px) {
@@ -687,6 +974,16 @@ a:hover { color: var(--accent); }
   .modal__cols { grid-template-columns: 1fr; }
   .modal-backdrop { padding: 16px; }
   .modal__body { padding: 26px 22px 30px; }
+
+  .market-toolbar { align-items: stretch; flex-wrap: wrap; }
+  .market-symbol { flex-basis: 100%; }
+  .market-symbol select { width: 100%; }
+  .book-mode { flex: 1; }
+  .book-mode button { flex: 1; }
+  .depth-head,
+  .depth-row { grid-template-columns: minmax(72px, 1fr) 72px 72px minmax(72px, 1fr); }
+  .execution-event { grid-template-columns: 90px 1fr auto; }
+  .execution-event .event-result { grid-column: 1 / -1; }
 }
 
 @media (max-width: 480px) {
@@ -704,6 +1001,99 @@ a:hover { color: var(--accent); }
   .timeline__dot { left: -31px; }
   .band__inner { gap: 24px; }
   .footer__inner { justify-content: center; text-align: center; }
+
+  .trading-lab {
+    margin-inline: -10px;
+    border-radius: 8px;
+  }
+  .market-symbol { display: block; }
+  .market-symbol > span { display: block; margin-bottom: 6px; }
+  .market-toolbar {
+    min-height: 0;
+    padding: 8px;
+    gap: 7px;
+  }
+  .market-symbol select {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+  .book-mode button,
+  .terminal-reset {
+    min-height: 29px;
+    padding: 5px 7px;
+    font-size: 9px;
+  }
+  .market-strip {
+    gap: 5px 12px;
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+  .depth-table { height: 222px; }
+  .depth-head,
+  .depth-row { grid-template-columns: minmax(62px, 1fr) 64px 64px minmax(62px, 1fr); }
+  .depth-head { padding-block: 6px; }
+  .depth-row { min-height: 31px; }
+  .depth-qty,
+  .depth-price { padding-inline: 6px; font-size: 9px; }
+  .depth-head span { padding-inline: 6px; font-size: 8px; }
+  .depth-qty::before { inset-block: 3px; }
+
+  .order-ticket {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 7px;
+  }
+  .order-ticket__title,
+  .side-toggle,
+  .ticket-pair,
+  .ticket-error,
+  .ticket-submit { grid-column: 1 / -1; }
+  .order-ticket__title { margin-bottom: 2px; }
+  .side-toggle { gap: 6px; }
+  .side-toggle button {
+    min-height: 38px;
+    font-size: 11px;
+  }
+  .ticket-pair {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .ticket-pair label,
+  .ticket-field {
+    min-width: 0;
+    padding: 8px 9px;
+    gap: 4px;
+  }
+  .ticket-pair span,
+  .ticket-field span { font-size: 8px; }
+  .ticket-pair strong,
+  .order-ticket select { font-size: 11px; }
+  .ticket-field input { font-size: 15px; }
+  .ticket-submit {
+    min-height: 39px;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .lab-events,
+  .market-education { padding: 11px; }
+  .lab-events { min-height: 118px; }
+  .lab-events > .lab-panel-title { margin-bottom: 7px; }
+  .lab-events__empty { padding: 18px 0; font-size: 10px; }
+  .execution-event { grid-template-columns: 1fr auto; }
+  .execution-event { padding: 7px 0; gap: 6px; font-size: 9px; }
+  .execution-event .event-result { grid-column: 1 / -1; }
+  .concept-tabs {
+    flex-wrap: nowrap;
+    margin: 9px -2px 11px;
+    padding: 2px;
+    overflow-x: auto;
+  }
+  .concept-tabs button { flex: none; padding: 5px 7px; font-size: 8px; }
+  .concept-copy h4 { margin-bottom: 5px; font-size: 14px; }
+  .concept-copy p { font-size: 10px; line-height: 1.55; }
+  .lab-disclaimer { margin-top: 12px; font-size: 9px; }
 }
 
 /* El hero es un grid auto-fit de 340px: bajo ese ancho debe colapsar sin

@@ -17,6 +17,7 @@ export const NAV = [
   { href: "#sobre-mi", es: "Sobre mí", en: "About" },
   { href: "#trayectoria", es: "Trayectoria", en: "Career" },
   { href: "#proyectos", es: "Proyectos", en: "Projects" },
+  { href: "#espacio-bursatil", es: "Espacio bursátil", en: "Trading Lab" },
   { href: "#stack", es: "Stack", en: "Stack" },
   { href: "#contacto", es: "Contacto", en: "Contact" },
 ];
@@ -37,7 +38,7 @@ export const STATS = [
 export const TIMELINE = [
   {
     kind: "work",
-    range: { es: "2022 — ACTUALIDAD", en: "2022 — PRESENT" },
+    range: { es: "SEPT. 2021 — ACTUALIDAD", en: "SEP. 2021 — PRESENT" },
     title: { es: "Senior Software Engineer", en: "Senior Software Engineer" },
     place: "Bolsa de Santiago / nuam exchange · Santiago, Chile",
     desc: {
@@ -56,7 +57,7 @@ export const TIMELINE = [
   },
   {
     kind: "education",
-    range: { es: "2022 — 2023", en: "2022 — 2023" },
+    range: { es: "2021 — 2022", en: "2021 — 2022" },
     title: {
       es: "Diplomado en Desarrollo de Aplicaciones Móviles",
       en: "Diploma in Mobile Application Development",
@@ -71,8 +72,8 @@ export const TIMELINE = [
   },
   {
     kind: "work",
-    range: { es: "2020 — 2022", en: "2020 — 2022" },
-    title: { es: "Programador", en: "Programmer" },
+    range: { es: "MAYO 2020 — SEPT. 2021", en: "MAY 2020 — SEP. 2021" },
+    title: { es: "Analista Programador", en: "Analyst Programmer" },
     place: "Bolsa de Santiago · Santiago, Chile",
   },
   {
@@ -269,13 +270,13 @@ export const DICT = {
   "nav.menuClose": { es: "Cerrar menú", en: "Close menu" },
 
   "hero.status": {
-    es: "Santiago, Chile · disponible para roles remotos en backend, full stack y fintech",
-    en: "Santiago, Chile · open to remote backend, full stack and fintech roles",
+    es: "Santiago, Chile · freelance y consultoría técnica remota",
+    en: "Santiago, Chile · remote freelance and technical consulting",
   },
   "hero.hello": { es: "Hola ", en: "Hi there " },
   "hero.lead": {
-    es: "Senior Software Engineer especializado en sistemas de trading e infraestructura bursátil. Diseño servicios, modelos de datos e interfaces que operan diariamente en mercados latinoamericanos.",
-    en: "Senior Software Engineer specialising in trading systems and exchange infrastructure. I design services, data models and interfaces used daily across Latin American markets.",
+    es: "Senior Software Engineer especializado en soluciones de trading e infraestructura bursátil. Trabajo con FIX, motores de negociación, gateways de conectividad, Market Data, Order Entry y WebSockets para construir sistemas financieros trazables y preparados para producción.",
+    en: "Senior Software Engineer specialising in trading solutions and exchange infrastructure. I work with FIX, trading engines, connectivity gateways, Market Data, Order Entry and WebSockets to build traceable, production-ready financial systems.",
   },
   "hero.projects": { es: "Ver proyectos", en: "See projects" },
   "hero.cv": { es: "Ver CV", en: "View CV" },
@@ -283,7 +284,7 @@ export const DICT = {
   "hero.cvDownload": { es: "Descargar CV en PDF", en: "Download CV as PDF" },
 
   "about.kicker": { es: "SOBRE MÍ", en: "ABOUT" },
-  "about.title": { es: "Backend serio, frontend cuidado.", en: "Serious backend, careful frontend." },
+  "about.title": { es: "Backend sólido, frontend pulido.", en: "Solid backend, polished frontend." },
   "about.p1": {
     es: "Ingeniero en Informática (INACAP) con diplomado en Desarrollo de Aplicaciones Móviles (Pontificia Universidad Católica de Chile). Desde 2020 trabajo en Bolsa de Santiago / nuam exchange, donde pasé de práctica profesional a Senior Software Engineer.",
     en: "Computer Engineer (INACAP) with a diploma in Mobile Application Development (Pontificia Universidad Católica de Chile). Since 2020 I've worked at Bolsa de Santiago / nuam exchange, moving from intern to Senior Software Engineer.",
@@ -295,8 +296,8 @@ export const DICT = {
   "about.currently": { es: "Actualmente", en: "Currently" },
   "about.languages": { es: "Idiomas", en: "Languages" },
   "about.languagesValue": {
-    es: "Español (nativo) · Inglés B2 (IELTS)",
-    en: "Spanish (native) · English B2 (IELTS)",
+    es: "Español (nativo) · Inglés B2",
+    en: "Spanish (native) · English B2",
   },
 
   "career.kicker": { es: "TRAYECTORIA", en: "CAREER" },
@@ -336,10 +337,13 @@ export const DICT = {
   "stack.level.complementary": { es: "Complementario", en: "Complementary" },
 
   "contact.kicker": { es: "CONTACTO", en: "CONTACT" },
-  "contact.title": { es: "¿Trabajamos juntos?", en: "Let's work together" },
+  "contact.title": {
+    es: "¿Tienes un proyecto o desafío técnico?",
+    en: "Have a project or technical challenge?",
+  },
   "contact.lead": {
-    es: "Abierto a roles senior remotos y proyectos freelance. Respondo en menos de 48 horas.",
-    en: "Open to remote senior engineering roles and freelance projects. I reply within 48 hours.",
+    es: "Disponible para proyectos freelance remotos y consultoría técnica en backend, fintech e integraciones de trading. Puedo ayudarte a revisar arquitectura, diseñar APIs y conexiones, mejorar sistemas existentes o convertir una idea en una solución funcional.",
+    en: "Available for remote freelance projects and technical consulting in backend, fintech and trading integrations. I can help review architecture, design APIs and connections, improve existing systems or turn an idea into a working solution.",
   },
   "contact.name": { es: "Nombre", en: "Name" },
   "contact.company": { es: "Empresa (opcional)", en: "Company (optional)" },

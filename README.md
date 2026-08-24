@@ -27,9 +27,20 @@ src/
     styles/site.css            → tokens y estilos
     components/                → Header, Hero, StatsBand, About, Timeline, Projects,
                                  CaseStudyModal, Stack, Contact, Footer, ParticlesCanvas
+public/
+  Francisco-Del-Valle-Senior-Backend-Engineer-CV.pdf  → CV oficial servido por el sitio
 ```
 
 Para cambiar textos, proyectos o tecnologías basta con editar `src/site/data/content.js`.
+
+## CV
+
+El CV oficial se encuentra en:
+
+`public/Francisco-Del-Valle-Senior-Backend-Engineer-CV.pdf`
+
+El archivo contiene texto seleccionable y puede abrirse o descargarse desde el hero del portfolio.
+Al actualizarlo, se debe conservar este nombre para no romper el enlace público.
 
 ## Instalación y scripts
 
@@ -50,11 +61,6 @@ Se puede desplegar conectando el repositorio, o arrastrando la carpeta `build` a
 
 ## Pendientes conocidos
 
-- ⚠️ **El CV en PDF debe reemplazarse antes del despliegue definitivo.** El archivo actual
-  (`src/Assets/CV_Francisco_Del_Valle.pdf`) debe sustituirse por una versión **ATS-friendly con
-  texto seleccionable** — no una imagen escaneada ni exportada como mapa de bits —, ya que muchos
-  reclutadores y sistemas de selección procesan el PDF automáticamente. Basta con reemplazar el
-  archivo conservando el nombre.
 - **Imagen social**: falta crear una imagen Open Graph de 1200×630 y declarar `og:image` /
   `twitter:image` en `public/index.html` (hay un TODO en el archivo).
 - **Formulario de contacto**: hoy abre el cliente de correo del visitante mediante `mailto:`. Si en

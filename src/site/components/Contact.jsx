@@ -39,7 +39,7 @@ export default function Contact() {
     <section id="contacto" className="section">
       <div className="contact">
         <div>
-          <div className="kicker">05 — {t("contact.kicker")}</div>
+          <div className="kicker">06 — {t("contact.kicker")}</div>
           <h3 className="contact__title">{t("contact.title")}</h3>
           <p className="contact__lead">{t("contact.lead")}</p>
 
