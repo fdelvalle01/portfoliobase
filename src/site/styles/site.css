@@ -1271,3 +1271,12 @@ a:hover { color: var(--accent); }
   .order-flow__arrow { align-self: center; transform: rotate(90deg); }
   .order-flow__token { display: none; }
 }
+
+/* Project screenshot gallery */
+.case-gallery { margin-bottom: 28px; }
+.case-gallery__choices { display: flex; gap: 10px; }
+.case-gallery__choices button { width: 100px; padding: 3px; border: 1px solid var(--line); background: var(--surface); border-radius: 5px; cursor: pointer; }
+.case-gallery__choices button[aria-pressed="true"] { border-color: var(--accent); }
+.case-gallery__choices img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; }
+.case-gallery p { margin: 12px 0 4px; color: var(--text); font-size: 13px; }
+.case-gallery small { color: var(--muted); font-size: 11px; }

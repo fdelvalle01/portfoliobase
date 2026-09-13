@@ -1,3 +1,6 @@
+import workstation from "../../Assets/Projects/trading-workstation.png";
+import workstationLight from "../../Assets/Projects/trading-workstation-light.png";
+import workstationTicket from "../../Assets/Projects/trading-workstation-ticket.png";
 import sebraht from "../../Assets/Projects/sebraht.png";
 import sebrahtSiadus from "../../Assets/Projects/sebraht_siadus.png";
 import summitapp from "../../Assets/Projects/summitapp.png";
@@ -239,6 +242,44 @@ export const CASES = [
     link: "https://github.com/fdelvalle01/stock-bar",
     linkLabel: "projects.repo",
   },
+  {
+    categories: ["personal", "trading", "platform"],
+    img: workstation,
+    media: "app",
+    mediaBg: "#111316",
+    alt: {
+      es: "Trading Workstation en Obsidiana: profundidad de COPEC, watchlist e ingreso de órdenes en el laboratorio local",
+      en: "Trading Workstation in Obsidiana: COPEC market depth, watchlist and order entry in the local lab",
+    },
+    kicker: { es: "PROYECTO PROPIO · POC", en: "OWN PROJECT · POC" },
+    title: { es: "Trading Workstation — plataforma de trading desde cero", en: "Trading Workstation — a trading platform built from scratch" },
+    summary: {
+      es: "POC full stack diseñada desde cero con Claude Design y SDD: un escritorio de trading con widgets vinculados, profundidad en tiempo real y motor de calce local.",
+      en: "Full stack POC designed from scratch with Claude Design and SDD: a trading desktop with linked widgets, live market depth and a local matching engine.",
+    },
+    tags: ["React", "Spring Boot", "SDD"],
+    context: {
+      es: "Convertir mi experiencia en sistemas bursátiles en una plataforma propia para explorar el ciclo completo de una orden: desde el ticket y el libro hasta el backend y el calce. Un laboratorio local donde probar decisiones de arquitectura y de interacción con datos simulados.",
+      en: "Turn my experience in exchange systems into a platform of my own to explore an order's full lifecycle: from the ticket and order book to the backend and matching. A local lab for testing architecture and interaction decisions with simulated data.",
+    },
+    role: {
+      es: "Diseño y desarrollo de punta a punta. Usé Claude Design para explorar el sistema visual y SDD (Spec-Driven Development) para guiar la implementación desde especificaciones, historias de usuario y criterios de aceptación. Revisé las propuestas, adapté el diseño a componentes reutilizables y validé el comportamiento con pruebas automatizadas y recorridos de navegador. Documenté las decisiones y el avance en Obsidian.",
+      en: "End-to-end design and development. I used Claude Design to explore the visual system and SDD (Spec-Driven Development) to guide implementation through specifications, user stories and acceptance criteria. I reviewed the proposals, adapted the design into reusable components and validated behaviour with automated tests and browser walkthroughs. Decisions and progress are documented in Obsidian.",
+    },
+    result: {
+      es: "POC operativa: workspaces con ventanas ancladas y flotantes, widgets sincronizados por color, libro agregado o por orden y ticket integrado o independiente que conserva el borrador al redimensionar. Temas Obsidiana y Claro, autenticación Keycloak y servicios Java con PostgreSQL y WebSocket. El cierre documentado de esta iteración pasó 459 pruebas y compilación. Kafka, replay durable y Kubernetes son próximos hitos; la POC usa un mercado simulado local.",
+      en: "Working POC: workspaces with docked and floating windows, colour-linked widgets, aggregated or order-by-order depth, and embedded or standalone tickets that preserve drafts while resizing. Obsidiana and light themes, Keycloak authentication, and Java services with PostgreSQL and WebSocket. The documented iteration passed 459 tests and a production build. Kafka, durable replay and Kubernetes are next milestones; the POC uses a local simulated market.",
+    },
+    stack: ["React", "TypeScript", "Dockview", "Spring Boot", "Java", "PostgreSQL", "Keycloak", "WebSocket", "Docker Compose", "Claude Design", "SDD", "Playwright"],
+    gallery: [
+      { img: workstation, alt: { es: "Escritorio Obsidiana con profundidad, watchlist y ticket independiente", en: "Obsidiana desktop with depth, watchlist and standalone ticket" } },
+      { img: workstationLight, alt: { es: "El mismo workspace con el tema Claro", en: "The same workspace in the light theme" } },
+      { img: workstationTicket, alt: { es: "Ingreso de órdenes integrado en el widget de profundidad", en: "Order entry embedded in the market depth widget" } },
+    ],
+    mediaNote: { es: "Capturas reales del laboratorio local · datos simulados · septiembre de 2026", en: "Real screenshots from the local lab · simulated data · September 2026" },
+    link: "https://github.com/fdelvalle01/trading-workstation-platform/tree/feat/workstation-v2",
+    linkLabel: "projects.repo",
+  },
 ];
 
 export const CASE_GROUPS = [
@@ -248,7 +289,7 @@ export const CASE_GROUPS = [
   },
   {
     label: { es: "PRODUCTOS PROPIOS, DE PUNTA A PUNTA", en: "MY OWN PRODUCTS, END TO END" },
-    indexes: [2, 3],
+    indexes: [2, 3, 4],
   },
 ];
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { PiArrowUpRight, PiX } from "react-icons/pi";
 import { useI18n } from "../context/I18nContext";
 
@@ -9,6 +9,7 @@ export default function CaseStudyModal({ project, onClose }) {
   const { t, L } = useI18n();
   const panelRef = useRef(null);
   const closeRef = useRef(null);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const onKeyDown = useCallback(
     (e) => {
@@ -31,11 +32,12 @@ export default function CaseStudyModal({ project, onClose }) {
         first.focus();
       }
     },
-    [onClose]
+    [onClose],
   );
 
   useEffect(() => {
     if (!project) return undefined;
+    setImageIndex(0);
     const previous = document.activeElement;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -48,6 +50,10 @@ export default function CaseStudyModal({ project, onClose }) {
   }, [project]);
 
   if (!project) return null;
+  const selectedImage = project.gallery?.[imageIndex] || {
+    img: project.img,
+    alt: project.alt,
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
@@ -64,7 +70,7 @@ export default function CaseStudyModal({ project, onClose }) {
           className={`modal__media${project.media === "app" ? " modal__media--app" : ""}`}
           style={project.mediaBg ? { background: project.mediaBg } : undefined}
         >
-          <img src={project.img} alt={L(project.alt)} />
+          <img src={selectedImage.img} alt={L(selectedImage.alt)} />
           <button
             type="button"
             ref={closeRef}
@@ -77,6 +83,25 @@ export default function CaseStudyModal({ project, onClose }) {
         </div>
 
         <div className="modal__body">
+          {project.gallery && (
+            <div className="case-gallery">
+              <div className="case-gallery__choices">
+                {project.gallery.map((image, i) => (
+                  <button
+                    type="button"
+                    key={image.img}
+                    aria-pressed={i === imageIndex}
+                    onClick={() => setImageIndex(i)}
+                    aria-label={L(image.alt)}
+                  >
+                    <img src={image.img} alt="" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+              <p>{L(selectedImage.alt)}</p>
+              <small>{L(project.mediaNote)}</small>
+            </div>
+          )}
           <div className="modal__kicker">{L(project.kicker)}</div>
           <h3 className="modal__title" id="case-title">
             {L(project.title)}
