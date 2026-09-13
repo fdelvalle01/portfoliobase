@@ -1,11 +1,11 @@
 import React from "react";
-import { PiDownloadSimple, PiGithubLogo, PiLinkedinLogo, PiReadCvLogo } from "react-icons/pi";
+import { PiBriefcase, PiDownloadSimple, PiGithubLogo, PiLinkedinLogo, PiReadCvLogo } from "react-icons/pi";
 import avatar from "../../Assets/avatar.svg";
-import { CV_FILENAME, HERO_CHIPS, LINKS } from "../data/content";
+import { LINKS, STATS } from "../data/content";
 import { useI18n } from "../context/I18nContext";
 
 export default function Hero() {
-  const { t } = useI18n();
+  const { t, L } = useI18n();
 
   return (
     <section id="inicio" className="hero">
@@ -15,46 +15,40 @@ export default function Hero() {
           <span>{t("hero.status")}</span>
         </div>
 
-        <h1 className="hero__hello">
+        <p className="hero__hello">
           {t("hero.hello")}
           <span className="hero__wave" role="img" aria-label="wave">
             👋🏻
           </span>
-        </h1>
+        </p>
 
-        <h2 className="hero__name">
-          Francisco
-          <br />
-          <span className="hero__name-gradient">Del Valle</span>
-        </h2>
+        <h1 className="hero__name">{t("hero.title")}</h1>
 
         <p className="hero__lead">{t("hero.lead")}</p>
 
-        <div className="chip-row">
-          {HERO_CHIPS.map((chip) => (
-            <span key={chip} className="chip">
-              {chip}
-            </span>
+        <div className="hero__stats" aria-label={t("hero.lead")}>
+          {STATS.map((stat) => (
+            <div className="hero-stat" key={stat.value}>
+              <strong>{stat.value}</strong>
+              <span>{L(stat)}</span>
+            </div>
           ))}
         </div>
 
         <div className="hero__ctas">
-          <a href="#proyectos" className="btn-outline-accent btn-lg">
+          <a href="#simulador" className="btn-outline-accent btn-lg">
             {t("hero.projects")}
+          </a>
+          <a href="#trayectoria" className="btn-outline-line">
+            <PiBriefcase />
+            {t("hero.experience")}
           </a>
           <a href={LINKS.cv} target="_blank" rel="noreferrer" className="btn-outline-line">
             <PiReadCvLogo />
             {t("hero.cv")}
           </a>
-          <a
-            href={LINKS.cv}
-            download={CV_FILENAME}
-            className="hero__download"
-            aria-label={t("hero.cvDownload")}
-            title={t("hero.cvDownload")}
-          >
+          <a href={LINKS.cv} download className="hero__download" aria-label={t("hero.cvDownload")} title={t("hero.cvDownload")}>
             <PiDownloadSimple />
-            {t("hero.download")}
           </a>
           <a
             href={LINKS.github}

@@ -14,85 +14,100 @@ export const LINKS = {
 };
 
 export const NAV = [
-  { href: "#sobre-mi", es: "Sobre mí", en: "About" },
+  { href: "#simulador", es: "Simulador", en: "Trading Lab" },
+  { href: "#casos", es: "Casos", en: "Cases" },
+  { href: "#como-trabajo", es: "Cómo trabajo", en: "How I work" },
   { href: "#trayectoria", es: "Trayectoria", en: "Career" },
-  { href: "#proyectos", es: "Proyectos", en: "Projects" },
-  { href: "#espacio-bursatil", es: "Espacio bursátil", en: "Trading Lab" },
-  { href: "#stack", es: "Stack", en: "Stack" },
   { href: "#contacto", es: "Contacto", en: "Contact" },
 ];
 
-export const HERO_CHIPS = ["Java", "Spring Boot", "Node.js", "React", "SQL Server", "AWS/Kubernetes"];
-
 export const STATS = [
-  { value: "6+", es: "años en infraestructura bursátil", en: "years in exchange infrastructure" },
+  { value: "6+", es: "años en tecnología de mercados de capitales", en: "years in capital markets technology" },
   {
-    value: "4",
-    es: "mercados: Chile, Perú, Colombia y Rep. Dominicana",
-    en: "markets: Chile, Peru, Colombia and Dominican Rep.",
+    value: "REGIONAL",
+    es: "experiencia en proyectos con alcance regional",
+    en: "experience contributing to projects with regional reach",
   },
-  { value: "3", es: "roles en Bolsa de Santiago / nuam", en: "roles at Bolsa de Santiago / nuam" },
-  { value: "24/7", es: "sistemas en producción y soporte", en: "systems live in production" },
+  { value: "CRÍTICOS", es: "sistemas en producción y entornos regulados", en: "critical systems in regulated production environments" },
 ];
 
 export const TIMELINE = [
   {
     kind: "work",
-    range: { es: "SEPT. 2021 — ACTUALIDAD", en: "SEP. 2021 — PRESENT" },
+    range: { es: "AGOSTO 2024 — ACTUALIDAD", en: "AUGUST 2024 — PRESENT" },
     title: { es: "Senior Software Engineer", en: "Senior Software Engineer" },
-    place: "Bolsa de Santiago / nuam exchange · Santiago, Chile",
+    place: "Bolsa de Santiago / nuam · Santiago, Chile",
     desc: {
-      es: "Desarrollo end-to-end sobre la plataforma de trading Sebra HT: servicios, modelos de datos e interfaces de administración.",
-      en: "End-to-end development on the Sebra HT trading platform: services, data models and admin interfaces.",
+      es: "Diseño y desarrollo de plataformas de trading y mercados de capitales, servicios backend distribuidos, Order Entry, Market Data y conectividad con sistemas de negociación.",
+      en: "Design and development of trading and capital markets platforms, distributed backend services, Order Entry, Market Data, and connectivity with trading systems.",
     },
-  },
-  {
-    kind: "education",
-    range: { es: "2024 — 2025", en: "2024 — 2025" },
-    title: {
-      es: "6 meses de inglés en Nueva Zelanda",
-      en: "Six months of English in New Zealand",
-    },
-    place: { es: "WorldWide School · Nueva Zelanda", en: "WorldWide School · New Zealand" },
-  },
-  {
-    kind: "education",
-    range: { es: "2021 — 2022", en: "2021 — 2022" },
-    title: {
-      es: "Diplomado en Desarrollo de Aplicaciones Móviles",
-      en: "Diploma in Mobile Application Development",
-    },
-    place: "Pontificia Universidad Católica de Chile · Santiago",
-  },
-  {
-    kind: "education",
-    range: { es: "2021 — 2022", en: "2021 — 2022" },
-    title: { es: "Inglés Elemental A2", en: "Elementary English A2" },
-    place: "Santiago, Chile",
   },
   {
     kind: "work",
-    range: { es: "MAYO 2020 — SEPT. 2021", en: "MAY 2020 — SEP. 2021" },
-    title: { es: "Analista Programador", en: "Analyst Programmer" },
+    range: { es: "NOVIEMBRE 2021 — AGOSTO 2024", en: "NOVEMBER 2021 — AUGUST 2024" },
+    title: { es: "Mid-level Software Engineer", en: "Mid-level Software Engineer" },
     place: "Bolsa de Santiago · Santiago, Chile",
+    desc: {
+      es: "Desarrollo e integración de servicios backend para aplicaciones de mercados de capitales, APIs, sistemas distribuidos, despliegues, pruebas de integración y resolución de problemas productivos.",
+      en: "Development and integration of backend services for capital markets applications, APIs, distributed systems, deployments, integration testing, and production issue resolution.",
+    },
   },
   {
     kind: "work",
-    range: { es: "2020", en: "2020" },
-    title: { es: "Práctica profesional", en: "Professional practice" },
+    range: { es: "MAYO 2020 — NOVIEMBRE 2021", en: "MAY 2020 — NOVEMBER 2021" },
+    title: { es: "Junior Software Engineer", en: "Junior Software Engineer" },
     place: "Bolsa de Santiago · Santiago, Chile",
+    desc: {
+      es: "Desarrollo y mantención de aplicaciones para operaciones del mercado financiero, integraciones, bases de datos y soporte productivo.",
+      en: "Development and maintenance of applications for financial-market operations, integrations, databases, and production support.",
+    },
   },
   {
-    kind: "education",
-    range: { es: "2016 — 2020", en: "2016 — 2020" },
-    title: { es: "Ingeniería en Informática", en: "Informatics Engineering" },
-    place: "INACAP · Santiago, Chile",
+    kind: "work",
+    range: { es: "FEBRERO 2020 — MARZO 2020", en: "FEBRUARY 2020 — MARCH 2020" },
+    title: { es: "Práctica Profesional", en: "Software Engineering Internship" },
+    place: "Bolsa de Santiago · Santiago, Chile",
+  },
+];
+
+export const EDUCATION = [
+  { es: "Ingeniería en Informática · INACAP · marzo 2016 — diciembre 2019", en: "Computer Engineering · INACAP · March 2016 — December 2019" },
+  { es: "Diplomado en Desarrollo de Aplicaciones Móviles · PUC Chile · septiembre 2022 — abril 2023", en: "Diploma in Mobile Application Development · PUC Chile · September 2022 — April 2023" },
+  { es: "English Studies · WorldWide School of English, Nueva Zelanda · agosto 2024 — febrero 2025", en: "English Studies · WorldWide School of English, New Zealand · August 2024 — February 2025" },
+  { es: "Español nativo · Inglés B2 — certificación IELTS", en: "Native Spanish · English B2 — IELTS certification" },
+];
+
+export const PRINCIPLES = [
+  {
+    number: "01",
+    title: { es: "El modelo de datos viene primero", en: "The data model comes first" },
+    text: {
+      es: "Antes de construir una interfaz, hay que entender las entidades, sus relaciones y sus reglas. Un modelo confuso termina convirtiéndose en años de parches.",
+      en: "Before building an interface, understand the entities, relationships, and rules. A confusing model turns into years of patches.",
+    },
+  },
+  {
+    number: "02",
+    title: { es: "Todo debe ser trazable", en: "Everything must be traceable" },
+    text: {
+      es: "Quién hizo qué, cuándo y por qué. En un mercado regulado, la auditoría no es una funcionalidad adicional: es parte del diseño.",
+      en: "Who did what, when, and why. In a regulated market, auditability is not an optional feature; it is part of the design.",
+    },
+  },
+  {
+    number: "03",
+    title: { es: "Cada dato crítico necesita una única autoridad", en: "Every critical fact needs a single authority" },
+    text: {
+      es: "El backend debe decidir el precio, el estado y el resultado de una operación. El cliente representa la información; no puede convertirse en su fuente de verdad.",
+      en: "The backend decides the price, state, and result of an operation. The client presents information; it must not become its source of truth.",
+    },
   },
 ];
 
 export const CASES = [
   {
     img: sebraht,
+    categories: ["production", "trading"],
     alt: {
       es: "Plataforma de trading de la Bolsa y Mercado de Valores de la República Dominicana",
       en: "Trading platform of the Dominican Republic stock exchange",
@@ -109,7 +124,7 @@ export const CASES = [
     tags: ["Java", "React", "SQL Server"],
     context: {
       es: "La Bolsa y Mercado de Valores de la República Dominicana (BVRD) necesitaba modernizar su operación con una plataforma de negociación al nivel de los mercados de la región.",
-      en: "The Dominican Republic's stock exchange (BVRD) needed to modernise its operation with a trading platform on par with regional markets.",
+      en: "The Dominican Republic's stock exchange (BVRD) needed to modernize its operation with a trading platform on par with regional markets.",
     },
     role: {
       es: "Participé en el desarrollo y la integración de la plataforma: adaptación de componentes, ajustes de reglas de negocio locales y puesta en marcha junto al equipo de la bolsa.",
@@ -124,6 +139,7 @@ export const CASES = [
   },
   {
     img: sebrahtSiadus,
+    categories: ["production", "platform"],
     alt: {
       es: "Módulo de gestión de usuarios y entidades de la plataforma Sebra HT",
       en: "User and entity management module of the Sebra HT platform",
@@ -155,6 +171,7 @@ export const CASES = [
   },
   {
     img: summitapp,
+    categories: ["personal"],
     media: "app",
     mediaBg: "#151725",
     alt: {
@@ -189,6 +206,7 @@ export const CASES = [
   },
   {
     img: stockbar,
+    categories: ["personal", "trading"],
     media: "app",
     mediaBg: "#120f0d",
     alt: {
@@ -220,6 +238,17 @@ export const CASES = [
     stack: ["React 18", "TypeScript", "Vite", "Spring Boot 3", "Java 17", "PostgreSQL", "Keycloak", "Docker"],
     link: "https://github.com/fdelvalle01/stock-bar",
     linkLabel: "projects.repo",
+  },
+];
+
+export const CASE_GROUPS = [
+  {
+    label: { es: "SISTEMAS EN PRODUCCIÓN EN MERCADOS REGULADOS", en: "PRODUCTION SYSTEMS IN REGULATED MARKETS" },
+    indexes: [0, 1],
+  },
+  {
+    label: { es: "PRODUCTOS PROPIOS, DE PUNTA A PUNTA", en: "MY OWN PRODUCTS, END TO END" },
+    indexes: [2, 3],
   },
 ];
 
@@ -263,6 +292,16 @@ export const STACK = {
   ],
 };
 
+export const CAPABILITIES = [
+  { key: "trading", title: { es: "Trading & Financial Systems", en: "Trading & Financial Systems" }, items: ["Trading Systems", "Capital Markets", "FIX Protocol", "Market Data", "Order Entry", "Exchange Connectivity", "WebSockets"] },
+  { key: "backend", title: { es: "Backend & Distributed Systems", en: "Backend & Distributed Systems" }, items: ["Java", "Spring Boot", "Golang", "Apache Kafka", "Node.js", "REST APIs", "Event-Driven Architecture", "Distributed Systems"] },
+  { key: "platform", title: { es: "Platform & Data", en: "Platform & Data" }, items: ["Kubernetes", "Docker", "PostgreSQL", "SQL Server", "AWS", "Keycloak", "Git"] },
+  { key: "frontend", title: { es: "Frontend & Product", en: "Frontend & Product" }, items: ["React", "TypeScript", "JavaScript", "MUI", "Flutter", "Dart", "HTML", "CSS"] },
+  { key: "engineering", title: { es: "Engineering", en: "Engineering" }, items: ["System Design", "Software Architecture", "Integration Testing", "Production Support", "Traceability", "Technical Analysis"] },
+];
+
+export const AI_TOOLS = ["Claude Code", { es: "Agentes de código", en: "Coding agents" }, { es: "Contexto para agentes", en: "Agent context" }];
+
 /* Diccionario de textos sueltos de la interfaz. */
 export const DICT = {
   "nav.cta": { es: "Hablemos", en: "Get in touch" },
@@ -270,15 +309,20 @@ export const DICT = {
   "nav.menuClose": { es: "Cerrar menú", en: "Close menu" },
 
   "hero.status": {
-    es: "Santiago, Chile · freelance y consultoría técnica remota",
-    en: "Santiago, Chile · remote freelance and technical consulting",
+    es: "Santiago, Chile · disponible para oportunidades remotas e internacionales",
+    en: "Santiago, Chile · open to remote and international opportunities",
   },
   "hero.hello": { es: "Hola ", en: "Hi there " },
   "hero.lead": {
-    es: "Senior Software Engineer especializado en soluciones de trading e infraestructura bursátil. Trabajo con FIX, motores de negociación, gateways de conectividad, Market Data, Order Entry y WebSockets para construir sistemas financieros trazables y preparados para producción.",
-    en: "Senior Software Engineer specialising in trading solutions and exchange infrastructure. I work with FIX, trading engines, connectivity gateways, Market Data, Order Entry and WebSockets to build traceable, production-ready financial systems.",
+    es: "Senior Software Engineer especializado en Exchange & Trading Systems. Diseño y construyo soluciones de Order Entry, Market Data, conectividad FIX y arquitecturas distribuidas para mercados financieros.",
+    en: "Senior Software Engineer specializing in Exchange & Trading Systems. I design and build Order Entry, Market Data, FIX connectivity, and distributed architectures for financial markets.",
   },
-  "hero.projects": { es: "Ver proyectos", en: "See projects" },
+  "hero.title": {
+    es: "Construyo los sistemas por donde viaja una orden.",
+    en: "I build the systems an order travels through.",
+  },
+  "hero.projects": { es: "Probar el Trading Lab", en: "Try the Trading Lab" },
+  "hero.experience": { es: "Ver experiencia", en: "View experience" },
   "hero.cv": { es: "Ver CV", en: "View CV" },
   "hero.download": { es: "Descargar", en: "Download" },
   "hero.cvDownload": { es: "Descargar CV en PDF", en: "Download CV as PDF" },
@@ -301,20 +345,26 @@ export const DICT = {
   },
 
   "career.kicker": { es: "TRAYECTORIA", en: "CAREER" },
-  "career.title": { es: "Una sola línea de tiempo", en: "One single timeline" },
+  "career.title": { es: "De practicante a senior, construyendo cada vez más cerca del core del mercado.", en: "From intern to senior, building closer to the market core at every stage." },
   "career.lead": {
-    es: "Trabajo y formación en el mismo eje, en orden cronológico inverso.",
-    en: "Work and education on the same axis, newest first.",
+    es: "Una progresión construida sobre operaciones de mercado, integraciones, sistemas distribuidos y plataformas de trading.",
+    en: "A progression built on market operations, integrations, distributed systems, and trading platforms.",
   },
   "career.work": { es: "TRABAJO", en: "WORK" },
   "career.education": { es: "FORMACIÓN", en: "EDUCATION" },
 
-  "projects.kicker": { es: "PROYECTOS", en: "PROJECTS" },
-  "projects.title": { es: "Trabajo reciente", en: "Recent work" },
+  "projects.kicker": { es: "LOS CASOS", en: "THE CASES" },
+  "projects.title": { es: "Evidencia, no promesas.", en: "Evidence, not promises." },
   "projects.lead": {
-    es: "Cada tarjeta abre un caso: contexto, mi rol, stack y resultado.",
-    en: "Each card opens a case study: context, my role, stack and outcome.",
+    es: "La demo explica el dominio. Estos casos muestran contribuciones a sistemas de producción regulados y productos completos construidos de punta a punta.",
+    en: "The demo explains the domain. These cases show contributions to regulated production systems and complete products built end to end.",
   },
+  "projects.all": { es: "Todos", en: "All" },
+  "projects.production": { es: "Producción", en: "Production" },
+  "projects.trading": { es: "Trading", en: "Trading" },
+  "projects.platform": { es: "Plataforma", en: "Platform" },
+  "projects.personal": { es: "Producto propio", en: "Personal product" },
+  "projects.confidentiality": { es: "Los casos describen contribuciones públicas y educativas; no exponen arquitectura interna ni información confidencial.", en: "Cases describe public and educational contributions; they do not expose internal architecture or confidential information." },
   "projects.view": { es: "Ver caso", en: "View case" },
   "projects.context": { es: "CONTEXTO", en: "CONTEXT" },
   "projects.role": { es: "MI ROL", en: "MY ROLE" },
@@ -323,10 +373,10 @@ export const DICT = {
   "projects.repo": { es: "Ver el repositorio", en: "View the repository" },
   "projects.close": { es: "Cerrar", en: "Close" },
 
-  "stack.title": { es: "Con qué trabajo", en: "What I work with" },
+  "stack.title": { es: "Tecnologías y capacidades", en: "Technologies & capabilities" },
   "stack.lead": {
-    es: "Agrupado según cómo lo uso realmente, no según cursos.",
-    en: "Grouped by how I actually use it, not by courses.",
+    es: "Organizado por las capacidades que aplico al diseñar, integrar y soportar sistemas de mercado.",
+    en: "Organized by the capabilities I apply when designing, integrating, and supporting market systems.",
   },
   "stack.frontend": { es: "FRONTEND", en: "FRONTEND" },
   "stack.backend": { es: "BACKEND", en: "BACKEND" },
@@ -335,11 +385,12 @@ export const DICT = {
   "stack.level.daily": { es: "Uso diario", en: "Daily" },
   "stack.level.production": { es: "Experiencia en producción", en: "Production experience" },
   "stack.level.complementary": { es: "Complementario", en: "Complementary" },
+  "stack.aiTools": { es: "Herramientas de desarrollo asistido", en: "AI-assisted development tools" },
 
   "contact.kicker": { es: "CONTACTO", en: "CONTACT" },
   "contact.title": {
-    es: "¿Tienes un proyecto o desafío técnico?",
-    en: "Have a project or technical challenge?",
+    es: "El siguiente paso.",
+    en: "The next step.",
   },
   "contact.lead": {
     es: "Disponible para proyectos freelance remotos y consultoría técnica en backend, fintech e integraciones de trading. Puedo ayudarte a revisar arquitectura, diseñar APIs y conexiones, mejorar sistemas existentes o convertir una idea en una solución funcional.",
@@ -351,6 +402,17 @@ export const DICT = {
   "contact.send": { es: "Enviar mensaje", en: "Send message" },
   "contact.sent": { es: "Abriendo tu aplicación de correo…", en: "Opening your email app…" },
   "contact.subject": { es: "Contacto desde el portafolio", en: "Contact from your portfolio" },
+
+  "contact.summary": {
+    es: "Estoy abierto a oportunidades senior remotas e internacionales en Exchange & Trading Systems, Backend Engineering, FinTech y Distributed Systems. También evalúo consultoría técnica en integraciones, APIs y sistemas críticos.",
+    en: "I am open to senior remote and international opportunities in Exchange & Trading Systems, Backend Engineering, FinTech, and Distributed Systems. I also consider technical consulting engagements involving integrations, APIs, and critical systems.",
+  },
+  "contact.hiringTitle": { es: "Oportunidades laborales", en: "Hiring opportunities" },
+  "contact.hiringLead": { es: "Revisa mi experiencia o escríbeme por LinkedIn.", en: "Review my experience or contact me on LinkedIn." },
+  "contact.consultingTitle": { es: "Proyectos y consultoría", en: "Projects & consulting" },
+  "contact.consultingLead": { es: "Hablemos de arquitectura, APIs, integraciones o sistemas que no pueden fallar.", en: "Let's discuss architecture, APIs, integrations or systems that cannot fail." },
+  "contact.linkedin": { es: "Contactar por LinkedIn", en: "Contact on LinkedIn" },
+  "contact.email": { es: "Escribir por email", en: "Write an email" },
 
   "footer.copy": {
     es: "Diseñado y desarrollado en Santiago",

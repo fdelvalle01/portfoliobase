@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import { PiArrowClockwise, PiInfo, PiPulse, PiTrendDown, PiTrendUp } from "react-icons/pi";
 import { useI18n } from "../context/I18nContext";
+import FixExplorer from "./FixExplorer";
 
 const INSTRUMENTS = {
   ANDES: {
@@ -68,14 +69,14 @@ const INSTRUMENTS = {
 };
 
 const COPY = {
-  kicker: { es: "ESPACIO BURSÁTIL", en: "TRADING SYSTEMS LAB" },
+  kicker: { es: "NO ME CREAS: PRUÉBALO", en: "DON'T TAKE MY WORD FOR IT. TRY IT." },
   title: {
-    es: "Explora cómo viaja una orden por el mercado.",
-    en: "Explore how an order moves through the market.",
+    es: "Envía una orden y observa su recorrido.",
+    en: "Send an order and watch its journey.",
   },
   lead: {
-    es: "Una simulación sencilla de Market Data, profundidad, ingreso de órdenes y ejecuciones, basada en mi experiencia desarrollando soluciones fintech y bursátiles.",
-    en: "A simple Market Data, depth, order entry and execution simulation, based on my experience building fintech and trading solutions.",
+    es: "Order Book, profundidad, Order Entry, matching y Drop Copy: el dominio en el que trabajo convertido en una simulación interactiva. Selecciona un precio, ingresa una orden y observa qué ocurre.",
+    en: "Order Book, depth, Order Entry, matching, and Drop Copy: the domain I work in, turned into an interactive simulation. Select a price, enter an order, and see what happens.",
   },
   instrument: { es: "Instrumento", en: "Instrument" },
   aggregated: { es: "Agregado", en: "Aggregated" },
@@ -330,9 +331,9 @@ export default function TradingLab() {
   const rows = Math.max(visibleBids.length, visibleAsks.length);
 
   return (
-    <section id="espacio-bursatil" className="section section--alt trading-lab-section">
+    <section id="simulador" className="section section--alt trading-lab-section">
       <div className="section__inner">
-        <div className="kicker">04 — {tr("kicker")}</div>
+        <div className="kicker">01 — {tr("kicker")}</div>
         <h3 className="section-title">{tr("title")}</h3>
         <p className="section-lead">{tr("lead")}</p>
 
@@ -398,7 +399,7 @@ export default function TradingLab() {
             <button type="submit" className="ticket-submit">{side === "buy" ? tr("sendBuy") : tr("sendSell")}</button>
           </form>
 
-          <div className="lab-events">
+          <div className="lab-events" aria-live="polite" aria-atomic="false">
             <div className="lab-panel-title">{tr("eventFlow")}</div>
             {events.length ? events.map((item) => (
               <article className="execution-event" key={item.id}>
@@ -424,6 +425,7 @@ export default function TradingLab() {
           </aside>
         </div>
 
+        <FixExplorer event={events[0]} symbol={symbol} />
         <p className="lab-disclaimer">{tr("disclaimer")}</p>
       </div>
     </section>
