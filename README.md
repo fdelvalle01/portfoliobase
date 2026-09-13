@@ -1,5 +1,17 @@
 # Portafolio — Francisco Del Valle
 
+## Incorporación de Trading Workstation
+
+El proyecto propio Trading Workstation se incorpora sobre
+`feat/trading-portfolio-narrative` del fork `fdelvallenuamx/portfoliobase`
+(base `fd6a155`), que corresponde al diseño publicado en Netlify.
+Conserva la narrativa, los filtros de casos y los grupos existentes.
+
+La ficha incluye descripción ES/EN, Claude Design, SDD, arquitectura y resultados
+del cierre documentado de la POC. Las tres imágenes `src/Assets/Projects/trading-workstation*.png`
+son capturas reales del stack local del 2026-09-13, con datos simulados, sin enviar órdenes.
+`gallery` admite imágenes con textos alternativos ES/EN y `mediaNote` describe su procedencia.
+
 Sitio personal de **Francisco Del Valle**, Senior Software Engineer especializado en plataformas de
 trading e infraestructura bursátil.
 
