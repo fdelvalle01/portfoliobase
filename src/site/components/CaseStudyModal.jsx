@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { PiArrowUpRight, PiX } from "react-icons/pi";
 import { useI18n } from "../context/I18nContext";
+import AiSddStudy from "./AiSddStudy";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])';
@@ -67,7 +68,7 @@ export default function CaseStudyModal({ project, onClose }) {
         aria-labelledby="case-title"
       >
         <div
-          className={`modal__media${project.media === "app" ? " modal__media--app" : ""}`}
+          className={`modal__media${project.media === "app" ? " modal__media--app" : ""}${project.media === "diagram" ? " modal__media--diagram" : ""}`}
           style={project.mediaBg ? { background: project.mediaBg } : undefined}
         >
           <img src={selectedImage.img} alt={L(selectedImage.alt)} />
@@ -122,6 +123,8 @@ export default function CaseStudyModal({ project, onClose }) {
             <div className="modal__result-label">{t("projects.result")}</div>
             <p className="modal__result-text">{L(project.result)}</p>
           </div>
+
+          {project.id === "poc-ai-sdd" && <AiSddStudy />}
 
           <div className="modal__label">STACK</div>
           <div className="modal__stack">

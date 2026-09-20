@@ -1,5 +1,22 @@
 # Portafolio — Francisco Del Valle
 
+## POC: AI-Assisted Spec-Driven Development
+
+Nuevo caso ES/EN en «Casos», con filtro POC / Ingeniería y enlace directo
+`/#poc-ai-sdd`. Conserva Trading Workstation y su galería. El contenido vive en
+`src/site/data/aiSdd.js`; `AiSddStudy.jsx` presenta el flujo y separa evidencias de
+limitaciones. La portada SVG es un diagrama conceptual, no una captura de una app.
+
+La ficha resume el informe de evidencia de Brain Projects en la revisión `eb0bdf3`.
+La documentación no tiene acceso público (GitHub devuelve 404 sin autenticación), por lo
+que se omiten enlaces inaccesibles; no se cambia la visibilidad del repositorio.
+No afirma mejoras de productividad, adopción de equipo ni conexión con Jira.
+Las pruebas de la POC se citan desde ese informe; no son pruebas ejecutadas por el portfolio.
+
+La rama `feat/ai-assisted-sdd-poc` parte de `main` después del merge de Trading Workstation
+(PR #2). Un push a esta rama no acredita un despliegue de producción: depende de la
+configuración de previews de Netlify y de la integración a la rama de producción.
+
 ## Incorporación de Trading Workstation
 
 El proyecto propio Trading Workstation se incorpora sobre
