@@ -1280,3 +1280,33 @@ a:hover { color: var(--accent); }
 .case-gallery__choices img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; }
 .case-gallery p { margin: 12px 0 4px; color: var(--text); font-size: 13px; }
 .case-gallery small { color: var(--muted); font-size: 11px; }
+
+/* POC: vector cover and responsive, text-based workflow. */
+.project-card__media--diagram { background: #120d20; }
+.project-card__media--diagram img { object-fit: contain; opacity: 1; }
+.modal__media--diagram { background: #120d20; border-radius: 12px 12px 0 0; }
+.modal__media--diagram img { aspect-ratio: 16/10; object-fit: contain; opacity: 1; }
+.sdd-study { margin: 32px 0; }
+.sdd-study__heading h4 { font-size: 23px; line-height: 1.35; margin: 8px 0 12px; }
+.sdd-study__heading p, .sdd-study__evidence li { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.sdd-flow { margin: 28px 0; }
+.sdd-flow ol { list-style: none; margin: 0; padding: 0; }
+.sdd-flow__step { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 16px; padding: 18px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; }
+.sdd-flow__number { color: var(--accent-2); font-size: 22px; font-variant-numeric: tabular-nums; }
+.sdd-flow__step h5 { font-size: 15px; margin: 0 0 5px; color: var(--text); }
+.sdd-flow__step p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+.sdd-flow__artifact { display: inline-block; margin-top: 9px; color: var(--text); font-size: 12px; }
+.sdd-flow__review { display: flex; align-items: center; gap: 10px; margin: 12px 0 0 36px; padding: 12px 16px; border-left: 3px solid var(--accent); color: var(--text); background: var(--surface-2); font-size: 13px; }
+.sdd-flow__review svg { flex-shrink: 0; font-size: 22px; color: var(--accent-2); }
+.sdd-flow__arrow { display: block; margin: 9px 0 9px 27px; color: var(--accent-2); }
+.sdd-flow figcaption, .sdd-study__note { color: var(--muted); font-size: 12px; line-height: 1.7; margin-top: 18px; }
+.sdd-study__evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+.sdd-study__evidence h4 { display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 1.5; }
+.sdd-study__evidence h4 svg { flex-shrink: 0; color: var(--accent-2); }
+.sdd-study__evidence ul { padding-left: 18px; margin: 12px 0 0; }
+.sdd-study__evidence li + li { margin-top: 9px; }
+@media (max-width: 600px) {
+  .sdd-study__evidence { grid-template-columns: 1fr; }
+  .sdd-flow__step { padding: 14px; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
+  .sdd-flow__review { margin-left: 16px; }
+}

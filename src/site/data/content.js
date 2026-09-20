@@ -5,6 +5,7 @@ import sebraht from "../../Assets/Projects/sebraht.png";
 import sebrahtSiadus from "../../Assets/Projects/sebraht_siadus.png";
 import summitapp from "../../Assets/Projects/summitapp.png";
 import stockbar from "../../Assets/Projects/stockbar.png";
+import { AI_SDD_CASE } from "./aiSdd";
 
 /* CV oficial servido como archivo estático desde public/, no empaquetado. */
 export const CV_FILENAME = "Francisco-Del-Valle-Senior-Backend-Engineer-CV.pdf";
@@ -280,6 +281,7 @@ export const CASES = [
     link: "https://github.com/fdelvalle01/trading-workstation-platform/tree/feat/workstation-v2",
     linkLabel: "projects.repo",
   },
+  AI_SDD_CASE,
 ];
 
 export const CASE_GROUPS = [
@@ -290,6 +292,10 @@ export const CASE_GROUPS = [
   {
     label: { es: "PRODUCTOS PROPIOS, DE PUNTA A PUNTA", en: "MY OWN PRODUCTS, END TO END" },
     indexes: [2, 3, 4],
+  },
+  {
+    label: { es: "LABORATORIO DE INGENIERÍA · POC", en: "ENGINEERING LAB · POC" },
+    indexes: [5],
   },
 ];
 
@@ -397,14 +403,15 @@ export const DICT = {
   "projects.kicker": { es: "LOS CASOS", en: "THE CASES" },
   "projects.title": { es: "Evidencia, no promesas.", en: "Evidence, not promises." },
   "projects.lead": {
-    es: "La demo explica el dominio. Estos casos muestran contribuciones a sistemas de producción regulados y productos completos construidos de punta a punta.",
-    en: "The demo explains the domain. These cases show contributions to regulated production systems and complete products built end to end.",
+    es: "La demo explica el dominio. Estos casos muestran contribuciones a sistemas regulados, productos propios y experimentos de ingeniería con resultados y límites explícitos.",
+    en: "The demo explains the domain. These cases show contributions to regulated systems, personal products and engineering experiments with explicit results and limitations.",
   },
   "projects.all": { es: "Todos", en: "All" },
   "projects.production": { es: "Producción", en: "Production" },
   "projects.trading": { es: "Trading", en: "Trading" },
   "projects.platform": { es: "Plataforma", en: "Platform" },
   "projects.personal": { es: "Producto propio", en: "Personal product" },
+  "projects.poc": { es: "POC / Ingeniería", en: "POC / Engineering" },
   "projects.confidentiality": { es: "Los casos describen contribuciones públicas y educativas; no exponen arquitectura interna ni información confidencial.", en: "Cases describe public and educational contributions; they do not expose internal architecture or confidential information." },
   "projects.view": { es: "Ver caso", en: "View case" },
   "projects.context": { es: "CONTEXTO", en: "CONTEXT" },

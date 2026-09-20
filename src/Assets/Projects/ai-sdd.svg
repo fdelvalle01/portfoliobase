@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" fill="none">
+  <title>AI-Assisted Spec-Driven Development</title>
+  <desc>Brain provides context, OpenSpec holds specifications, and an AI agent executes authorized work. Human review and versioned evidence guide the workflow.</desc>
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.7">
+      <stop stop-color="#392153"/><stop offset="1" stop-color="#120D20"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9" stroke="#C6A8F1" stroke-width="1.5"/>
+    </marker>
+  </defs>
+  <rect width="960" height="600" fill="url(#glow)"/>
+  <g stroke="#B891E8" stroke-opacity=".09">
+    <path d="M0 100H960M0 200H960M0 300H960M0 400H960M0 500H960M120 0V600M240 0V600M360 0V600M480 0V600M600 0V600M720 0V600M840 0V600"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="60" y="72" fill="#D2B1FF" font-size="18" letter-spacing="4">ENGINEERING WORKFLOW / POC</text>
+    <text x="60" y="141" fill="#F5F0FF" font-size="48" font-weight="600">AI-Assisted</text>
+    <text x="60" y="199" fill="#F5F0FF" font-size="48" font-weight="600">Spec-Driven Development</text>
+    <g stroke="#C6A8F1" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M296 330H355"/><path d="M605 330H664"/>
+    </g>
+    <rect x="60" y="264" width="234" height="136" rx="14" fill="#221832" stroke="#755493"/>
+    <rect x="364" y="264" width="234" height="136" rx="14" fill="#36224F" stroke="#C399F9"/>
+    <rect x="668" y="264" width="232" height="136" rx="14" fill="#221832" stroke="#755493"/>
+    <g fill="#F5F0FF" font-size="30" text-anchor="middle" font-weight="600">
+      <text x="177" y="321">Brain</text><text x="481" y="321">OpenSpec</text><text x="784" y="321">AI Agent</text>
+    </g>
+    <g fill="#CEBEDF" font-size="21" text-anchor="middle">
+      <text x="177" y="361">Context</text><text x="481" y="361">Specifications</text><text x="784" y="361">Execution</text>
+    </g>
+    <path d="M177 420V450H784V420M480 450V477" stroke="#A185BF" stroke-width="2"/>
+    <rect x="181" y="482" width="598" height="56" rx="28" fill="#261A37" stroke="#755493"/>
+    <text x="480" y="517" text-anchor="middle" fill="#E5D3FC" font-size="19" letter-spacing="1">HUMAN REVIEW + VERSIONED EVIDENCE</text>
+  </g>
+</svg>

@@ -1,15 +1,35 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { PiArrowRight } from "react-icons/pi";
 import { CASE_GROUPS, CASES } from "../data/content";
 import { useI18n } from "../context/I18nContext";
 import CaseStudyModal from "./CaseStudyModal";
 
-const FILTERS = ["all", "production", "trading", "platform", "personal"];
+const FILTERS = ["all", "production", "trading", "platform", "personal", "poc"];
+
+function caseFromHash() {
+  const index = CASES.findIndex((project) => project.id && `#${project.id}` === window.location.hash);
+  return index === -1 ? null : index;
+}
 
 export default function Projects() {
   const { t, L } = useI18n();
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(caseFromHash);
   const [filter, setFilter] = useState("all");
+  useEffect(() => {
+    const handleHash = () => setOpen(caseFromHash());
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  function openCase(index) {
+    setOpen(index);
+    if (CASES[index].id) window.history.replaceState(null, "", `#${CASES[index].id}`);
+  }
+
+  function closeCase() {
+    setOpen(null);
+    if (caseFromHash() !== null) window.history.replaceState(null, "", "#casos");
+  }
   const visibleCases = useMemo(
     () => CASES.map((project, index) => ({ project, index })).filter(({ project }) => filter === "all" || project.categories.includes(filter)),
     [filter]
@@ -27,8 +47,8 @@ export default function Projects() {
       <div className="cards-grid">
         {visibleCases.map(({ project, index }) => <React.Fragment key={project.title.es}>
           {filter === "all" && CASE_GROUPS.find((group) => group.indexes[0] === index) ? <div className="case-group__label">{L(CASE_GROUPS.find((group) => group.indexes[0] === index).label)}</div> : null}
-          <button type="button" className="project-card" onClick={() => setOpen(index)}>
-            <div className={`project-card__media${project.media === "app" ? " project-card__media--app" : ""}`} style={project.mediaBg ? { background: project.mediaBg } : undefined}>
+          <button type="button" className="project-card" onClick={() => openCase(index)}>
+            <div className={`project-card__media${project.media === "app" ? " project-card__media--app" : ""}${project.media === "diagram" ? " project-card__media--diagram" : ""}`} style={project.mediaBg ? { background: project.mediaBg } : undefined}>
               <img src={project.img} alt={L(project.alt)} />
             </div>
             <div className="project-card__body">
@@ -45,6 +65,6 @@ export default function Projects() {
       </div>
       <p className="cases-disclaimer">{t("projects.confidentiality")}</p>
     </div>
-    <CaseStudyModal project={open === null ? null : CASES[open]} onClose={() => setOpen(null)} />
+    <CaseStudyModal project={open === null ? null : CASES[open]} onClose={closeCase} />
   </section>;
 }

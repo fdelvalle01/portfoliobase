@@ -79,9 +79,9 @@ El flujo es conceptual y educativo; no representa la arquitectura interna de nin
 ## 3. Casos / Cases
 
 - **ES — Título:** Evidencia, no promesas.
-- **ES — Introducción:** La demo explica el dominio. Estos casos muestran contribuciones a sistemas de producción regulados y productos completos construidos de punta a punta.
+- **ES — Introducción:** La demo explica el dominio. Estos casos muestran contribuciones a sistemas regulados, productos propios y experimentos de ingeniería con resultados y límites explícitos.
 - **EN — Title:** Evidence, not promises.
-- **EN — Introduction:** The demo explains the domain. These cases show contributions to regulated production systems and complete products built end to end.
+- **EN — Introduction:** The demo explains the domain. These cases show contributions to regulated systems, personal products and engineering experiments with explicit results and limitations.
 
 Los casos se pueden filtrar por producción, trading, plataforma y producto propio.
 
@@ -129,6 +129,21 @@ Los casos se pueden filtrar por producción, trading, plataforma y producto prop
 - **Repositorio:** https://github.com/fdelvalle01/stock-bar
 
 **Confidencialidad:** Los casos describen contribuciones públicas y educativas; no exponen arquitectura interna ni información confidencial.
+
+### Laboratorio de ingeniería · POC
+
+#### AI-Assisted Spec-Driven Development
+
+- **Categoría:** Experimento propio · POC documentada. Disponible en ES/EN y en el filtro POC / Ingeniería.
+- **Enlace para compartir:** `/#poc-ai-sdd` abre directamente la ficha.
+- **Problema:** Conservar contexto entre sesiones de IA y revisar las implicaciones del cambio antes de implementar.
+- **Propuesta:** Brain como memoria documental; OpenSpec como fuente del plan; agente como ejecutor; personas como responsables de las decisiones.
+- **Flujo:** Contexto → propuesta/specs → revisión funcional → diseño/tareas → revisión técnica → implementación/verificación → cierre autorizado y conocimiento duradero.
+- **Visuales:** Portada vectorial conceptual y diagrama responsive con texto accesible. No son capturas ni registros de una ejecución.
+- **Evidencia:** Informe de Brain Projects al 2026-09-17, fijado a la revisión `eb0bdf3`; distingue ensayos locales y revisiones simuladas. SummitApp es un caso de preparación vinculada, no una prueba de adopción completa por el equipo.
+- **Límites:** Sin mejoras comparativas medidas; adopción por otra persona, controles PR/CI y Jira pendientes de demostrar. Los registros originales de laboratorio no están distribuidos en el repositorio público.
+- **Fuente editorial del sitio:** `src/site/data/aiSdd.js` y `src/site/components/AiSddStudy.jsx`.
+- **Acceso:** El repositorio documental devuelve 404 sin autenticación. La ficha no incluye enlaces inaccesibles ni publica registros originales; su visibilidad permanece intacta.
 
 ## 4. Cómo trabajo / How I work
 
