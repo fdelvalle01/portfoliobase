@@ -1,6 +1,9 @@
-import React, { useMemo, useState } from "react";
-import { PiArrowRight, PiCode, PiRobot, PiShieldCheck } from "react-icons/pi";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { PiCode, PiRobot, PiShieldCheck, PiCopy, PiCheck } from "react-icons/pi";
 import { useI18n } from "../context/I18nContext";
+
+import useCompactLab from "../hooks/useCompactLab";
+import { FIX_GROUPS, FIX_NAMES, fixMeaning } from "../data/fixPresentation";
 
 const AUTOMATION_STEPS = ["Market Data", "Strategy", "Risk Controls", "Order Entry", "Execution Report"];
 const SOH = "\u0001";
@@ -15,7 +18,7 @@ function fixChecksum(message) {
   return String(total % 256).padStart(3, "0");
 }
 
-function buildExecutionReport(event, symbol) {
+export function buildExecutionReport(event, symbol) {
   const sequence = event?.id || 1;
   const identifier = String(sequence).padStart(3, "0");
   const simulatedMinutes = String(Math.floor((sequence - 1) / 60) % 60).padStart(2, "0");
@@ -65,40 +68,39 @@ function buildExecutionReport(event, symbol) {
   };
 }
 
-export default function FixExplorer({ event, symbol }) {
+export default function FixExplorer({ event, symbol, explorerRef }) {
   const { lang, L } = useI18n();
+  const text = (es, en) => lang === "es" ? es : en;
   const [tab, setTab] = useState("fix");
-  const [cycle, setCycle] = useState(0);
+  const compact = useCompactLab();
+  const [groupsOpen, setGroupsOpen] = useState({ exec: true });
+  const [rawOpen, setRawOpen] = useState(false);
+  const [copied, setCopied] = useState("");
+  const [hoverTag, setHoverTag] = useState(null);
+  const copyTimer = useRef(null);
+  const copyVersion = useRef(0);
+  useEffect(() => () => { clearTimeout(copyTimer.current); copyVersion.current += 1; }, []);
+  useEffect(() => { setTab("fix"); setCopied(""); clearTimeout(copyTimer.current); copyVersion.current += 1; }, [event, symbol]);
   const message = useMemo(() => buildExecutionReport(event, symbol), [event, symbol]);
-  const visibleRaw = message.raw.split(SOH).join("␁");
-
-  return <section className="fix-explorer" aria-labelledby="fix-explorer-title">
-    <div className="fix-explorer__intro">
-      <div>
-        <div className="kicker">FIX PROTOCOL</div>
-        <h3 id="fix-explorer-title">{L({ es: "De la ejecución al mensaje FIX.", en: "From execution to a FIX message." })}</h3>
-        <p>{L({ es: "FIX es un estándar de mensajería para comunicar órdenes, ejecuciones y datos entre participantes del mercado. Aquí puedes inspeccionar una representación educativa del resultado de tu última orden.", en: "FIX is a messaging standard used to communicate orders, executions, and data between market participants. Here you can inspect an educational representation of your latest order result." })}</p>
-      </div>
-      <div className="fix-tabs" role="tablist" aria-label="FIX">
-        <button type="button" role="tab" aria-selected={tab === "fix"} className={tab === "fix" ? "is-active" : ""} onClick={() => setTab("fix")}><PiCode /> ExecutionReport</button>
-        <button type="button" role="tab" aria-selected={tab === "automation"} className={tab === "automation" ? "is-active" : ""} onClick={() => setTab("automation")}><PiRobot /> {lang === "es" ? "Automatización" : "Automation"}</button>
-      </div>
+  const fields = Object.fromEntries(message.fields.map(([tag, value]) => [tag, value]));
+  const copy = async () => {
+    const version = ++copyVersion.current;
+    try { await navigator.clipboard.writeText(message.raw); if (version !== copyVersion.current) return; setCopied("ok"); }
+    catch { if (version !== copyVersion.current) return; setCopied("error"); }
+    clearTimeout(copyTimer.current); copyTimer.current = setTimeout(() => setCopied(""), 1800);
+  };
+  const number = value => new Intl.NumberFormat(lang === "es" ? "es-CL" : "en-US", { maximumFractionDigits: 2 }).format(Number(value));
+  const status = fields["39"] === "2" ? text("Ejecutada", "Filled") : fields["39"] === "1" ? text("Ejecución parcial", "Partially filled") : text("En el libro", "Resting in the book");
+  return <section ref={explorerRef} tabIndex={-1} className="fix-explorer fx" aria-labelledby="fix-explorer-title">
+    <div className="fx-intro"><div className="kicker">FIX PROTOCOL</div><h3 id="fix-explorer-title">{text("De la ejecución al mensaje FIX.", "From execution to a FIX message.")}</h3><p>{text("Inspecciona el resultado de tu última orden: su estado, cantidades y campos del ExecutionReport educativo.", "Inspect your latest order result: its status, quantities and fields in the educational ExecutionReport.")}</p><div className="fx-tabs" role="tablist" aria-label="FIX">{["fix", "automation"].map(value => <button type="button" role="tab" id={`fx-tab-${value}`} aria-controls="fx-panel" key={value} aria-selected={tab === value} onClick={() => setTab(value)}>{value === "fix" ? <><PiCode />ExecutionReport</> : <><PiRobot />{text("Automatización", "Automation")}</>}</button>)}</div></div>
+    <div id="fx-panel" role="tabpanel" aria-labelledby={`fx-tab-${tab}`}>
+      {tab === "fix" ? <>
+        <div className="fx-source"><div><span className={`fx-source-badge ${event ? "is-order" : ""}`}>{event ? `${text("Orden", "Order")} #${String(event.id).padStart(3, "0")}` : text("Ejemplo", "Example")}</span><span>{event ? "FIX 5.0 SP2 · ExecutionReport (35=8)" : text("Mensaje de ejemplo: todavía no envías una orden.", "Example message: you haven't sent an order yet.")}</span></div><div className="fx-source-actions"><button type="button" aria-expanded={rawOpen} aria-controls="fx-raw" onClick={() => setRawOpen(!rawOpen)}>{text("Mensaje raw", "Raw message")} {rawOpen ? "⌃" : "⌄"}</button><button type="button" onClick={copy}>{copied === "ok" ? <PiCheck /> : <PiCopy />}{text("Copiar", "Copy")}</button></div><span className="fx-copy-state" role="status">{copied === "ok" ? text("Copiado", "Copied") : copied === "error" ? text("No se pudo copiar", "Could not copy") : ""}</span></div>
+        {rawOpen && <div id="fx-raw" className="fx-raw"><code>{message.fields.map(([tag, value]) => <span key={tag} className={hoverTag === tag ? "is-highlighted" : ""}>{tag}={value}<span className="fx-soh">␁</span></span>)}</code><p>{text("␁ representa SOH (0x01). Copiar conserva el delimitador real. FIXT.1.1 identifica el transporte y 1128=9 la aplicación FIX 5.0 SP2.", "␁ represents SOH (0x01). Copy preserves the real delimiter. FIXT.1.1 identifies transport and 1128=9 the FIX 5.0 SP2 application.")}</p></div>}
+        <dl className="fx-summary">{[[text("Instrumento", "Instrument"), fields["55"], ""], [text("Lado", "Side"), fields["54"] === "2" ? text("Vender", "Sell") : text("Comprar", "Buy"), `54=${fields["54"]}`], [text("Estado", "Status"), status, `39=${fields["39"]} · 150=${fields["150"]}`], [text("Cantidad", "Quantity"), number(fields["38"]), `${number(fields["14"])} ${text("ejecutadas", "filled")} · ${number(fields["151"])} ${text("en libro", "resting")}`], [text("Precio límite", "Limit price"), number(fields["44"]), `${text("Promedio", "Average")} ${number(fields["6"])}`]].map(([label, value, detail]) => <div key={label}><dt>{label}</dt><dd>{value}</dd><small>{detail}</small></div>)}</dl>
+        <div className="fx-table" role="table" aria-label={text("Campos FIX agrupados", "Grouped FIX fields")}><div className="fx-table-head" role="row"><span role="columnheader">Tag</span><span role="columnheader">{text("Campo", "Field")}</span><span role="columnheader">{text("Valor", "Value")}</span><span role="columnheader">{text("Significado", "Meaning")}</span></div>{FIX_GROUPS.map(group => <details className="fx-group" key={group.key} open={!compact || !!groupsOpen[group.key]} onToggle={event => { if (compact) { const open = event.currentTarget.open; setGroupsOpen(current => current[group.key] === open ? current : { ...current, [group.key]: open }); } }}><summary onClick={event => { if (!compact) event.preventDefault(); }}>{L(group.title)} <span>{group.tags.length} {text("campos", "fields")}</span></summary><div className="fx-group-rows" role="rowgroup">{group.tags.map(tag => <div className="fx-field" role="row" key={tag} onMouseEnter={() => setHoverTag(tag)} onMouseLeave={() => setHoverTag(null)}><span role="cell">{tag}</span><span role="cell">{FIX_NAMES[tag]}</span><strong role="cell">{fields[tag]}</strong><span role="cell">{fixMeaning(tag, fields[tag], lang, { orderNo: event && String(event.id).padStart(3, "0") })}</span></div>)}</div></details>)}</div>
+      </> : <div className="fx-automation"><ol>{AUTOMATION_STEPS.map((step, index) => <li key={step} className={index > 2 ? "is-simulated" : index > 0 ? "is-excluded" : ""}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong><p>{index > 2 ? text("La demo lo simula", "Simulated by the demo") : index > 0 ? text("No incluido en la demo", "Not included in the demo") : text("Datos fijos", "Fixed data")}</p></li>)}</ol><div className="fx-automation-copy"><PiShieldCheck /><p>{text("Una estrategia puede reaccionar a Market Data y generar órdenes. Antes de llegar al mercado debe pasar por controles de riesgo, límites y un kill switch. Esta demo simula Order Entry y ExecutionReport con datos fijos.", "A strategy can react to Market Data and generate orders. Before reaching the market, orders must pass risk controls, limits and a kill switch. This demo simulates Order Entry and ExecutionReport with fixed data.")}</p></div></div>}
     </div>
-
-    {tab === "fix" ? <div className="fix-panel" role="tabpanel">
-      <div className="fix-raw">
-        <span>FIX 5.0 SP2 · EXECUTION REPORT (35=8)</span>
-        <code>{visibleRaw}</code>
-        <small>{L({ es: "␁ representa el delimitador SOH (0x01). En FIX 5.0 SP2, FIXT.1.1 identifica la capa de transporte y 1128=9 la versión de aplicación.", en: "␁ represents the SOH delimiter (0x01). In FIX 5.0 SP2, FIXT.1.1 identifies the transport layer and 1128=9 the application version." })}</small>
-      </div>
-      <div className="fix-fields">{message.fields.map(([tag, value, label]) => <div key={tag}><span>{tag}</span><strong>{value}</strong><small>{label}</small></div>)}</div>
-      {!event ? <p className="fix-hint">{lang === "es" ? "Envía una orden en el Trading Lab para actualizar este ExecutionReport." : "Send an order in the Trading Lab to update this ExecutionReport."}</p> : null}
-    </div> : <div className="automation-panel" role="tabpanel">
-      <div className="automation-flow" key={cycle}>{AUTOMATION_STEPS.map((step, index) => <React.Fragment key={step}><div className="automation-step" style={{ "--automation-step": index }}>{step}</div>{index < AUTOMATION_STEPS.length - 1 ? <PiArrowRight aria-hidden="true" /> : null}</React.Fragment>)}</div>
-      <div className="automation-copy"><PiShieldCheck aria-hidden="true" /><p>{L({ es: "Un robot de negociación puede reaccionar a Market Data y generar órdenes según reglas o modelos. Antes de llegar al mercado debe pasar por límites, controles de riesgo, rate limits y un kill switch. Esta vista sólo explica el ciclo: no envía órdenes ni se conecta a un mercado.", en: "A trading bot can react to Market Data and generate orders based on rules or models. Before reaching the market, every order must pass limits, risk controls, rate limits, and a kill switch. This view only explains the cycle; it does not send orders or connect to a market." })}</p></div>
-      <button type="button" className="automation-replay" onClick={() => setCycle((value) => value + 1)}>{lang === "es" ? "Reproducir ciclo" : "Replay cycle"}</button>
-    </div>}
-
-    <p className="fix-disclaimer">{L({ es: "Mensajes, identificadores y valores ficticios. Representación simplificada con fines educativos; no corresponde a una sesión FIX ni a infraestructura real.", en: "Fictional messages, identifiers, and values. Simplified for educational purposes; this is not a real FIX session or production infrastructure." })}</p>
+    <p className="fx-disclaimer">{text("Mensajes, identificadores y valores ficticios. Representación simplificada con fines educativos; no corresponde a una sesión FIX ni a infraestructura real.", "Fictional messages, identifiers and values. Simplified for educational purposes; this is not a real FIX session or production infrastructure.")}</p>
   </section>;
 }
