@@ -23,13 +23,13 @@ test("adds a POC without removing the existing cases or the Trading Workstation 
   expect(CASES).toHaveLength(6);
   expect(CASES[4].gallery).toHaveLength(3);
   userEvent.click(screen.getByRole("button", { name: "POC / Ingeniería" }));
-  expect(screen.getByRole("heading", { name: "AI-Assisted Spec-Driven Development" })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "OpenSpec S0 + Viewer" })).toBeInTheDocument();
   expect(screen.queryByRole("heading", { name: /Summit —/ })).not.toBeInTheDocument();
 });
 
 test("opens a shareable POC with both reviews, evidence and limitations; Escape returns focus", () => {
   renderProjects();
-  const opener = screen.getByRole("button", { name: /EXPERIMENTO PROPIO · POC DOCUMENTADA/ });
+  const opener = screen.getByRole("button", { name: /PROYECTO PERSONAL · BETA/ });
   userEvent.click(opener);
   const dialog = screen.getByRole("dialog");
   expect(window.location.hash).toBe("#poc-ai-sdd");
@@ -38,8 +38,8 @@ test("opens a shareable POC with both reviews, evidence and limitations; Escape 
   expect(within(steps).getByText("Revisión funcional explícita")).toBeInTheDocument();
   expect(within(steps).getByText("Revisión técnica explícita")).toBeInTheDocument();
   expect(within(dialog).getByText(/todavía sin línea base comparativa/)).toBeInTheDocument();
-  expect(within(dialog).getByText("eb0bdf3")).toBeInTheDocument();
-  expect(within(dialog).getByText(/La documentación completa no tiene acceso público/)).toBeInTheDocument();
+  expect(within(dialog).getByText("768a64f")).toBeInTheDocument();
+  expect(within(dialog).getByText(/El repositorio requiere acceso/)).toBeInTheDocument();
   expect(within(dialog).queryByRole("link")).not.toBeInTheDocument();
   fireEvent.keyDown(dialog, { key: "Escape" });
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -57,7 +57,7 @@ test("opens the direct link in English and closes when the hash changes", () => 
   expect(within(dialog).getByText("Explicit functional review")).toBeInTheDocument();
   expect(within(dialog).getByText("Explicit technical review")).toBeInTheDocument();
   expect(within(dialog).getByText("What remains to be demonstrated")).toBeInTheDocument();
-  expect(within(dialog).getByText(/Full documentation is not publicly accessible/)).toBeInTheDocument();
+  expect(within(dialog).getByText(/The repository requires access/)).toBeInTheDocument();
   window.history.replaceState(null, "", "#casos");
   fireEvent(window, new HashChangeEvent("hashchange"));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();

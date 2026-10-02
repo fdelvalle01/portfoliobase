@@ -294,7 +294,7 @@ export const CASE_GROUPS = [
     indexes: [2, 3, 4],
   },
   {
-    label: { es: "LABORATORIO DE INGENIERÍA · POC", en: "ENGINEERING LAB · POC" },
+    label: { es: "LABORATORIO DE INGENIERÍA · BETA", en: "ENGINEERING LAB · BETA" },
     indexes: [5],
   },
 ];

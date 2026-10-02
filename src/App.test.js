@@ -32,7 +32,8 @@ test("renders a structurally complete FIX 5.0 SP2 ExecutionReport", () => {
   render(<App />);
 
   const flowCard = document.querySelector(".order-flow__card");
-  const visibleMessage = document.querySelector(".fix-raw code").textContent;
+  userEvent.click(screen.getByRole("button", { name: /Mensaje raw/ }));
+  const visibleMessage = document.querySelector(".fx-raw code").textContent;
   const fixMessage = visibleMessage.split("␁").join("\u0001");
   const bodyLength = Number(fixMessage.match(/\u00019=(\d+)\u0001/)[1]);
   const bodyStart = fixMessage.indexOf("35=8\u0001");

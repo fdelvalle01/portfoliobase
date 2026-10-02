@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" fill="none">
-  <title>AI-Assisted Spec-Driven Development</title>
-  <desc>Brain provides context, OpenSpec holds specifications, and an AI agent executes authorized work. Human review and versioned evidence guide the workflow.</desc>
+  <title>OpenSpec S0 + Viewer</title>
+  <desc>A reusable template creates a planning repository for each system. After human review, an AI agent implements in the code repositories. A local VS Code viewer reads the S0 documents and diagrams.</desc>
   <defs>
     <radialGradient id="glow" cx="0.5" cy="0.4" r="0.7">
       <stop stop-color="#392153"/><stop offset="1" stop-color="#120D20"/>
@@ -14,9 +14,9 @@
     <path d="M0 100H960M0 200H960M0 300H960M0 400H960M0 500H960M120 0V600M240 0V600M360 0V600M480 0V600M600 0V600M720 0V600M840 0V600"/>
   </g>
   <g font-family="Inter, Arial, sans-serif">
-    <text x="60" y="72" fill="#D2B1FF" font-size="18" letter-spacing="4">ENGINEERING WORKFLOW / POC</text>
-    <text x="60" y="141" fill="#F5F0FF" font-size="48" font-weight="600">AI-Assisted</text>
-    <text x="60" y="199" fill="#F5F0FF" font-size="48" font-weight="600">Spec-Driven Development</text>
+    <text x="60" y="72" fill="#D2B1FF" font-size="18" letter-spacing="4">PERSONAL ENGINEERING / BETA</text>
+    <text x="60" y="141" fill="#F5F0FF" font-size="48" font-weight="600">OpenSpec S0 + Viewer</text>
+    <text x="60" y="190" fill="#CEBEDF" font-size="26">Plan. Review. Implement.</text>
     <g stroke="#C6A8F1" stroke-width="2" marker-end="url(#arrow)">
       <path d="M296 330H355"/><path d="M605 330H664"/>
     </g>
@@ -24,13 +24,15 @@
     <rect x="364" y="264" width="234" height="136" rx="14" fill="#36224F" stroke="#C399F9"/>
     <rect x="668" y="264" width="232" height="136" rx="14" fill="#221832" stroke="#755493"/>
     <g fill="#F5F0FF" font-size="30" text-anchor="middle" font-weight="600">
-      <text x="177" y="321">Brain</text><text x="481" y="321">OpenSpec</text><text x="784" y="321">AI Agent</text>
+      <text x="177" y="311">Template</text><text x="481" y="311">S0</text><text x="784" y="311">Code repos</text>
     </g>
     <g fill="#CEBEDF" font-size="21" text-anchor="middle">
-      <text x="177" y="361">Context</text><text x="481" y="361">Specifications</text><text x="784" y="361">Execution</text>
+      <text x="177" y="349">Reusable setup</text><text x="481" y="349">Context + specs</text><text x="784" y="349">Reviewed plan</text>
+      <text x="177" y="378">One S0 per system</text><text x="481" y="378">Design + tasks</text><text x="784" y="378">AI implementation</text>
     </g>
-    <path d="M177 420V450H784V420M480 450V477" stroke="#A185BF" stroke-width="2"/>
-    <rect x="181" y="482" width="598" height="56" rx="28" fill="#261A37" stroke="#755493"/>
-    <text x="480" y="517" text-anchor="middle" fill="#E5D3FC" font-size="19" letter-spacing="1">HUMAN REVIEW + VERSIONED EVIDENCE</text>
+    <path d="M481 401V449" stroke="#A185BF" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <rect x="233" y="458" width="496" height="56" rx="28" fill="#261A37" stroke="#755493"/>
+    <text x="481" y="493" text-anchor="middle" fill="#E5D3FC" font-size="21">VS Code Viewer · read-only</text>
+    <text x="480" y="562" text-anchor="middle" fill="#CEBEDF" font-size="18" letter-spacing="1">HUMAN DECISIONS · VERSIONED EVIDENCE</text>
   </g>
 </svg>

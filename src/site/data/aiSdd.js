@@ -1,6 +1,6 @@
 import diagram from "../../Assets/Projects/ai-sdd.svg";
 
-export const AI_SDD_SOURCE_REVISION = "eb0bdf3";
+export const AI_SDD_SOURCE_REVISION = "768a64f";
 
 export const AI_SDD_CASE = {
   id: "poc-ai-sdd",
@@ -8,42 +8,42 @@ export const AI_SDD_CASE = {
   img: diagram,
   media: "diagram",
   alt: {
-    es: "Diagrama conceptual: Brain aporta contexto, OpenSpec las especificaciones y el agente IA la ejecución, con revisión humana y evidencia versionada.",
-    en: "Conceptual diagram: Brain provides context, OpenSpec holds specifications and the AI agent executes, guided by human review and versioned evidence.",
+    es: "Diagrama conceptual: una plantilla prepara el S0 del sistema; la IA implementa en los repositorios tras revisión humana y un visor local permite leer los documentos de S0.",
+    en: "Conceptual diagram: a template prepares the system's S0; AI implements in code repositories after human review, while a local viewer displays S0 documents.",
   },
-  kicker: { es: "EXPERIMENTO PROPIO · POC DOCUMENTADA", en: "PERSONAL EXPERIMENT · DOCUMENTED POC" },
-  title: { es: "AI-Assisted Spec-Driven Development", en: "AI-Assisted Spec-Driven Development" },
+  kicker: { es: "PROYECTO PERSONAL · BETA", en: "PERSONAL PROJECT · BETA" },
+  title: { es: "OpenSpec S0 + Viewer", en: "OpenSpec S0 + Viewer" },
   summary: {
-    es: "De una petición a un cambio verificable: memoria de proyecto, especificaciones y agentes IA coordinados con dos revisiones humanas.",
-    en: "From a request to a verifiable change: project memory, specifications and AI agents coordinated through two human reviews.",
+    es: "Una plantilla para planificar cambios antes de programar y un visor de VS Code para explorar sus especificaciones, tareas y diagramas.",
+    en: "A template to plan changes before coding and a VS Code viewer to explore their specifications, tasks and diagrams.",
   },
-  tags: ["OpenSpec", "AI-assisted", "Human-in-the-loop"],
+  tags: ["OpenSpec", "VS Code", "Human-in-the-loop"],
   context: {
-    es: "Al desarrollar con IA, el contexto puede perderse entre sesiones y una instrucción precisa puede terminar en código sin revisar sus implicaciones. La POC explora cómo conservar el conocimiento, acordar el comportamiento antes de implementar y vincular los resultados a sus fuentes.",
-    en: "When developing with AI, context can be lost between sessions and a precise request can turn into code before its implications are reviewed. This POC explores how to preserve knowledge, agree on behaviour before implementation and trace outcomes to their sources.",
+    es: "Quería hacer más sencillo el trabajo con especificaciones y agentes IA. Cada sistema tiene un S0: su repositorio de planificación con contexto, HU, especificaciones y tareas. El código conserva su ubicación, sea un proyecto simple, un monorepo o varios repositorios. No requiere Brain ni Obsidian.",
+    en: "I wanted to make specifications and AI agents easier to work with. Each system has an S0: its planning repository for context, user stories, specifications and tasks. Code stays in its existing location, whether in a single project, a monorepo or several repositories. Brain and Obsidian are not required.",
   },
   role: {
-    es: "Diseñé y coordiné el flujo, las reglas documentales y las skills de integración. Con asistencia de IA, preparé el instalador y los ensayos locales, revisé las evidencias y apliqué la preparación al monorepo SummitApp.",
-    en: "I designed and coordinated the workflow, documentation rules and integration skills. With AI assistance, I prepared the installer and local experiments, reviewed evidence and applied the preparation to the SummitApp monorepo.",
+    es: "Diseñé el flujo y simplifiqué la preparación por proyecto. Con asistencia de IA, desarrollé el creador de S0 y el visor local, adapté la documentación y revisé las pruebas. La integración conserva las skills oficiales de OpenSpec y las revisiones humanas antes de implementar.",
+    en: "I designed the workflow and simplified project setup. With AI assistance, I developed the S0 creator and local viewer, adapted the documentation and reviewed the tests. The integration preserves official OpenSpec skills and human reviews before implementation.",
   },
   result: {
-    es: "Flujo e instalador disponibles, con pruebas documentadas de preparación, conservación de archivos y coordinación entre repositorios. SummitApp cuenta con contexto y OpenSpec vinculados. La adopción por otro desarrollador y la mejora de productividad siguen por medir.",
-    en: "Workflow and installer available, with documented tests for preparation, file preservation and cross-repository coordination. SummitApp has linked context and OpenSpec. Adoption by another developer and productivity gains remain to be measured.",
+    es: "Beta personal con plantilla genérica, creación de S0 independientes y visor instalable como VSIX. Validación en Windows con perfiles aislados y un ciclo OpenSpec que incluye cambio de requisito. La usabilidad con otro desarrollador y el impacto en productividad siguen por medir.",
+    en: "Personal beta with a generic template, independent S0 creation and an installable VSIX viewer. Validated on Windows with isolated profiles and an OpenSpec cycle that includes a requirement change. Usability with another developer and productivity impact remain to be measured.",
   },
-  stack: ["OpenSpec", "Markdown", "Git", "PowerShell", "Node.js", "Codex", "Claude Code", "Obsidian (optional)"],
+  stack: ["OpenSpec 1.13.2", "Node.js", "Markdown", "Git", "VS Code Extension API", "Mermaid", "Codex", "Claude Code"],
   // No public repository link: unauthenticated access returned 404.
   link: "",
 };
 
 export const AI_SDD_STEPS = [
   {
-    title: { es: "Entender la petición", en: "Understand the request" },
-    detail: { es: "Consultar Brain y comprobar código, contratos y fuentes actuales.", en: "Read Brain and check current code, contracts and sources." },
-    artifact: { es: "Contexto verificable", en: "Verifiable context" },
+    title: { es: "Preparar S0 y conocer el proyecto", en: "Prepare S0 and understand the project" },
+    detail: { es: "Crear S0 desde la plantilla, indicar el código al agente y revisar el mapa que documenta con fuentes comprobadas.", en: "Create S0 from the template, point the agent to the code and review the map it documents from verified sources." },
+    artifact: { es: "S0 + contexto + repositorios vinculados", en: "S0 + context + linked repositories" },
   },
   {
     title: { es: "Especificar el comportamiento", en: "Specify behaviour" },
-    detail: { es: "Acordar alcance, exclusiones y escenarios de aceptación.", en: "Define scope, exclusions and acceptance scenarios." },
+    detail: { es: "Ingresar una HU y analizar código y contratos pertinentes para acordar alcance, exclusiones y aceptación.", en: "Submit a user story and examine relevant code and contracts to agree on scope, exclusions and acceptance." },
     artifact: { es: "Propuesta + specs", en: "Proposal + specs" },
     review: { es: "Revisión funcional explícita", en: "Explicit functional review" },
   },
@@ -55,12 +55,12 @@ export const AI_SDD_STEPS = [
   },
   {
     title: { es: "Implementar y verificar", en: "Implement and verify" },
-    detail: { es: "El agente ejecuta lo autorizado y reporta pruebas y pendientes.", en: "The agent executes authorized work and reports tests and gaps." },
+    detail: { es: "Tras las revisiones, pedir al agente la ejecución en los repositorios autorizados y registrar pruebas y pendientes en S0.", en: "After review, ask the agent to implement in authorized repositories and record tests and gaps in S0." },
     artifact: { es: "Código + evidencia", en: "Code + evidence" },
   },
   {
-    title: { es: "Cerrar y conservar lo aprendido", en: "Close and preserve knowledge" },
-    detail: { es: "Con cierre autorizado, archivar el cambio y actualizar el contexto duradero.", en: "After authorized closure, archive the change and update durable context." },
-    artifact: { es: "Archivo + Brain", en: "Archive + Brain" },
+    title: { es: "Aceptar y archivar en S0", en: "Accept and archive in S0" },
+    detail: { es: "Con evidencias y aceptación, archivar el cambio. El visor permite consultar los documentos durante todo el recorrido.", en: "With evidence and acceptance, archive the change. The viewer lets you read the documents throughout the workflow." },
+    artifact: { es: "Specs consolidadas + historial del cambio", en: "Consolidated specs + change history" },
   },
 ];

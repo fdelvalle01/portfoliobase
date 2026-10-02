@@ -130,20 +130,23 @@ Los casos se pueden filtrar por producción, trading, plataforma y producto prop
 
 **Confidencialidad:** Los casos describen contribuciones públicas y educativas; no exponen arquitectura interna ni información confidencial.
 
-### Laboratorio de ingeniería · POC
+### Laboratorio de ingeniería · beta personal
 
-#### AI-Assisted Spec-Driven Development
+#### OpenSpec S0 + Viewer
 
-- **Categoría:** Experimento propio · POC documentada. Disponible en ES/EN y en el filtro POC / Ingeniería.
+- **Categoría:** Proyecto personal · beta. Disponible en ES/EN y en el filtro POC / Ingeniería.
 - **Enlace para compartir:** `/#poc-ai-sdd` abre directamente la ficha.
-- **Problema:** Conservar contexto entre sesiones de IA y revisar las implicaciones del cambio antes de implementar.
-- **Propuesta:** Brain como memoria documental; OpenSpec como fuente del plan; agente como ejecutor; personas como responsables de las decisiones.
-- **Flujo:** Contexto → propuesta/specs → revisión funcional → diseño/tareas → revisión técnica → implementación/verificación → cierre autorizado y conocimiento duradero.
+- **Problema:** Simplificar el uso de especificaciones y agentes IA, mantener el contexto de cada sistema y revisar los cambios antes de programar.
+- **Propuesta:** Una plantilla genérica prepara un S0 independiente por sistema. S0 conserva contexto, HU, specs, diseños, tareas y evidencias; el código permanece en sus repositorios. Brain y Obsidian no son requisitos.
+- **Rol:** Diseño del flujo y simplificación de la preparación; desarrollo del creador y visor con asistencia de IA, documentación y revisión de las pruebas. Se conservan las skills oficiales de OpenSpec.
+- **Uso inicial:** `npm run crear-s0` → abrir el S0 → indicar el proyecto al agente → revisar el mapa. Admite código nuevo o existente, monorepos y multirrepos.
+- **Flujo de HU:** Petición → análisis y propuesta/specs → revisión funcional → diseño/tareas → revisión técnica → ejecución autorizada en componentes → pruebas y aceptación → archivo en S0. Un cambio de requisitos renueva las revisiones afectadas.
+- **Visor:** Extensión personal de VS Code instalable como VSIX, de sólo lectura: HU, especificaciones, tareas y diagramas Mermaid. Puede abrir un S0 desde la ventana donde está el código. No ejecuta agentes ni registra stores.
 - **Visuales:** Portada vectorial conceptual y diagrama responsive con texto accesible. No son capturas ni registros de una ejecución.
-- **Evidencia:** Informe de Brain Projects al 2026-09-17, fijado a la revisión `eb0bdf3`; distingue ensayos locales y revisiones simuladas. SummitApp es un caso de preparación vinculada, no una prueba de adopción completa por el equipo.
-- **Límites:** Sin mejoras comparativas medidas; adopción por otra persona, controles PR/CI y Jira pendientes de demostrar. Los registros originales de laboratorio no están distribuidos en el repositorio público.
+- **Evidencia:** `VALIDACION.md` de la distribución personal, revisión `768a64f`, pruebas del 2026-10-01: 46 comprobaciones de creador/plantilla/ciclo OpenSpec, 28 unitarias del visor y 8 en el host VS Code; también recorrido UI y VSIX. Incluye reproceso tras aprobación simulada. No se repitieron esas pruebas para actualizar el sitio.
+- **Límites:** Comprobado en Windows con perfiles aislados. Usabilidad con otro desarrollador, validación Linux/macOS e impacto en productividad pendientes. Jira y controles obligatorios PR/CI fuera de esta beta; las revisiones humanas son reglas del flujo, no bloqueos nativos.
 - **Fuente editorial del sitio:** `src/site/data/aiSdd.js` y `src/site/components/AiSddStudy.jsx`.
-- **Acceso:** El repositorio documental devuelve 404 sin autenticación. La ficha no incluye enlaces inaccesibles ni publica registros originales; su visibilidad permanece intacta.
+- **Acceso:** La rama personal `feat/s0-template-viewer-personal` de `fdelvalle01/sdd-workspace` devuelve 404 sin autenticación al 2026-10-02. La ficha no ofrece un enlace público inaccesible ni publica los registros originales; la visibilidad del repositorio permanece intacta.
 
 ## 4. Cómo trabajo / How I work
 

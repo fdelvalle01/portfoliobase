@@ -1,7 +1,10 @@
 import React, { useMemo, useRef, useState } from "react";
-import { PiArrowClockwise, PiInfo, PiPulse, PiTrendDown, PiTrendUp } from "react-icons/pi";
+import { PiArrowClockwise, PiInfo, PiPulse, PiTrendDown, PiTrendUp, PiX, PiMinus, PiPlus, PiWarningCircle } from "react-icons/pi";
 import { useI18n } from "../context/I18nContext";
 import FixExplorer from "./FixExplorer";
+import useCompactLab from "../hooks/useCompactLab";
+
+let nextTicketId = 0;
 
 const INSTRUMENTS = {
   ANDES: {
@@ -105,8 +108,8 @@ const COPY = {
   eventFlow: { es: "Flujo de eventos", en: "Event flow" },
   empty: { es: "Envía una orden para ver su recorrido.", en: "Send an order to see its journey." },
   filled: { es: "Ejecutada", en: "Filled" },
-  partial: { es: "Parcial y en libro", en: "Partial and resting" },
-  resting: { es: "Aceptada en el libro", en: "Accepted into the book" },
+  partial: { es: "Ejecución parcial", en: "Partially filled" },
+  resting: { es: "En el libro", en: "Resting in the book" },
   reset: { es: "Reiniciar", en: "Reset" },
   education: { es: "¿Qué estás viendo?", en: "What are you looking at?" },
   disclaimer: {
@@ -202,7 +205,22 @@ export default function TradingLab() {
   const [quantity, setQuantity] = useState("5000");
   const [validity, setValidity] = useState("day");
   const [events, setEvents] = useState([]);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [selection, setSelection] = useState(null);
+  const [hover, setHover] = useState(null);
+  const [guideOpen, setGuideOpen] = useState(null);
+  const compact = useCompactLab();
+  const guideExpanded = guideOpen ?? !compact;
+  const ticketId = useRef(null);
+  if (ticketId.current === null) ticketId.current = ++nextTicketId;
+  const priceRef = useRef(null);
+  const quantityRef = useRef(null);
+  const ticketRef = useRef(null);
+  const fixRef = useRef(null);
+  const text = (es, en) => lang === "es" ? es : en;
+  const unlink = () => { setSelection(null); setHover(null); };
+  const edit = (setter, value, field) => { unlink(); setter(value); setErrors(current => ({ ...current, [field]: false })); };
+  const showFix = () => { fixRef.current?.scrollIntoView({ behavior: "auto", block: "start" }); fixRef.current?.focus({ preventScroll: true }); };
   const [activeConcept, setActiveConcept] = useState("marketData");
   const orderId = useRef(1);
 
@@ -215,9 +233,6 @@ export default function TradingLab() {
   );
   const qtyFormatter = useMemo(() => new Intl.NumberFormat(lang === "es" ? "es-CL" : "en-US"), [lang]);
   const formatPrice = (value) => priceFormatter.format(value);
-  const formatOrders = (orders) =>
-    mode === "aggregated" ? qtyFormatter.format(total(orders)) : orders.map(qtyFormatter.format).join(" · ");
-
   const changeInstrument = (nextSymbol) => {
     const next = INSTRUMENTS[nextSymbol];
     setSymbol(nextSymbol);
@@ -226,7 +241,8 @@ export default function TradingLab() {
     setSide("buy");
     setPrice(String(next.asks[0].price));
     setEvents([]);
-    setError("");
+    setErrors({});
+    unlink();
     setActiveConcept("marketData");
   };
 
@@ -238,7 +254,8 @@ export default function TradingLab() {
     setSide("buy");
     setValidity("day");
     setEvents([]);
-    setError("");
+    setErrors({});
+    unlink();
     setActiveConcept("marketData");
   };
 
@@ -254,6 +271,8 @@ export default function TradingLab() {
       ? total(selectedLevel.orders)
       : total(selectedLevel.orders.slice(0, selectedOrderIndex + 1));
     const cumulativeQuantity = previousLevels + selectedQuantity;
+    setSelection({ bookSide: nextSide === "buy" ? "ask" : "bid", levelIndex, orderIndex: selectedOrderIndex });
+    setHover(null);
     setSide(nextSide);
     setPrice(String(nextPrice));
     setQuantity(String(cumulativeQuantity));
@@ -265,7 +284,9 @@ export default function TradingLab() {
     const limitPrice = Number(String(price).replace(",", "."));
     const requested = Number(quantity);
     if (!Number.isFinite(limitPrice) || limitPrice <= 0 || !Number.isInteger(requested) || requested <= 0) {
-      setError(tr("invalid"));
+      const invalidPrice = !Number.isFinite(limitPrice) || limitPrice <= 0;
+      setErrors({ price: invalidPrice, qty: !Number.isInteger(requested) || requested <= 0 });
+      (invalidPrice ? priceRef : quantityRef).current?.focus();
       return;
     }
 
@@ -319,7 +340,8 @@ export default function TradingLab() {
     setBook(next);
     if (lastExecutionPrice !== null) setLastTrade(lastExecutionPrice);
     setEvents((current) => [nextEvent, ...current].slice(0, 4));
-    setError("");
+    setErrors({});
+    unlink();
     setActiveConcept(executed ? "dropCopy" : "matching");
   };
 
@@ -330,104 +352,80 @@ export default function TradingLab() {
   const visibleAsks = visibleLevels(book.asks, mode);
   const rows = Math.max(visibleBids.length, visibleAsks.length);
 
-  return (
-    <section id="simulador" className="section section--alt trading-lab-section">
-      <div className="section__inner">
-        <div className="kicker">01 — {tr("kicker")}</div>
-        <h3 className="section-title">{tr("title")}</h3>
-        <p className="section-lead">{tr("lead")}</p>
-
-        <div className="trading-lab">
-          <div className="market-terminal">
-            <div className="market-toolbar">
-              <label className="market-symbol">
-                <span>{tr("instrument")}</span>
-                <select value={symbol} onChange={(event) => changeInstrument(event.target.value)}>
-                  {Object.entries(INSTRUMENTS).map(([code, item]) => (
-                    <option value={code} key={code}>{code} · {L(item.name)}</option>
-                  ))}
-                </select>
-              </label>
-              <div className="book-mode" role="group" aria-label={lang === "es" ? "Vista del libro" : "Book view"}>
-                <button type="button" className={mode === "aggregated" ? "is-active" : ""} onClick={() => setMode("aggregated")}>{tr("aggregated")}</button>
-                <button type="button" className={mode === "orders" ? "is-active" : ""} onClick={() => setMode("orders")}>{tr("byOrder")}</button>
-              </div>
-              <button type="button" className="terminal-reset" onClick={reset}><PiArrowClockwise /> {tr("reset")}</button>
-            </div>
-
-            <div className="market-strip">
-              <span>{tr("last")} <strong>{formatPrice(lastTrade)}</strong></span>
-              <span>BID <strong className="market-buy-text">{bestBid ? formatPrice(bestBid) : "—"}</strong></span>
-              <span>ASK <strong className="market-sell-text">{bestAsk ? formatPrice(bestAsk) : "—"}</strong></span>
-              <span>{tr("spread")} <strong>{formatPrice(spread)}</strong></span>
-            </div>
-
-            <div className="depth-table" aria-label="Market Depth">
-              <div className="depth-head">
-                <span>{tr("buyQty")}</span><span>BID</span><span>ASK</span><span>{tr("sellQty")}</span>
-              </div>
-              {Array.from({ length: rows }).map((_, index) => {
-                const bid = visibleBids[index];
-                const ask = visibleAsks[index];
-                const bidWidth = bid ? Math.min(100, (total(bid.orders) / 32000) * 100) : 0;
-                const askWidth = ask ? Math.min(100, (total(ask.orders) / 32000) * 100) : 0;
-                return (
-                  <div className="depth-row" key={`${bid?.price || "b"}-${bid?.levelIndex ?? "x"}-${bid?.orderIndex ?? "all"}-${ask?.price || "a"}-${ask?.levelIndex ?? "x"}-${ask?.orderIndex ?? "all"}`}>
-                    <span className="depth-qty depth-qty--bid" style={{ "--depth": `${bidWidth}%` }}>{bid ? formatOrders(bid.orders) : ""}</span>
-                    <button type="button" className="depth-price depth-price--bid" disabled={!bid} title={tr("depthHint")} onClick={() => bid && loadPrice("sell", bid.price, bid.levelIndex, bid.orderIndex)}>{bid ? formatPrice(bid.price) : ""}</button>
-                    <button type="button" className="depth-price depth-price--ask" disabled={!ask} title={tr("depthHint")} onClick={() => ask && loadPrice("buy", ask.price, ask.levelIndex, ask.orderIndex)}>{ask ? formatPrice(ask.price) : ""}</button>
-                    <span className="depth-qty depth-qty--ask" style={{ "--depth": `${askWidth}%` }}>{ask ? formatOrders(ask.orders) : ""}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <form className={`order-ticket order-ticket--${side}`} onSubmit={submitOrder}>
-            <div className="order-ticket__title"><PiPulse /> {tr("ticket")}</div>
-            <div className="side-toggle" role="group" aria-label={lang === "es" ? "Lado de la orden" : "Order side"}>
-              <button type="button" className={side === "buy" ? "is-active" : ""} onClick={() => setSide("buy")}><PiTrendUp /> {tr("buy")}</button>
-              <button type="button" className={side === "sell" ? "is-active" : ""} onClick={() => setSide("sell")}><PiTrendDown /> {tr("sell")}</button>
-            </div>
-            <div className="ticket-pair">
-              <label><span>{tr("orderType")}</span><strong>{tr("limit")}</strong></label>
-              <label><span>{tr("validity")}</span><select value={validity} onChange={(event) => setValidity(event.target.value)}><option value="day">{tr("day")}</option><option value="gtc">{tr("gtc")}</option></select></label>
-            </div>
-            <label className="ticket-field"><span>{tr("price")} · {instrument.currency}</span><input type="number" min={instrument.tick} step={instrument.tick} value={price} onChange={(event) => setPrice(event.target.value)} /></label>
-            <label className="ticket-field"><span>{tr("quantity")}</span><input type="number" min="1" step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} /></label>
-            {error ? <div className="ticket-error" role="alert">{error}</div> : null}
-            <button type="submit" className="ticket-submit">{side === "buy" ? tr("sendBuy") : tr("sendSell")}</button>
-          </form>
-
-          <div className="lab-events" aria-live="polite" aria-atomic="false">
-            <div className="lab-panel-title">{tr("eventFlow")}</div>
-            {events.length ? events.map((item) => (
-              <article className="execution-event" key={item.id}>
-                <div><span className={`event-side event-side--${item.side}`}>{item.side === "buy" ? tr("buy") : tr("sell")}</span><strong> #{String(item.id).padStart(3, "0")}</strong></div>
-                <div>{qtyFormatter.format(item.requested)} @ {formatPrice(item.limitPrice)}</div>
-                <div className="event-result">{tr(item.status)}{item.executed ? ` · ${qtyFormatter.format(item.executed)} @ ${formatPrice(item.averagePrice)}` : ""}</div>
-                <span className="drop-copy-badge">DROP COPY</span>
-              </article>
-            )) : <div className="lab-events__empty">{tr("empty")}</div>}
-          </div>
-
-          <aside className="market-education">
-            <div className="lab-panel-title"><PiInfo /> {tr("education")}</div>
-            <div className="concept-tabs" role="tablist">
-              {Object.entries(CONCEPTS).map(([key, concept]) => (
-                <button type="button" role="tab" aria-selected={activeConcept === key} className={activeConcept === key ? "is-active" : ""} onClick={() => setActiveConcept(key)} key={key}>{L(concept.title)}</button>
-              ))}
-            </div>
-            <div className="concept-copy" role="tabpanel">
-              <h4>{L(CONCEPTS[activeConcept].title)}</h4>
-              <p>{L(CONCEPTS[activeConcept].text)}</p>
-            </div>
-          </aside>
+  const addCumulative = (levels) => {
+    let cum = 0;
+    return levels.map(level => ({ ...level, cum: cum += total(level.orders) }));
+  };
+  const bids = addCumulative(visibleBids);
+  const asks = addCumulative(visibleAsks);
+  const maxVolume = Math.max(1, ...[...bids, ...asks].map(level => total(level.orders)));
+  const selectedRows = selection?.bookSide === "bid" ? bids : asks;
+  const selected = selection && selectedRows.find(row => row.levelIndex === selection.levelIndex && row.orderIndex === selection.orderIndex);
+  const preview = hover || (selected && { ...selection, ...selected });
+  const parsedPrice = Number(String(price).replace(",", "."));
+  const validPrice = Number.isFinite(parsedPrice) && parsedPrice > 0;
+  const validQty = Number.isInteger(Number(quantity)) && Number(quantity) > 0;
+  const oppositePrice = side === "buy" ? bestAsk : bestBid;
+  const crosses = oppositePrice != null && (side === "buy" ? parsedPrice >= oppositePrice : parsedPrice <= oppositePrice);
+  const rowMatches = (point, bookSide, row) => point?.bookSide === bookSide && point.levelIndex === row.levelIndex && point.orderIndex === row.orderIndex;
+  const beforePoint = (point, bookSide, row) => point?.bookSide === bookSide && (row.levelIndex < point.levelIndex || (row.levelIndex === point.levelIndex && point.orderIndex !== null && row.orderIndex < point.orderIndex));
+  const renderSide = (bookSide, levels) => <div className={`tl-ladder__${bookSide}s`}>
+    <div className="tl-book-header">
+    <div className="tl-book-label">{bookSide === "bid" ? text("Compradores · bid", "Buyers · bid") : text("Vendedores · ask", "Sellers · ask")}</div>
+    <div className="tl-columns">{bookSide === "bid" ? <><span data-col="cum">{text("Acum.", "Cum.")}</span><span>{text("Cant.", "Qty")}</span><span>{text("Precio", "Price")}</span></> : <><span>{text("Precio", "Price")}</span><span>{text("Cant.", "Qty")}</span><span data-col="cum">{text("Acum.", "Cum.")}</span></>}</div>
+    </div>
+    {Array.from({ length: rows }).map((_, index) => {
+      const row = levels[index];
+      if (!row) return <div className="tl-row tl-row--empty" key={index} />;
+      const point = { bookSide, ...row };
+      const priceBadge = <span className="tl-badge">{formatPrice(row.price)}</span>;
+      const qty = <span className="tl-row__qty">{qtyFormatter.format(total(row.orders))}</span>;
+      const cum = <span className="tl-row__cum" data-col="cum">{qtyFormatter.format(row.cum)}</span>;
+      return <button type="button" key={index} className={`tl-row ${index > 0 && levels[index - 1].levelIndex !== row.levelIndex ? "is-new-level" : ""} ${beforePoint(selection, bookSide, row) ? "is-swept" : ""} ${beforePoint(hover, bookSide, row) ? "is-hover-sweep" : ""}`}
+        aria-pressed={rowMatches(selection, bookSide, row)} aria-label={`${bookSide === "ask" ? tr("buy") : tr("sell")} ${qtyFormatter.format(row.cum)} @ ${formatPrice(row.price)} · ${row.levelIndex + 1} ${text("niveles", "levels")}`}
+        onMouseEnter={() => setHover(point)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(point)} onBlur={() => setHover(null)}
+        onClick={() => loadPrice(bookSide === "ask" ? "buy" : "sell", row.price, row.levelIndex, row.orderIndex)}>
+        <span className="tl-row__bar" style={{ width: `${total(row.orders) / maxVolume * 100}%` }} />
+        {bookSide === "bid" ? <>{cum}{qty}{priceBadge}</> : <>{priceBadge}{qty}{cum}</>}
+      </button>;
+    })}
+  </div>;
+  const selectionDescription = selected ? `${selection.bookSide} ${formatPrice(selected.price)} · ${selected.levelIndex + 1} ${text("niveles", "levels")}${mode === "orders" ? ` · ${selectedRows.slice(0, selectedRows.indexOf(selected) + 1).length} ${text("órdenes", "orders")}` : ""}` : "";
+  return <section id="simulador" className="section section--alt trading-lab-section">
+    <div className="section__inner">
+      <div className="kicker">01 — {tr("kicker")}</div><h3 className="section-title">{tr("title")}</h3><p className="section-lead">{tr("lead")}</p>
+      <div className="tl" onKeyDown={event => { if (event.key === "Escape") unlink(); }}>
+        <div className="tl-toolbar">
+          <label className="tl-instrument"><span>{tr("instrument")}</span><select className="tl-control" value={symbol} onChange={event => changeInstrument(event.target.value)}>{Object.entries(INSTRUMENTS).map(([code, item]) => <option key={code} value={code}>{code} · {L(item.name)}</option>)}</select></label>
+          <div className="tl-toolbar-actions"><span className="tl-view-label">{text("Vista", "View")}</span><div className="tl-seg" role="group" aria-label={text("Vista del libro", "Book view")}>{["aggregated", "orders"].map(value => <button type="button" key={value} aria-pressed={mode === value} onClick={() => { setMode(value); unlink(); }}>{tr(value === "orders" ? "byOrder" : "aggregated")}</button>)}</div><button type="button" className="tl-reset tl-control" onClick={reset}><PiArrowClockwise /> {tr("reset")}</button></div>
         </div>
-
-        <FixExplorer event={events[0]} symbol={symbol} />
-        <p className="lab-disclaimer">{tr("disclaimer")}</p>
+        <div className="tl-main">
+          <div className="tl-market">
+            <dl className="tl-quote">{[[tr("last"), lastTrade, ""], [text("Mejor bid", "Best bid"), bestBid, "bid"], [text("Mejor ask", "Best ask"), bestAsk, "ask"], [tr("spread"), spread, ""]].map(([label, value, tone]) => <div key={label}><dt>{label}</dt><dd className={`tl-value--${tone}`}>{value != null ? formatPrice(value) : "—"}</dd></div>)}</dl>
+            <div className="tl-ladder" role="group" aria-label="Market Depth" tabIndex={0}>{renderSide("bid", bids)}{renderSide("ask", asks)}</div>
+            <div className={`tl-hint ${selected ? "is-linked" : ""}`}>{selected && <span className="tl-mark" />}{preview ? <span>{selected && !hover ? text("En el ticket: ", "In the ticket: ") : `${preview.bookSide} → `}{preview.bookSide === "ask" ? tr("buy") : tr("sell")} {qtyFormatter.format(preview.cum)} {text("hasta", "up to")} {formatPrice(preview.price)} · {preview.levelIndex + 1} {text("niveles", "levels")}{selected && !hover ? text(". Esc para quitar.", ". Esc to clear.") : ""}</span> : tr("depthHint")}</div>
+            {selected && <div className="tl-orderbar"><span>{side === "buy" ? tr("buy") : tr("sell")} {qtyFormatter.format(Number(quantity))} @ {formatPrice(parsedPrice)}</span><button type="button" onClick={() => { ticketRef.current?.scrollIntoView({ block: "start" }); priceRef.current?.focus({ preventScroll: true }); }}>{text("Revisar", "Review")}</button></div>}
+          </div>
+          <form ref={ticketRef} className={`tl-ticket tl-ticket--${side}`} onSubmit={submitOrder} noValidate>
+            <div className="tl-panel-title"><PiPulse /> {text("Ticket de orden", "Order ticket")} <small>{tr("limit")}</small></div>
+            <div className="tl-ticket__body">
+              {selected && <div className="tl-link"><span>{text("Desde el libro", "From the book")}: {selectionDescription}</span><button type="button" aria-label={text("Quitar vínculo con el libro", "Unlink from book")} onClick={unlink}><PiX /></button></div>}
+              <div className="tl-side" role="group" aria-label={text("Lado de la orden", "Order side")}>{["buy", "sell"].map(value => <button key={value} type="button" data-side={value} aria-pressed={side === value} onClick={() => { setSide(value); unlink(); }}>{value === "buy" ? <PiTrendUp /> : <PiTrendDown />} {tr(value)}</button>)}</div>
+              <div className="tl-field"><label htmlFor={`tl-price-${ticketId.current}`}>{tr("price")} · {instrument.currency}</label><div className={`tl-field__control ${errors.price ? "is-error" : ""}`}><button type="button" tabIndex={-1} aria-label={text(`Restar tick ${instrument.tick}`, `Subtract tick ${instrument.tick}`)} onClick={() => edit(setPrice, String(Number((parsedPrice - instrument.tick).toFixed(2))), "price")}><PiMinus /></button><input ref={priceRef} id={`tl-price-${ticketId.current}`} type="text" inputMode="decimal" value={price} aria-invalid={!!errors.price} aria-describedby={`tl-price-help-${ticketId.current}`} onChange={event => edit(setPrice, event.target.value, "price")} /><button type="button" tabIndex={-1} aria-label={text(`Sumar tick ${instrument.tick}`, `Add tick ${instrument.tick}`)} onClick={() => edit(setPrice, String(Number((parsedPrice + instrument.tick).toFixed(2))), "price")}><PiPlus /></button></div>
+              <div id={`tl-price-help-${ticketId.current}`} className={errors.price ? "tl-error" : "tl-cross-hint"}>{errors.price ? <><PiWarningCircle /> {text("Ingresa un precio límite mayor que 0.", "Enter a limit price greater than 0.")}</> : validPrice && oppositePrice != null ? `${crosses ? text("→ Cruza", "→ Crosses") : text("No cruza", "Does not cross")} ${side === "buy" ? "ask" : "bid"} (${formatPrice(oppositePrice)}): ${crosses ? text("habrá ejecución.", "it will execute.") : text("quedará en el libro.", "it will rest in the book.")}` : ""}</div></div>
+              <div className="tl-field"><label htmlFor={`tl-qty-${ticketId.current}`}>{tr("quantity")}</label><div className={`tl-field__control ${errors.qty ? "is-error" : ""}`}><input ref={quantityRef} id={`tl-qty-${ticketId.current}`} type="text" inputMode="numeric" value={quantity} aria-invalid={!!errors.qty} aria-describedby={errors.qty ? `tl-qty-help-${ticketId.current}` : undefined} onChange={event => edit(setQuantity, event.target.value, "qty")} /></div>{errors.qty && <div id={`tl-qty-help-${ticketId.current}`} className="tl-error"><PiWarningCircle />{text("Ingresa una cantidad entera mayor que 0.", "Enter a whole quantity greater than 0.")}</div>}</div>
+              <div className="tl-field"><span>{tr("validity")}</span><div className="tl-seg" role="group" aria-label={tr("validity")}>{["day", "gtc"].map(value => <button key={value} type="button" aria-pressed={validity === value} onClick={() => setValidity(value)}>{tr(value)}</button>)}</div></div>
+              <button type="submit" className="tl-submit" data-side={side}>{side === "buy" ? tr("sendBuy") : tr("sendSell")}{validPrice && validQty ? ` · ${qtyFormatter.format(Number(quantity))} @ ${formatPrice(parsedPrice)}` : ""}</button>
+            </div>
+          </form>
+        </div>
+        <div className="tl-flow"><div className="tl-panel-title">{tr("eventFlow")}</div><div aria-live="polite" aria-atomic="true" className="tl-live">{events[0] ? `#${String(events[0].id).padStart(3, "0")} · ${tr(events[0].status)} · ${qtyFormatter.format(events[0].executed)} / ${qtyFormatter.format(events[0].requested)}` : ""}</div>
+          {events.length ? events.map((item, index) => <article key={item.id} className={index === 0 ? "tl-result" : "tl-previous"}><div><strong>{tr(item.status)} · #{String(item.id).padStart(3, "0")}</strong><p className={`tl-value--${item.side === "buy" ? "bid" : "ask"}`}>{tr(item.side)} {qtyFormatter.format(item.requested)} @ {formatPrice(item.limitPrice)}</p></div><div><span>{qtyFormatter.format(item.executed)} {text("de", "of")} {qtyFormatter.format(item.requested)} {text("ejecutadas", "executed")} ({Math.round(item.executed / item.requested * 100)}%)</span>{index === 0 && <div className="tl-progress" role="meter" aria-label={text("Cantidad ejecutada", "Executed quantity")} aria-valuemin={0} aria-valuemax={item.requested} aria-valuenow={item.executed}><span style={{ width: `${item.executed / item.requested * 100}%` }} /></div>}</div><div>{item.executed > 0 && <span>{text("Promedio", "Average")} {formatPrice(item.averagePrice)}</span>}<p>{qtyFormatter.format(item.remaining)} {text("en el libro", "in the book")}</p></div><div><span className="tl-drop-copy">{text("Drop Copy generada", "Drop Copy issued")}</span>{index === 0 && <button type="button" className="tl-fix-link" onClick={showFix}>{text("Ver ExecutionReport ↓", "View ExecutionReport ↓")}</button>}</div></article>) : <p className="tl-flow-empty">{text("Envía una orden y verás aquí si queda en el libro, se ejecuta en parte o por completo.", "Send an order to see here whether it rests in the book, fills in part or fills completely.")}</p>}
+        </div>
+        <aside className={`tl-guide ${guideExpanded ? "is-open" : "is-closed"}`}><button type="button" className="tl-guide-toggle" aria-expanded={guideExpanded} aria-controls={`tl-guide-${ticketId.current}`} onClick={() => setGuideOpen(!guideExpanded)}><PiInfo />{text("Cómo funciona", "How it works")} <span>⌄</span></button><div className="tl-guide-content" id={`tl-guide-${ticketId.current}`}><div className="tl-concept-tabs" role="tablist" aria-label={text("Conceptos del mercado", "Market concepts")}>{Object.entries(CONCEPTS).map(([key, concept]) => <button type="button" role="tab" id={`tl-tab-${ticketId.current}-${key}`} aria-controls={`tl-concept-${ticketId.current}`} aria-selected={activeConcept === key} onClick={() => setActiveConcept(key)} key={key}>{L(concept.title)}</button>)}</div><p className="tl-concept-copy" role="tabpanel" id={`tl-concept-${ticketId.current}`} aria-labelledby={`tl-tab-${ticketId.current}-${activeConcept}`}>{L(CONCEPTS[activeConcept].text)}</p></div></aside>
       </div>
-    </section>
-  );
+      <FixExplorer event={events[0]} symbol={symbol} explorerRef={fixRef} />
+      <p className="lab-disclaimer">{tr("disclaimer")}</p>
+    </div>
+  </section>;
 }

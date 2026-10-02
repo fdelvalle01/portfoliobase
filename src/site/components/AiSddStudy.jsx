@@ -9,7 +9,8 @@ export default function AiSddStudy() {
     <div className="sdd-study__heading">
       <span className="modal__label">{L({ es: "DEL CONTEXTO A LA EVIDENCIA", en: "FROM CONTEXT TO EVIDENCE" })}</span>
       <h4 id="sdd-study-title">{L({ es: "La IA ejecuta. Las personas deciden.", en: "AI executes. People decide." })}</h4>
-      <p>{L({ es: "Brain es la memoria documental; OpenSpec conserva el plan del cambio. El agente consulta ambas fuentes y trabaja dentro del alcance autorizado.", en: "Brain is the documentation memory; OpenSpec holds the change plan. The agent reads both sources and works within the authorized scope." })}</p>
+      <p>{L({ es: "S0 es el repositorio de planificación de un sistema. OpenSpec conserva sus especificaciones y tareas; el agente consulta el código y ejecuta cambios autorizados. El visor de VS Code muestra esos documentos y diagramas en modo lectura.", en: "S0 is a system's planning repository. OpenSpec holds its specifications and tasks; the agent reads code and implements authorized changes. The VS Code viewer displays those documents and diagrams in read-only mode." })}</p>
+      <p>{L({ es: "Para empezar: crear S0 con npm run crear-s0, abrirlo, indicar el proyecto al agente y revisar el mapa antes de la primera HU. La plantilla sirve para proyectos nuevos o existentes; el visor es opcional.", en: "To start: create S0 with npm run crear-s0, open it, tell the agent which project to use and review the map before the first user story. The template supports new or existing projects; the viewer is optional." })}</p>
     </div>
     <figure className="sdd-flow">
       <ol aria-label={L({ es: "Flujo de desarrollo con dos revisiones humanas", en: "Development workflow with two human reviews" })}>
@@ -28,9 +29,9 @@ export default function AiSddStudy() {
       <div>
         <h4><PiCheckCircle aria-hidden="true" />{L({ es: "Evidencia documentada", en: "Documented evidence" })}</h4>
         <ul>
-          <li>{L({ es: "Preparación probada en proyectos simples, monorepos y multirepos de laboratorio.", en: "Preparation tested with single projects, monorepos and multi-repository lab fixtures." })}</li>
-          <li>{L({ es: "Regresión multirepo: 13/13 casos en el informe local. Las revisiones simuladas están identificadas como tales.", en: "Multi-repository regression: 13/13 cases in the local report. Simulated reviews are explicitly identified." })}</li>
-          <li>{L({ es: "Ensayos de reproceso conservan el historial y dejan pendientes las aprobaciones afectadas.", en: "Reprocessing experiments preserve history and leave affected approvals pending." })}</li>
+          <li>{L({ es: "Creador y plantilla: 46 comprobaciones documentadas, incluidas conservación de contenido, stores independientes y un ciclo OpenSpec completo con cambio de requisito.", en: "Creator and template: 46 documented checks, including content preservation, independent stores and a complete OpenSpec cycle with a requirement change." })}</li>
+          <li>{L({ es: "Visor: 28 pruebas unitarias y 8 comprobaciones en VS Code, además de un recorrido automatizado de interfaz en Edge. Paquete VSIX personal generado.", en: "Viewer: 28 unit tests and 8 checks in VS Code, plus an automated UI walkthrough in Edge. Personal VSIX package generated." })}</li>
+          <li>{L({ es: "Pruebas en Windows con perfiles y datos de laboratorio aislados. Las aprobaciones del ciclo son simuladas; no acreditan revisiones humanas reales.", en: "Tests ran on Windows with isolated profiles and lab data. Cycle approvals are simulated; they do not represent actual human reviews." })}</li>
         </ul>
       </div>
       <div>
@@ -38,11 +39,11 @@ export default function AiSddStudy() {
         <ul>
           <li>{L({ es: "Adopción por otra persona en su entorno y con revisores reales.", en: "Adoption by another developer in their own environment with real reviewers." })}</li>
           <li>{L({ es: "Mejora de tiempos, coste o calidad: todavía sin línea base comparativa.", en: "Time, cost or quality improvements: no comparative baseline yet." })}</li>
-          <li>{L({ es: "Controles obligatorios de PR/CI y conexión con Jira; no forman parte de lo validado.", en: "Enforced PR/CI controls and a Jira connection are not part of the validated scope." })}</li>
+          <li>{L({ es: "Validación en Linux/macOS. Jira y controles obligatorios de PR/CI quedan fuera de esta beta.", en: "Validation on Linux/macOS. Jira and enforced PR/CI controls are outside this beta." })}</li>
         </ul>
       </div>
     </div>
-    <p className="sdd-study__note">{L({ es: "Fuente: informe de la POC con corte al 17 de septiembre de 2026. Resume ensayos locales, no una certificación independiente; los registros originales permanecen fuera del repositorio. No se repitieron esos ensayos para crear esta presentación.", en: "Source: POC report as of September 17, 2026. It summarizes local experiments, not independent certification; original logs remain outside the repository. These experiments were not rerun to create this presentation." })}</p>
-    <p className="sdd-study__note">{L({ es: "Referencia documental", en: "Documentation reference" })}: <code>{AI_SDD_SOURCE_REVISION}</code>. {L({ es: "La documentación completa no tiene acceso público; este resumen no equivale a publicar los registros originales.", en: "Full documentation is not publicly accessible; this summary does not publish the original logs." })}</p>
+    <p className="sdd-study__note">{L({ es: "Fuente: VALIDACION.md de la distribución personal, pruebas del 1 de octubre de 2026. Estos resultados pertenecen a esa versión y no son una certificación independiente; no se repitieron para actualizar el portafolio.", en: "Source: the personal distribution's VALIDACION.md, tests dated October 1, 2026. Results apply to that version and are not independent certification; they were not rerun for this portfolio update." })}</p>
+    <p className="sdd-study__note">{L({ es: "Referencia documental", en: "Documentation reference" })}: <code>{AI_SDD_SOURCE_REVISION}</code>. {L({ es: "El repositorio requiere acceso; este caso presenta un resumen personal, sin publicar los registros de laboratorio.", en: "The repository requires access; this case presents a personal summary without publishing lab logs." })}</p>
   </section>;
 }
