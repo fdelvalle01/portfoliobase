@@ -370,8 +370,10 @@ export default function TradingLab() {
   const rowMatches = (point, bookSide, row) => point?.bookSide === bookSide && point.levelIndex === row.levelIndex && point.orderIndex === row.orderIndex;
   const beforePoint = (point, bookSide, row) => point?.bookSide === bookSide && (row.levelIndex < point.levelIndex || (row.levelIndex === point.levelIndex && point.orderIndex !== null && row.orderIndex < point.orderIndex));
   const renderSide = (bookSide, levels) => <div className={`tl-ladder__${bookSide}s`}>
+    <div className="tl-book-header">
     <div className="tl-book-label">{bookSide === "bid" ? text("Compradores · bid", "Buyers · bid") : text("Vendedores · ask", "Sellers · ask")}</div>
     <div className="tl-columns">{bookSide === "bid" ? <><span data-col="cum">{text("Acum.", "Cum.")}</span><span>{text("Cant.", "Qty")}</span><span>{text("Precio", "Price")}</span></> : <><span>{text("Precio", "Price")}</span><span>{text("Cant.", "Qty")}</span><span data-col="cum">{text("Acum.", "Cum.")}</span></>}</div>
+    </div>
     {Array.from({ length: rows }).map((_, index) => {
       const row = levels[index];
       if (!row) return <div className="tl-row tl-row--empty" key={index} />;
@@ -400,7 +402,7 @@ export default function TradingLab() {
         <div className="tl-main">
           <div className="tl-market">
             <dl className="tl-quote">{[[tr("last"), lastTrade, ""], [text("Mejor bid", "Best bid"), bestBid, "bid"], [text("Mejor ask", "Best ask"), bestAsk, "ask"], [tr("spread"), spread, ""]].map(([label, value, tone]) => <div key={label}><dt>{label}</dt><dd className={`tl-value--${tone}`}>{value != null ? formatPrice(value) : "—"}</dd></div>)}</dl>
-            <div className="tl-ladder" role="group" aria-label="Market Depth">{renderSide("bid", bids)}{renderSide("ask", asks)}</div>
+            <div className="tl-ladder" role="group" aria-label="Market Depth" tabIndex={0}>{renderSide("bid", bids)}{renderSide("ask", asks)}</div>
             <div className={`tl-hint ${selected ? "is-linked" : ""}`}>{selected && <span className="tl-mark" />}{preview ? <span>{selected && !hover ? text("En el ticket: ", "In the ticket: ") : `${preview.bookSide} → `}{preview.bookSide === "ask" ? tr("buy") : tr("sell")} {qtyFormatter.format(preview.cum)} {text("hasta", "up to")} {formatPrice(preview.price)} · {preview.levelIndex + 1} {text("niveles", "levels")}{selected && !hover ? text(". Esc para quitar.", ". Esc to clear.") : ""}</span> : tr("depthHint")}</div>
             {selected && <div className="tl-orderbar"><span>{side === "buy" ? tr("buy") : tr("sell")} {qtyFormatter.format(Number(quantity))} @ {formatPrice(parsedPrice)}</span><button type="button" onClick={() => { ticketRef.current?.scrollIntoView({ block: "start" }); priceRef.current?.focus({ preventScroll: true }); }}>{text("Revisar", "Review")}</button></div>}
           </div>
