@@ -1,32 +1,35 @@
 import React from "react";
-import aboutImg from "../../Assets/about.png";
+import { PiArrowRight } from "react-icons/pi";
+import { ABOUT_MILESTONES } from "../data/content";
 import { useI18n } from "../context/I18nContext";
 
 export default function About() {
-  const { t } = useI18n();
+  const { t, L } = useI18n();
 
   return (
-    <section id="sobre-mi" className="about">
-      <div>
-        <div className="kicker">01 — {t("about.kicker")}</div>
-        <h3 className="about__title">{t("about.title")}</h3>
-        <p className="about__p">{t("about.p1")}</p>
-        <p className="about__p">{t("about.p2")}</p>
-
-        <div className="about__cards">
-          <div className="mini-card">
-            <div className="mini-card__label">{t("about.currently")}</div>
-            <div className="mini-card__value">Senior Software Engineer · nuam exchange</div>
+    <section id="sobre-mi" className="section section--alt about-section" aria-labelledby="about-title">
+      <div className="section__inner">
+        <div className="about-story">
+          <div className="about-story__intro">
+            <div className="kicker">01 — {t("about.kicker")}</div>
+            <h2 className="section-title" id="about-title">{t("about.title")}</h2>
           </div>
-          <div className="mini-card">
-            <div className="mini-card__label">{t("about.languages")}</div>
-            <div className="mini-card__value">{t("about.languagesValue")}</div>
+          <div className="about-story__body">
+            <p>{t("about.p1")}</p>
+            <p>{t("about.p2")}</p>
+            <p>{t("about.p3")}</p>
           </div>
         </div>
-      </div>
-
-      <div className="about__art">
-        <img src={aboutImg} alt="" />
+        <nav className="about-milestones" aria-label={t("about.milestones")}>
+          {ABOUT_MILESTONES.map((milestone) => (
+            <a className="about-milestone" href={`#${milestone.caseId}`} key={milestone.caseId}>
+              <strong>{L(milestone.title)}</strong>
+              <span className="about-milestone__detail">{L(milestone.detail)}</span>
+              <span className="about-milestone__more">{t("projects.view")} <PiArrowRight aria-hidden="true" /></span>
+            </a>
+          ))}
+        </nav>
+        <p className="about-outside">{t("about.outside")}</p>
       </div>
     </section>
   );

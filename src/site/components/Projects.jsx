@@ -37,7 +37,7 @@ export default function Projects() {
 
   return <section id="casos" className="section cases-section">
     <div className="section__inner">
-      <div className="kicker">01 — {t("projects.kicker")}</div>
+      <div className="kicker">02 — {t("projects.kicker")}</div>
       <h2 className="section-title">{t("projects.title")}</h2>
       <p className="section-lead">{t("projects.lead")}</p>
       <div className="case-filters" role="group" aria-label={t("projects.kicker")}>

@@ -1,6 +1,6 @@
 # Portfolio — Francisco Del Valle
 
-Contenido editorial vigente del portfolio React. El sitio está disponible en español e inglés y sigue este recorrido: `Hero → Proyectos → Cómo trabajo → Trayectoria → Contacto`. La propuesta al final de este archivo todavía no se renderiza.
+Contenido editorial vigente del portfolio React. El sitio está disponible en español e inglés y sigue este recorrido: `Hero → Sobre mí → Proyectos → Cómo trabajo → Trayectoria → Contacto`.
 
 ## 1. Hero / Inicio
 
@@ -26,7 +26,43 @@ Contenido editorial vigente del portfolio React. El sitio está disponible en es
   - `CRITICAL` — critical systems in regulated production environments.
 - **Actions:** View projects · View experience · View/download CV · GitHub · LinkedIn.
 
-## 2. Proyectos y casos / Projects & cases
+## 2. Sobre mí / About me
+
+Esta sección se muestra entre el Hero y «Evidencia, no promesas», con acceso desde la navegación a `/#sobre-mi`.
+
+### Español
+
+**De la curiosidad por las apps a construir sistemas de mercado.**
+
+Mi curiosidad por el software empezó entre videojuegos en el computador y conversaciones con amigos en Discord sobre desarrollo web, donde se hablaba mucho de PHP. También recuerdo mi primer teléfono táctil y descubrir las apps y juegos de Android, por la época de Android 2.1. Quería entender cómo se creaban esas aplicaciones y cómo podían funcionar dentro de un teléfono.
+
+En 2020 entré como practicante a Bolsa de Santiago, hoy parte de nuam. Desde entonces he trabajado en aplicaciones de operación, integraciones y servicios backend. Lideré el desarrollo del módulo de usuarios y entidades de Sebra HT y participé en la integración de la plataforma de trading para República Dominicana. Ese recorrido me acercó a los sistemas que hoy construyo.
+
+Fuera del trabajo sigo explorando esa curiosidad con proyectos propios. Summit conecta mi interés por las aplicaciones móviles con la montaña; mis laboratorios de trading me permiten convertir la experiencia del mercado en ideas que se pueden ver y probar.
+
+**Fuera del código:** montaña, videojuegos y viajar. También viví y estudié inglés durante seis meses en Nueva Zelanda.
+
+### English
+
+**From curiosity about apps to building market systems.**
+
+My curiosity about software began with PC games and conversations with friends on Discord about web development, where PHP came up often. I also remember my first touchscreen phone and discovering Android apps and games around the time of Android 2.1. I wanted to understand how those applications were built and how they could run inside a phone.
+
+In 2020 I joined Bolsa de Santiago, now part of nuam, as an intern. Since then I have worked on operational applications, integrations and backend services. I led development of the Sebra HT user and entity management module and helped integrate the trading platform for the Dominican Republic. That work brought me closer to the systems I build today.
+
+Outside work, I keep exploring that curiosity through projects of my own. Summit connects my interest in mobile apps with the mountains; my trading labs let me turn market experience into ideas people can see and try.
+
+**Outside code:** mountains, games and travel. I also lived and studied English in New Zealand for six months.
+
+### Proyectos que conectan la historia / Projects behind the story
+
+Las tarjetas abren directamente sus casos, incluso si hay otro filtro activo en Proyectos:
+
+- **Sebra HT:** usuarios, permisos y trazabilidad / users, permissions and traceability — `/#sebra-ht`.
+- **Mercado dominicano / Dominican market:** integración y puesta en marcha / integration and go-live — `/#mercado-dominicano`.
+- **Summit:** aplicaciones móviles y montaña / mobile apps and the mountains — `/#summit`.
+
+## 3. Proyectos y casos / Projects & cases
 
 - **ES — Título:** Evidencia, no promesas.
 - **ES — Introducción:** Contribuciones a sistemas regulados, productos propios y experimentos de ingeniería. En cada proyecto explico el problema, mi rol, el resultado y su alcance.
@@ -111,7 +147,7 @@ Los casos se pueden filtrar por producción, trading, plataforma, proyectos pers
 - **Código:** https://github.com/fdelvalle01/market-depth-fix-lab
 - **Enlace directo en el portafolio:** `/#market-depth-fix-lab`.
 
-## 3. Cómo trabajo / How I work
+## 4. Cómo trabajo / How I work
 
 - **ES — Título:** Trabajar con sistemas que mueven dinero te enseña tres cosas.
 - **ES — Introducción:** Son los principios que guían mi trabajo, independientemente del lenguaje o framework utilizado.
@@ -133,12 +169,7 @@ Los casos se pueden filtrar por producción, trading, plataforma, proyectos pers
 - **Engineering:** System Design, Software Architecture, Integration Testing, Production Support, Traceability y Technical Analysis.
 - **Desarrollo asistido:** Claude Code, agentes de código y contexto para agentes.
 
-### Perfil
-
-- **ES:** Ingeniero en Informática (INACAP), con diplomado en Desarrollo de Aplicaciones Móviles de la Pontificia Universidad Católica de Chile. Español nativo e inglés B2 con certificación IELTS. Viví y estudié inglés durante seis meses en Nueva Zelanda. Fuera del código: montaña, videojuegos y viajar; de ahí salió Summit.
-- **EN:** Computer Engineer (INACAP), with a Diploma in Mobile Application Development from Pontificia Universidad Católica de Chile. Native Spanish speaker and English B2 with IELTS certification. I lived and studied English in New Zealand for six months. Outside code: mountains, games, and traveling; that is where Summit came from.
-
-## 4. Trayectoria / Career
+## 5. Trayectoria / Career
 
 - **ES — Título:** De practicante a senior, construyendo cada vez más cerca del core del mercado.
 - **ES — Introducción:** Una progresión construida sobre operaciones de mercado, integraciones, sistemas distribuidos y plataformas de trading.
@@ -159,7 +190,7 @@ Los casos se pueden filtrar por producción, trading, plataforma, proyectos pers
 - English Studies · WorldWide School of English, Nueva Zelanda · agosto 2024–febrero 2025.
 - Español nativo · Inglés B2 — certificación IELTS.
 
-## 5. Contacto / Contact
+## 6. Contacto / Contact
 
 - **ES — Título:** El siguiente paso.
 - **ES — Descripción:** Estoy abierto a oportunidades senior remotas e internacionales en Exchange & Trading Systems, Backend Engineering, FinTech y Distributed Systems. También evalúo consultoría técnica en integraciones, APIs y sistemas críticos.
@@ -180,69 +211,13 @@ Hablemos de arquitectura, APIs, integraciones o sistemas que no pueden fallar.
 - Email: fdel_valle01@hotmail.com
 - GitHub: https://github.com/fdelvalle01
 
-## Propuesta editorial: Sobre mí (pendiente de implementación)
+## Fuentes y fechas por conciliar
 
-### Diagnóstico
+El origen personal de «Sobre mí» procede del relato aportado por Francisco el 2026-10-10.
+Los hitos profesionales y proyectos corresponden al contenido existente del sitio y al CV
+oficial de `public/`. La narrativa no agrega fechas precisas al recuerdo de Discord y Android
+ni incorpora métricas profesionales nuevas.
 
-El antiguo recorrido ponía una simulación extensa entre la presentación y los casos. La herramienta
-ocupaba el espacio que podría explicar quién es Francisco y cómo se conectan su experiencia y sus
-proyectos. Al tener una demo independiente, corresponde presentarla dentro del laboratorio.
-
-Existe `About.jsx`, pero no se renderiza. La biografía hoy está al final de Cómo trabajo y repite
-formación e idiomas incluidos en Trayectoria. Incorporar Sobre mí debería trasladar esa información
-personal y dejar Cómo trabajo para principios y capacidades; Trayectoria conservaría fechas y formación.
-
-### Recorrido propuesto
-
-`Inicio → Sobre mí → Proyectos y casos → Cómo trabajo → Trayectoria → Contacto`
-
-- **Inicio:** nombre, especialidad, evidencia breve y acceso a proyectos.
-- **Sobre mí:** origen de la curiosidad por el software y conexión con la carrera actual. Dos o tres párrafos, sin repetir el CV.
-- **Proyectos y casos:** contribuciones profesionales, productos personales y laboratorio de ingeniería, con sus límites y evidencias.
-- **Cómo trabajo:** principios de diseño y capacidades técnicas.
-- **Trayectoria:** experiencia y formación en orden cronológico.
-- **Contacto:** oportunidades profesionales y consultoría.
-
-### Borrador ES
-
-**De la curiosidad por las apps a construir sistemas de mercado.**
-
-Mi interés por la informática empezó entre videojuegos en el computador y conversaciones con amigos
-en Discord sobre desarrollo web; por entonces se hablaba mucho de PHP. Mi primer teléfono táctil
-y las apps y juegos que descubrí en Android también despertaban preguntas: quería entender cómo se
-creaban esas aplicaciones y cómo podían funcionar en dispositivos tan pequeños.
-
-Desde 2020 trabajo en Bolsa de Santiago / nuam. He desarrollado aplicaciones de operación,
-integraciones y servicios backend, liderado el módulo de usuarios y entidades de Sebra HT y participado
-en la integración de la plataforma de negociación para el mercado dominicano. En ese recorrido,
-las reglas de negocio, los permisos y la trazabilidad pasaron a formar parte de mi manera de construir software.
-
-Esa curiosidad también sigue en mis proyectos personales. Mi interés por la montaña dio origen a
-Summit; Stock Bar, Trading Workstation y Market Depth FIX Lab son espacios donde exploro ideas propias
-y convierto mi experiencia en sistemas que se pueden ver y probar.
-
-### Draft EN
-
-**From curiosity about apps to building market systems.**
-
-My interest in computing began with PC games and conversations with friends on Discord about web
-development; PHP came up often at the time. My first touchscreen phone and the apps and games
-I discovered on Android also raised questions: how were these applications built, and
-how could they run on such small devices?
-
-Since 2020 I have worked at Bolsa de Santiago / nuam. I have developed operational applications,
-integrations and backend services, led the Sebra HT user and entity module, and contributed to
-integrating the trading platform for the Dominican market. Along the way, business rules, permissions
-and traceability became part of how I build software.
-
-That curiosity continues in my personal projects. My interest in the mountains led to Summit;
-Stock Bar, Trading Workstation and Market Depth FIX Lab give me room to explore my own ideas and
-turn my experience into systems people can see and try.
-
-### Fuentes y datos por conciliar
-
-- El origen personal procede del relato aportado por Francisco en esta conversación el 2026-10-10.
-- Los hitos profesionales y proyectos proceden de `src/site/data/content.js`, los casos existentes y el CV oficial de `public/`.
-- El alcance del laboratorio se verificó con su README público y la copia local del proyecto.
-- El CV y el sitio difieren en fechas de promoción a senior, fin de INACAP, diplomado PUC y estudios de inglés; el sitio también menciona IELTS y el CV no. Este cambio no decide qué fuente tiene las fechas correctas. Antes de editar la cronología, se necesitan los datos confirmados por Francisco.
-- La propuesta no atribuye los proyectos a un momento vocacional específico ni incorpora métricas profesionales nuevas.
+El CV y el sitio difieren en fechas de promoción a senior, fin de INACAP, diplomado PUC y
+estudios de inglés; el sitio también menciona IELTS y el CV no. Esos datos siguen pendientes
+de confirmación por Francisco. Este cambio conserva la cronología existente.

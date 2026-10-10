@@ -1,8 +1,21 @@
 # Portafolio — Francisco Del Valle
 
+## Composición y narrativa
+
+La página sigue `Hero → Sobre mí → Proyectos → Cómo trabajo → Trayectoria → Contacto`.
+«Sobre mí» aparece después de la presentación y antes de «Evidencia, no promesas».
+Cuenta el origen de la curiosidad por las aplicaciones, el paso por Bolsa de Santiago
+y su continuidad en proyectos propios. El relato personal procede de Francisco;
+los hitos profesionales corresponden a los casos y la trayectoria del sitio.
+
+`About.jsx` presenta los textos ES/EN de `src/site/data/content.js` y enlaza las fichas de
+Sebra HT (`/#sebra-ht`), el mercado dominicano (`/#mercado-dominicano`) y Summit (`/#summit`).
+«Cómo trabajo» conserva principios y capacidades; la formación y los idiomas están en
+«Trayectoria». El contenido vigente y la nota sobre fechas por conciliar con el CV están
+en `PORTFOLIO_CONTENT.md`.
+
 ## Market Depth FIX Lab como proyecto independiente
 
-La página sigue `Hero → Proyectos → Cómo trabajo → Trayectoria → Contacto`.
 Se retiraron el Trading Lab incrustado, el inspector FIX, el recorrido animado de una orden
 y sus componentes, datos y estilos exclusivos. El hero y la navegación llevan a proyectos.
 
@@ -12,9 +25,6 @@ del escenario local con datos sintéticos y acceso directo a la
 [demo](https://market-depth-fix-lab.netlify.app/) y al
 [repositorio](https://github.com/fdelvalle01/market-depth-fix-lab).
 La ficha también se puede abrir con `/#market-depth-fix-lab`.
-
-La propuesta para una sección «Sobre mí» está al final de `PORTFOLIO_CONTENT.md`;
-es un borrador editorial y todavía no se renderiza en el sitio.
 
 ## POC: AI-Assisted Spec-Driven Development
 
@@ -70,8 +80,8 @@ src/
     context/ThemeContext.js    → { theme, toggleTheme }    (dark | light)
     data/content.js            → todo el contenido: textos es/en, trayectoria, casos, stack
     styles/site.css            → tokens y estilos
-    components/                → Header, Hero, StatsBand, About, Timeline, Projects,
-                                 CaseStudyModal, Stack, Contact, Footer, ParticlesCanvas
+    components/                → Header, Hero, About, Projects, CaseStudyModal,
+                                 HowIWork, Stack, Timeline, Contact, Footer, ParticlesCanvas
 public/
   Francisco-Del-Valle-Senior-Backend-Engineer-CV.pdf  → CV oficial servido por el sitio
 ```

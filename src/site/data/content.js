@@ -19,6 +19,7 @@ export const LINKS = {
 };
 
 export const NAV = [
+  { href: "#sobre-mi", es: "Sobre mí", en: "About me" },
   { href: "#casos", es: "Proyectos", en: "Projects" },
   { href: "#como-trabajo", es: "Cómo trabajo", en: "How I work" },
   { href: "#trayectoria", es: "Trayectoria", en: "Career" },
@@ -110,6 +111,7 @@ export const PRINCIPLES = [
 
 export const CASES = [
   {
+    id: "mercado-dominicano",
     img: sebraht,
     categories: ["production", "trading"],
     alt: {
@@ -142,6 +144,7 @@ export const CASES = [
     link: "https://bvrd.com.do/bvrd-bsc/",
   },
   {
+    id: "sebra-ht",
     img: sebrahtSiadus,
     categories: ["production", "platform"],
     alt: {
@@ -174,6 +177,7 @@ export const CASES = [
     link: "",
   },
   {
+    id: "summit",
     img: summitapp,
     categories: ["personal"],
     media: "app",
@@ -337,6 +341,24 @@ export const CASE_GROUPS = [
   },
 ];
 
+export const ABOUT_MILESTONES = [
+  {
+    caseId: "sebra-ht",
+    title: { es: "Sebra HT", en: "Sebra HT" },
+    detail: { es: "Usuarios, permisos y trazabilidad", en: "Users, permissions and traceability" },
+  },
+  {
+    caseId: "mercado-dominicano",
+    title: { es: "Mercado dominicano", en: "Dominican market" },
+    detail: { es: "Integración y puesta en marcha", en: "Integration and go-live" },
+  },
+  {
+    caseId: "summit",
+    title: { es: "Summit", en: "Summit" },
+    detail: { es: "Aplicaciones móviles y montaña", en: "Mobile apps and the mountains" },
+  },
+];
+
 /* Niveles declarados: agrupan la tecnología por cómo la uso, sin puntajes. */
 export const LEVELS = ["daily", "production", "complementary"];
 
@@ -412,21 +434,27 @@ export const DICT = {
   "hero.download": { es: "Descargar", en: "Download" },
   "hero.cvDownload": { es: "Descargar CV en PDF", en: "Download CV as PDF" },
 
-  "about.kicker": { es: "SOBRE MÍ", en: "ABOUT" },
-  "about.title": { es: "Backend sólido, frontend pulido.", en: "Solid backend, polished frontend." },
+  "about.kicker": { es: "SOBRE MÍ", en: "ABOUT ME" },
+  "about.title": {
+    es: "De la curiosidad por las apps a construir sistemas de mercado.",
+    en: "From curiosity about apps to building market systems.",
+  },
   "about.p1": {
-    es: "Ingeniero en Informática (INACAP) con diplomado en Desarrollo de Aplicaciones Móviles (Pontificia Universidad Católica de Chile). Desde 2020 trabajo en Bolsa de Santiago / nuam exchange, donde pasé de práctica profesional a Senior Software Engineer.",
-    en: "Computer Engineer (INACAP) with a diploma in Mobile Application Development (Pontificia Universidad Católica de Chile). Since 2020 I've worked at Bolsa de Santiago / nuam exchange, moving from intern to Senior Software Engineer.",
+    es: "Mi curiosidad por el software empezó entre videojuegos en el computador y conversaciones con amigos en Discord sobre desarrollo web, donde se hablaba mucho de PHP. También recuerdo mi primer teléfono táctil y descubrir las apps y juegos de Android, por la época de Android 2.1. Quería entender cómo se creaban esas aplicaciones y cómo podían funcionar dentro de un teléfono.",
+    en: "My curiosity about software began with PC games and conversations with friends on Discord about web development, where PHP came up often. I also remember my first touchscreen phone and discovering Android apps and games around the time of Android 2.1. I wanted to understand how those applications were built and how they could run inside a phone.",
   },
   "about.p2": {
-    es: "Me interesa el software donde un error cuesta: reglas de negocio explícitas, trazabilidad y datos consistentes. Fuera del código: videojuegos, trekking y viajar.",
-    en: "I like software where mistakes are expensive: explicit business rules, traceability and consistent data. Outside code: games, hiking and travelling.",
+    es: "En 2020 entré como practicante a Bolsa de Santiago, hoy parte de nuam. Desde entonces he trabajado en aplicaciones de operación, integraciones y servicios backend. Lideré el desarrollo del módulo de usuarios y entidades de Sebra HT y participé en la integración de la plataforma de trading para República Dominicana. Ese recorrido me acercó a los sistemas que hoy construyo.",
+    en: "In 2020 I joined Bolsa de Santiago, now part of nuam, as an intern. Since then I have worked on operational applications, integrations and backend services. I led development of the Sebra HT user and entity management module and helped integrate the trading platform for the Dominican Republic. That work brought me closer to the systems I build today.",
   },
-  "about.currently": { es: "Actualmente", en: "Currently" },
-  "about.languages": { es: "Idiomas", en: "Languages" },
-  "about.languagesValue": {
-    es: "Español (nativo) · Inglés B2",
-    en: "Spanish (native) · English B2",
+  "about.p3": {
+    es: "Fuera del trabajo sigo explorando esa curiosidad con proyectos propios. Summit conecta mi interés por las aplicaciones móviles con la montaña; mis laboratorios de trading me permiten convertir la experiencia del mercado en ideas que se pueden ver y probar.",
+    en: "Outside work, I keep exploring that curiosity through projects of my own. Summit connects my interest in mobile apps with the mountains; my trading labs let me turn market experience into ideas people can see and try.",
+  },
+  "about.milestones": { es: "Proyectos que conectan mi historia", en: "Projects behind my story" },
+  "about.outside": {
+    es: "Fuera del código: montaña, videojuegos y viajar. También viví y estudié inglés durante seis meses en Nueva Zelanda.",
+    en: "Outside code: mountains, games and travel. I also lived and studied English in New Zealand for six months.",
   },
 
   "career.kicker": { es: "TRAYECTORIA", en: "CAREER" },
