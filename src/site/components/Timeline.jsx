@@ -6,7 +6,7 @@ export default function Timeline() {
   const { t, L } = useI18n();
   return <section id="trayectoria" className="section career-section">
     <div className="section__inner">
-      <div className="kicker">04 — {t("career.kicker")}</div>
+      <div className="kicker">03 — {t("career.kicker")}</div>
       <h2 className="section-title">{t("career.title")}</h2>
       <p className="section-lead">{t("career.lead")}</p>
       <div className="timeline">

@@ -36,7 +36,7 @@ export default function Hero() {
         </div>
 
         <div className="hero__ctas">
-          <a href="#simulador" className="btn-outline-accent btn-lg">
+          <a href="#casos" className="btn-outline-accent btn-lg">
             {t("hero.projects")}
           </a>
           <a href="#trayectoria" className="btn-outline-line">

@@ -5,6 +5,7 @@ import sebraht from "../../Assets/Projects/sebraht.png";
 import sebrahtSiadus from "../../Assets/Projects/sebraht_siadus.png";
 import summitapp from "../../Assets/Projects/summitapp.png";
 import stockbar from "../../Assets/Projects/stockbar.png";
+import marketDepthLab from "../../Assets/Projects/market-depth-fix-lab.png";
 import { AI_SDD_CASE } from "./aiSdd";
 
 /* CV oficial servido como archivo estático desde public/, no empaquetado. */
@@ -18,8 +19,7 @@ export const LINKS = {
 };
 
 export const NAV = [
-  { href: "#simulador", es: "Simulador", en: "Trading Lab" },
-  { href: "#casos", es: "Casos", en: "Cases" },
+  { href: "#casos", es: "Proyectos", en: "Projects" },
   { href: "#como-trabajo", es: "Cómo trabajo", en: "How I work" },
   { href: "#trayectoria", es: "Trayectoria", en: "Career" },
   { href: "#contacto", es: "Contacto", en: "Contact" },
@@ -282,6 +282,44 @@ export const CASES = [
     linkLabel: "projects.repo",
   },
   AI_SDD_CASE,
+  {
+    id: "market-depth-fix-lab",
+    categories: ["personal", "trading", "poc"],
+    img: marketDepthLab,
+    mediaPosition: "top",
+    mediaBg: "#090b0d",
+    alt: {
+      es: "Market Depth FIX Lab: libro de órdenes de NOVA, ticket límite y ejecuciones con datos sintéticos",
+      en: "Market Depth FIX Lab: NOVA order book, limit ticket and executions with synthetic data",
+    },
+    kicker: { es: "PROYECTO PERSONAL · DEMO EDUCATIVA", en: "PERSONAL PROJECT · EDUCATIONAL DEMO" },
+    title: { es: "Market Depth FIX Lab", en: "Market Depth FIX Lab" },
+    summary: {
+      es: "Laboratorio interactivo para explorar un libro de órdenes, el calce por prioridad precio-tiempo y los ExecutionReports FIX. Demo independiente que funciona en el navegador con datos sintéticos.",
+      en: "Interactive lab for exploring an order book, price-time matching and FIX ExecutionReports. A standalone browser demo using synthetic data.",
+    },
+    tags: ["React", "TypeScript", "FIX"],
+    context: {
+      es: "Hacer observable el ciclo de una orden sin depender de una plataforma real: cómo cambia la profundidad, qué se ejecuta y cómo ese resultado se representa en FIX. El laboratorio vive como proyecto independiente, accesible desde este portafolio.",
+      en: "Make an order's lifecycle observable without relying on a real platform: how depth changes, what gets filled and how that outcome is represented in FIX. The lab is an independent project accessible from this portfolio.",
+    },
+    role: {
+      es: "Proyecto personal con motor de calce, codec FIX e interfaz separados. Escenarios deterministas, libro agregado o por orden, ticket límite y un inspector que genera y valida ExecutionReports, incluidos BodyLength y CheckSum.",
+      en: "Personal project with separate matching engine, FIX codec and interface. Deterministic scenarios, aggregate or order-by-order depth, a limit ticket and an inspector that generates and validates ExecutionReports, including BodyLength and CheckSum.",
+    },
+    result: {
+      es: "Demo pública con ejecuciones parciales y completas, remanentes en el libro y cierre de sesión simulada para órdenes DAY. Alcance educativo: un instrumento sintético, sin backend, datos de mercado en vivo ni sesión FIX real.",
+      en: "Public demo with partial and complete fills, resting remainders and simulated session close for DAY orders. Educational scope: one synthetic instrument, with no backend, live market data or real FIX session.",
+    },
+    stack: ["React", "TypeScript", "Vite", "FIXT.1.1", "FIX 5.0 SP2", "Vitest"],
+    mediaNote: {
+      es: "Captura del proyecto independiente · escenario local con datos sintéticos",
+      en: "Screenshot from the standalone project · local scenario with synthetic data",
+    },
+    demoLink: "https://market-depth-fix-lab.netlify.app/",
+    link: "https://github.com/fdelvalle01/market-depth-fix-lab",
+    linkLabel: "projects.repo",
+  },
 ];
 
 export const CASE_GROUPS = [
@@ -295,7 +333,7 @@ export const CASE_GROUPS = [
   },
   {
     label: { es: "LABORATORIO DE INGENIERÍA · BETA", en: "ENGINEERING LAB · BETA" },
-    indexes: [5],
+    indexes: [5, 6],
   },
 ];
 
@@ -368,7 +406,7 @@ export const DICT = {
     es: "Construyo los sistemas por donde viaja una orden.",
     en: "I build the systems an order travels through.",
   },
-  "hero.projects": { es: "Probar el Trading Lab", en: "Try the Trading Lab" },
+  "hero.projects": { es: "Ver proyectos", en: "View projects" },
   "hero.experience": { es: "Ver experiencia", en: "View experience" },
   "hero.cv": { es: "Ver CV", en: "View CV" },
   "hero.download": { es: "Descargar", en: "Download" },
@@ -400,17 +438,17 @@ export const DICT = {
   "career.work": { es: "TRABAJO", en: "WORK" },
   "career.education": { es: "FORMACIÓN", en: "EDUCATION" },
 
-  "projects.kicker": { es: "LOS CASOS", en: "THE CASES" },
+  "projects.kicker": { es: "PROYECTOS Y CASOS", en: "PROJECTS & CASES" },
   "projects.title": { es: "Evidencia, no promesas.", en: "Evidence, not promises." },
   "projects.lead": {
-    es: "La demo explica el dominio. Estos casos muestran contribuciones a sistemas regulados, productos propios y experimentos de ingeniería con resultados y límites explícitos.",
-    en: "The demo explains the domain. These cases show contributions to regulated systems, personal products and engineering experiments with explicit results and limitations.",
+    es: "Contribuciones a sistemas regulados, productos propios y experimentos de ingeniería. En cada proyecto explico el problema, mi rol, el resultado y su alcance.",
+    en: "Contributions to regulated systems, personal products and engineering experiments. Each project explains the problem, my role, the outcome and its scope.",
   },
   "projects.all": { es: "Todos", en: "All" },
   "projects.production": { es: "Producción", en: "Production" },
   "projects.trading": { es: "Trading", en: "Trading" },
   "projects.platform": { es: "Plataforma", en: "Platform" },
-  "projects.personal": { es: "Producto propio", en: "Personal product" },
+  "projects.personal": { es: "Proyectos personales", en: "Personal projects" },
   "projects.poc": { es: "POC / Ingeniería", en: "POC / Engineering" },
   "projects.confidentiality": { es: "Los casos describen contribuciones públicas y educativas; no exponen arquitectura interna ni información confidencial.", en: "Cases describe public and educational contributions; they do not expose internal architecture or confidential information." },
   "projects.view": { es: "Ver caso", en: "View case" },
@@ -419,6 +457,7 @@ export const DICT = {
   "projects.result": { es: "RESULTADO", en: "OUTCOME" },
   "projects.visit": { es: "Ver el producto", en: "Visit the product" },
   "projects.repo": { es: "Ver el repositorio", en: "View the repository" },
+  "projects.demo": { es: "Abrir demo", en: "Open demo" },
   "projects.close": { es: "Cerrar", en: "Close" },
 
   "stack.title": { es: "Tecnologías y capacidades", en: "Technologies & capabilities" },

@@ -9,7 +9,7 @@ export default function Contact() {
   return <section id="contacto" className="section contact-section">
     <div className="contact">
       <div className="contact__intro">
-        <div className="kicker">05 — {t("contact.kicker")}</div>
+        <div className="kicker">04 — {t("contact.kicker")}</div>
         <h2 className="contact__title">{t("contact.title")}</h2>
         <p className="contact__lead">{t("contact.summary")}</p>
       </div>

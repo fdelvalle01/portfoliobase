@@ -1,5 +1,21 @@
 # Portafolio — Francisco Del Valle
 
+## Market Depth FIX Lab como proyecto independiente
+
+La página sigue `Hero → Proyectos → Cómo trabajo → Trayectoria → Contacto`.
+Se retiraron el Trading Lab incrustado, el inspector FIX, el recorrido animado de una orden
+y sus componentes, datos y estilos exclusivos. El hero y la navegación llevan a proyectos.
+
+Market Depth FIX Lab tiene una ficha ES/EN en **Laboratorio de ingeniería · beta**, visible
+con los filtros de proyectos personales, trading y POC / Ingeniería. Incluye una captura
+del escenario local con datos sintéticos y acceso directo a la
+[demo](https://market-depth-fix-lab.netlify.app/) y al
+[repositorio](https://github.com/fdelvalle01/market-depth-fix-lab).
+La ficha también se puede abrir con `/#market-depth-fix-lab`.
+
+La propuesta para una sección «Sobre mí» está al final de `PORTFOLIO_CONTENT.md`;
+es un borrador editorial y todavía no se renderiza en el sitio.
+
 ## POC: AI-Assisted Spec-Driven Development
 
 Nuevo caso ES/EN en «Casos», con filtro POC / Ingeniería y enlace directo

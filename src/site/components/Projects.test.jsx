@@ -20,11 +20,46 @@ test("adds a POC without removing the existing cases or the Trading Workstation 
   renderProjects();
   expect(screen.getByRole("heading", { name: /Trading Workstation/ })).toBeInTheDocument();
   expect(screen.getByRole("heading", { name: /Summit —/ })).toBeInTheDocument();
-  expect(CASES).toHaveLength(6);
+  expect(CASES).toHaveLength(7);
   expect(CASES[4].gallery).toHaveLength(3);
   userEvent.click(screen.getByRole("button", { name: "POC / Ingeniería" }));
   expect(screen.getByRole("heading", { name: "OpenSpec S0 + Viewer" })).toBeInTheDocument();
   expect(screen.queryByRole("heading", { name: /Summit —/ })).not.toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "Market Depth FIX Lab" })).toBeInTheDocument();
+});
+
+test("presents the standalone market lab as a personal engineering project with demo and source links", () => {
+  renderProjects();
+  const group = screen.getByText("LABORATORIO DE INGENIERÍA · BETA");
+  const opener = screen.getByRole("button", { name: /PROYECTO PERSONAL · DEMO EDUCATIVA/ });
+  expect(group.compareDocumentPosition(opener) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  userEvent.click(screen.getByRole("button", { name: "Proyectos personales" }));
+  expect(screen.getByRole("heading", { name: "Market Depth FIX Lab" })).toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: /mercado dominicano/ })).not.toBeInTheDocument();
+  userEvent.click(screen.getByRole("button", { name: /PROYECTO PERSONAL · DEMO EDUCATIVA/ }));
+  const dialog = screen.getByRole("dialog");
+  expect(window.location.hash).toBe("#market-depth-fix-lab");
+  expect(within(dialog).getByRole("link", { name: "Abrir demo" }))
+    .toHaveAttribute("href", "https://market-depth-fix-lab.netlify.app/");
+  expect(within(dialog).getByRole("link", { name: "Ver el repositorio" }))
+    .toHaveAttribute("href", "https://github.com/fdelvalle01/market-depth-fix-lab");
+  expect(within(dialog).getByText(/sin backend, datos de mercado en vivo ni sesión FIX real/)).toBeInTheDocument();
+  userEvent.click(within(dialog).getByRole("button", { name: "Cerrar" }));
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  expect(window.location.hash).toBe("#casos");
+});
+
+test("opens the standalone market lab from its direct link in English", () => {
+  localStorage.setItem("fdv-lang", "en");
+  window.history.replaceState(null, "", "#market-depth-fix-lab");
+  renderProjects();
+  const dialog = screen.getByRole("dialog");
+  expect(within(dialog).getByRole("heading", { name: "Market Depth FIX Lab" })).toBeInTheDocument();
+  expect(within(dialog).getByRole("link", { name: "Open demo" }))
+    .toHaveAttribute("href", "https://market-depth-fix-lab.netlify.app/");
+  expect(within(dialog).getByRole("link", { name: "View the repository" }))
+    .toHaveAttribute("href", "https://github.com/fdelvalle01/market-depth-fix-lab");
+  expect(within(dialog).getByText(/no backend, live market data or real FIX session/)).toBeInTheDocument();
 });
 
 test("opens a shareable POC with both reviews, evidence and limitations; Escape returns focus", () => {

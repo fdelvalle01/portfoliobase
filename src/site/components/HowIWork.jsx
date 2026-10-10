@@ -7,7 +7,7 @@ export default function HowIWork() {
   const { L } = useI18n();
   return <section id="como-trabajo" className="section section--alt how-i-work">
     <div className="section__inner">
-      <div className="kicker">03 — {L({ es: "CÓMO TRABAJO", en: "HOW I WORK" })}</div>
+      <div className="kicker">02 — {L({ es: "CÓMO TRABAJO", en: "HOW I WORK" })}</div>
       <h2 className="section-title">{L({ es: "Trabajar con sistemas que mueven dinero te enseña tres cosas.", en: "Working on systems that move money teaches you three things." })}</h2>
       <p className="section-lead">{L({ es: "Son los principios que guían mi trabajo, independientemente del lenguaje o framework utilizado.", en: "These are the principles that guide my work, regardless of the language or framework involved." })}</p>
       <div className="principles-grid">

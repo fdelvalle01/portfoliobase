@@ -37,7 +37,7 @@ export default function Projects() {
 
   return <section id="casos" className="section cases-section">
     <div className="section__inner">
-      <div className="kicker">02 — {t("projects.kicker")}</div>
+      <div className="kicker">01 — {t("projects.kicker")}</div>
       <h2 className="section-title">{t("projects.title")}</h2>
       <p className="section-lead">{t("projects.lead")}</p>
       <div className="case-filters" role="group" aria-label={t("projects.kicker")}>
@@ -49,7 +49,7 @@ export default function Projects() {
           {filter === "all" && CASE_GROUPS.find((group) => group.indexes[0] === index) ? <div className="case-group__label">{L(CASE_GROUPS.find((group) => group.indexes[0] === index).label)}</div> : null}
           <button type="button" className="project-card" onClick={() => openCase(index)}>
             <div className={`project-card__media${project.media === "app" ? " project-card__media--app" : ""}${project.media === "diagram" ? " project-card__media--diagram" : ""}`} style={project.mediaBg ? { background: project.mediaBg } : undefined}>
-              <img src={project.img} alt={L(project.alt)} />
+              <img src={project.img} alt={L(project.alt)} style={project.mediaPosition ? { objectPosition: project.mediaPosition } : undefined} />
             </div>
             <div className="project-card__body">
               <div className="project-card__kicker">{L(project.kicker)}</div>

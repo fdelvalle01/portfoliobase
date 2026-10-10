@@ -1,6 +1,6 @@
 # Portfolio — Francisco Del Valle
 
-Contenido editorial vigente del portfolio React. El sitio está disponible en español e inglés y sigue este recorrido: `Hero → Simulador → Recorrido de una orden → Casos → Cómo trabajo → Trayectoria → Contacto`.
+Contenido editorial vigente del portfolio React. El sitio está disponible en español e inglés y sigue este recorrido: `Hero → Proyectos → Cómo trabajo → Trayectoria → Contacto`. La propuesta al final de este archivo todavía no se renderiza.
 
 ## 1. Hero / Inicio
 
@@ -13,7 +13,7 @@ Contenido editorial vigente del portfolio React. El sitio está disponible en es
   - `6+` años en tecnología de mercados de capitales.
   - `REGIONAL` — experiencia en proyectos con alcance regional.
   - `CRÍTICOS` — sistemas en producción y entornos regulados.
-- **Acciones:** Probar el Trading Lab · Ver experiencia · Ver/descargar CV · GitHub · LinkedIn.
+- **Acciones:** Ver proyectos · Ver experiencia · Ver/descargar CV · GitHub · LinkedIn.
 
 ### English
 
@@ -24,66 +24,16 @@ Contenido editorial vigente del portfolio React. El sitio está disponible en es
   - `6+` years in capital markets technology.
   - `REGIONAL` — experience contributing to projects with regional reach.
   - `CRITICAL` — critical systems in regulated production environments.
-- **Actions:** Try the Trading Lab · View experience · View/download CV · GitHub · LinkedIn.
+- **Actions:** View projects · View experience · View/download CV · GitHub · LinkedIn.
 
-## 2. Simulador / Trading Lab
-
-### Presentación
-
-- **ES — Kicker:** NO ME CREAS: PRUÉBALO.
-- **ES — Título:** Envía una orden y observa su recorrido.
-- **ES — Descripción:** Order Book, profundidad, Order Entry, matching y Drop Copy: el dominio en el que trabajo convertido en una simulación interactiva. Selecciona un precio, ingresa una orden y observa qué ocurre.
-- **EN — Kicker:** DON'T TAKE MY WORD FOR IT. TRY IT.
-- **EN — Title:** Send an order and watch its journey.
-- **EN — Description:** Order Book, depth, Order Entry, matching, and Drop Copy: the domain I work in, turned into an interactive simulation. Select a price, enter an order, and see what happens.
-
-### Funcionalidad
-
-El laboratorio utiliza tres instrumentos ficticios —ANDES, PACIFICO y CORDILLERA— e incluye:
-
-- Market Depth agregado y por orden.
-- Último precio, mejor bid, mejor ask y spread.
-- Selección de profundidad para cargar precio y cantidad acumulada.
-- Órdenes limitadas de compra o venta con vigencia Day o GTC.
-- Matching con ejecución total, parcial o ingreso al libro.
-- Flujo de eventos y Drop Copy.
-- Explicaciones de Market Data, Market Depth, Order Entry, Matching y Execution / Drop Copy.
-- Reinicio completo de la simulación.
-
-### FIX Protocol
-
-- **ES — Título:** De la ejecución al mensaje FIX.
-- **ES — Descripción:** FIX es un estándar de mensajería para comunicar órdenes, ejecuciones y datos entre participantes del mercado. Aquí puedes inspeccionar una representación educativa del resultado de tu última orden.
-- **EN — Title:** From execution to a FIX message.
-- **EN — Description:** FIX is a messaging standard used to communicate orders, executions, and data between market participants. Here you can inspect an educational representation of your latest order result.
-
-El explorador genera un `ExecutionReport (35=8)` educativo en FIX 5.0 SP2. Muestra el mensaje completo con `BeginString`, `BodyLength`, encabezado estándar, identificadores, estado, cantidades de ejecución y `CheckSum`. El carácter `␁` representa el delimitador SOH (`0x01`); `8=FIXT.1.1` identifica la capa de transporte y `1128=9` la versión de aplicación.
-
-La pestaña **Automatización** explica este ciclo:
-
-`Market Data → Strategy → Risk Controls → Order Entry → Execution Report`
-
-Un robot de negociación puede reaccionar a Market Data y generar órdenes según reglas o modelos. Antes de llegar al mercado, cada orden debe pasar por límites, controles de riesgo, rate limits y un kill switch. La demostración no envía órdenes ni se conecta a mercados reales.
-
-### Recorrido conceptual
-
-`Order Entry → Validation → FIX Gateway → Matching → Execution / Drop Copy → Market Data`
-
-El flujo es conceptual y educativo; no representa la arquitectura interna de ninguna organización.
-
-### Aviso
-
-- **ES:** Simulación educativa con instrumentos y datos ficticios. No está conectada a un mercado real ni representa sistemas internos de ninguna empresa.
-- **EN:** Educational simulation with fictional instruments and data. It is not connected to a real market and does not represent any company's internal systems.
-
-## 3. Casos / Cases
+## 2. Proyectos y casos / Projects & cases
 
 - **ES — Título:** Evidencia, no promesas.
-- **ES — Introducción:** La demo explica el dominio. Estos casos muestran contribuciones a sistemas regulados, productos propios y experimentos de ingeniería con resultados y límites explícitos.
+- **ES — Introducción:** Contribuciones a sistemas regulados, productos propios y experimentos de ingeniería. En cada proyecto explico el problema, mi rol, el resultado y su alcance.
 - **EN — Title:** Evidence, not promises.
-- **EN — Introduction:** The demo explains the domain. These cases show contributions to regulated systems, personal products and engineering experiments with explicit results and limitations.
+- **EN — Introduction:** Contributions to regulated systems, personal products and engineering experiments. Each project explains the problem, my role, the outcome and its scope.
 
-Los casos se pueden filtrar por producción, trading, plataforma y producto propio.
+Los casos se pueden filtrar por producción, trading, plataforma, proyectos personales y POC / Ingeniería.
 
 ### Sistemas en producción en mercados regulados
 
@@ -148,7 +98,20 @@ Los casos se pueden filtrar por producción, trading, plataforma y producto prop
 - **Fuente editorial del sitio:** `src/site/data/aiSdd.js` y `src/site/components/AiSddStudy.jsx`.
 - **Acceso:** La rama personal `feat/s0-template-viewer-personal` de `fdelvalle01/sdd-workspace` devuelve 404 sin autenticación al 2026-10-02. La ficha no ofrece un enlace público inaccesible ni publica los registros originales; la visibilidad del repositorio permanece intacta.
 
-## 4. Cómo trabajo / How I work
+#### Market Depth FIX Lab
+
+- **Categoría:** Proyecto personal · demo educativa. Pertenece a **Laboratorio de ingeniería · beta**, junto a OpenSpec S0 + Viewer.
+- **Resumen ES:** Laboratorio interactivo para explorar un libro de órdenes, el calce por prioridad precio-tiempo y los ExecutionReports FIX. Demo independiente que funciona en el navegador con datos sintéticos.
+- **Summary EN:** Interactive lab for exploring an order book, price-time matching and FIX ExecutionReports. A standalone browser demo using synthetic data.
+- **Rol:** Proyecto personal con motor de calce, codec FIX e interfaz separados. Escenarios deterministas, profundidad agregada o por orden e inspector de mensajes.
+- **Resultado:** Demo pública con ejecuciones parciales y completas, remanentes en el libro y cierre de sesión simulada para órdenes DAY. Un instrumento sintético; sin backend, datos en vivo ni sesión FIX real.
+- **Stack:** React, TypeScript, Vite, FIXT.1.1, FIX 5.0 SP2 y Vitest.
+- **Visual:** Captura del escenario local del proyecto independiente con datos sintéticos, copiada desde su carpeta `preview/`. La tarjeta encuadra la parte superior del libro y el ticket.
+- **Demo:** https://market-depth-fix-lab.netlify.app/
+- **Código:** https://github.com/fdelvalle01/market-depth-fix-lab
+- **Enlace directo en el portafolio:** `/#market-depth-fix-lab`.
+
+## 3. Cómo trabajo / How I work
 
 - **ES — Título:** Trabajar con sistemas que mueven dinero te enseña tres cosas.
 - **ES — Introducción:** Son los principios que guían mi trabajo, independientemente del lenguaje o framework utilizado.
@@ -175,7 +138,7 @@ Los casos se pueden filtrar por producción, trading, plataforma y producto prop
 - **ES:** Ingeniero en Informática (INACAP), con diplomado en Desarrollo de Aplicaciones Móviles de la Pontificia Universidad Católica de Chile. Español nativo e inglés B2 con certificación IELTS. Viví y estudié inglés durante seis meses en Nueva Zelanda. Fuera del código: montaña, videojuegos y viajar; de ahí salió Summit.
 - **EN:** Computer Engineer (INACAP), with a Diploma in Mobile Application Development from Pontificia Universidad Católica de Chile. Native Spanish speaker and English B2 with IELTS certification. I lived and studied English in New Zealand for six months. Outside code: mountains, games, and traveling; that is where Summit came from.
 
-## 5. Trayectoria / Career
+## 4. Trayectoria / Career
 
 - **ES — Título:** De practicante a senior, construyendo cada vez más cerca del core del mercado.
 - **ES — Introducción:** Una progresión construida sobre operaciones de mercado, integraciones, sistemas distribuidos y plataformas de trading.
@@ -196,7 +159,7 @@ Los casos se pueden filtrar por producción, trading, plataforma y producto prop
 - English Studies · WorldWide School of English, Nueva Zelanda · agosto 2024–febrero 2025.
 - Español nativo · Inglés B2 — certificación IELTS.
 
-## 6. Contacto / Contact
+## 5. Contacto / Contact
 
 - **ES — Título:** El siguiente paso.
 - **ES — Descripción:** Estoy abierto a oportunidades senior remotas e internacionales en Exchange & Trading Systems, Backend Engineering, FinTech y Distributed Systems. También evalúo consultoría técnica en integraciones, APIs y sistemas críticos.
@@ -216,3 +179,70 @@ Hablemos de arquitectura, APIs, integraciones o sistemas que no pueden fallar.
 
 - Email: fdel_valle01@hotmail.com
 - GitHub: https://github.com/fdelvalle01
+
+## Propuesta editorial: Sobre mí (pendiente de implementación)
+
+### Diagnóstico
+
+El antiguo recorrido ponía una simulación extensa entre la presentación y los casos. La herramienta
+ocupaba el espacio que podría explicar quién es Francisco y cómo se conectan su experiencia y sus
+proyectos. Al tener una demo independiente, corresponde presentarla dentro del laboratorio.
+
+Existe `About.jsx`, pero no se renderiza. La biografía hoy está al final de Cómo trabajo y repite
+formación e idiomas incluidos en Trayectoria. Incorporar Sobre mí debería trasladar esa información
+personal y dejar Cómo trabajo para principios y capacidades; Trayectoria conservaría fechas y formación.
+
+### Recorrido propuesto
+
+`Inicio → Sobre mí → Proyectos y casos → Cómo trabajo → Trayectoria → Contacto`
+
+- **Inicio:** nombre, especialidad, evidencia breve y acceso a proyectos.
+- **Sobre mí:** origen de la curiosidad por el software y conexión con la carrera actual. Dos o tres párrafos, sin repetir el CV.
+- **Proyectos y casos:** contribuciones profesionales, productos personales y laboratorio de ingeniería, con sus límites y evidencias.
+- **Cómo trabajo:** principios de diseño y capacidades técnicas.
+- **Trayectoria:** experiencia y formación en orden cronológico.
+- **Contacto:** oportunidades profesionales y consultoría.
+
+### Borrador ES
+
+**De la curiosidad por las apps a construir sistemas de mercado.**
+
+Mi interés por la informática empezó entre videojuegos en el computador y conversaciones con amigos
+en Discord sobre desarrollo web; por entonces se hablaba mucho de PHP. Mi primer teléfono táctil
+y las apps y juegos que descubrí en Android también despertaban preguntas: quería entender cómo se
+creaban esas aplicaciones y cómo podían funcionar en dispositivos tan pequeños.
+
+Desde 2020 trabajo en Bolsa de Santiago / nuam. He desarrollado aplicaciones de operación,
+integraciones y servicios backend, liderado el módulo de usuarios y entidades de Sebra HT y participado
+en la integración de la plataforma de negociación para el mercado dominicano. En ese recorrido,
+las reglas de negocio, los permisos y la trazabilidad pasaron a formar parte de mi manera de construir software.
+
+Esa curiosidad también sigue en mis proyectos personales. Mi interés por la montaña dio origen a
+Summit; Stock Bar, Trading Workstation y Market Depth FIX Lab son espacios donde exploro ideas propias
+y convierto mi experiencia en sistemas que se pueden ver y probar.
+
+### Draft EN
+
+**From curiosity about apps to building market systems.**
+
+My interest in computing began with PC games and conversations with friends on Discord about web
+development; PHP came up often at the time. My first touchscreen phone and the apps and games
+I discovered on Android also raised questions: how were these applications built, and
+how could they run on such small devices?
+
+Since 2020 I have worked at Bolsa de Santiago / nuam. I have developed operational applications,
+integrations and backend services, led the Sebra HT user and entity module, and contributed to
+integrating the trading platform for the Dominican market. Along the way, business rules, permissions
+and traceability became part of how I build software.
+
+That curiosity continues in my personal projects. My interest in the mountains led to Summit;
+Stock Bar, Trading Workstation and Market Depth FIX Lab give me room to explore my own ideas and
+turn my experience into systems people can see and try.
+
+### Fuentes y datos por conciliar
+
+- El origen personal procede del relato aportado por Francisco en esta conversación el 2026-10-10.
+- Los hitos profesionales y proyectos proceden de `src/site/data/content.js`, los casos existentes y el CV oficial de `public/`.
+- El alcance del laboratorio se verificó con su README público y la copia local del proyecto.
+- El CV y el sitio difieren en fechas de promoción a senior, fin de INACAP, diplomado PUC y estudios de inglés; el sitio también menciona IELTS y el CV no. Este cambio no decide qué fuente tiene las fechas correctas. Antes de editar la cronología, se necesitan los datos confirmados por Francisco.
+- La propuesta no atribuye los proyectos a un momento vocacional específico ni incorpora métricas profesionales nuevas.

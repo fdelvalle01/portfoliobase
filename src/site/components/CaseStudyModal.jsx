@@ -71,7 +71,7 @@ export default function CaseStudyModal({ project, onClose }) {
           className={`modal__media${project.media === "app" ? " modal__media--app" : ""}${project.media === "diagram" ? " modal__media--diagram" : ""}`}
           style={project.mediaBg ? { background: project.mediaBg } : undefined}
         >
-          <img src={selectedImage.img} alt={L(selectedImage.alt)} />
+          <img src={selectedImage.img} alt={L(selectedImage.alt)} style={project.mediaPosition ? { objectPosition: project.mediaPosition } : undefined} />
           <button
             type="button"
             ref={closeRef}
@@ -84,6 +84,7 @@ export default function CaseStudyModal({ project, onClose }) {
         </div>
 
         <div className="modal__body">
+          {project.mediaNote && !project.gallery && <p className="case-media-note">{L(project.mediaNote)}</p>}
           {project.gallery && (
             <div className="case-gallery">
               <div className="case-gallery__choices">
@@ -135,16 +136,28 @@ export default function CaseStudyModal({ project, onClose }) {
             ))}
           </div>
 
-          {project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-outline-accent btn-lg modal__visit"
-            >
-              {t(project.linkLabel || "projects.visit")} <PiArrowUpRight />
-            </a>
-          ) : null}
+          <div className="modal__actions">
+            {project.demoLink ? (
+              <a
+                href={project.demoLink}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-outline-accent btn-lg modal__visit"
+              >
+                {t("projects.demo")} <PiArrowUpRight />
+              </a>
+            ) : null}
+            {project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-outline-accent btn-lg modal__visit"
+              >
+                {t(project.linkLabel || "projects.visit")} <PiArrowUpRight />
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
