@@ -1,6 +1,6 @@
 import React from "react";
 import { PiBriefcase, PiDownloadSimple, PiGithubLogo, PiLinkedinLogo, PiReadCvLogo } from "react-icons/pi";
-import avatar from "../../Assets/avatar.svg";
+import portrait from "../../Assets/img_person.jpg";
 import { LINKS, STATS } from "../data/content";
 import { useI18n } from "../context/I18nContext";
 
@@ -73,7 +73,7 @@ export default function Hero() {
 
       <div className="hero__art">
         <div className="hero__glow" />
-        <img src={avatar} alt="" className="hero__img" />
+        <img src={portrait} alt="Francisco Del Valle" className="hero__img hero__img--portrait" />
       </div>
     </section>
   );

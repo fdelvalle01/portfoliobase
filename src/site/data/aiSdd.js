@@ -1,44 +1,61 @@
-import diagram from "../../Assets/Projects/ai-sdd.svg";
+import viewerHome from "../../Assets/Projects/openspec-viewer-home.png";
+import viewerGraph from "../../Assets/Projects/openspec-viewer-graph.png";
 
-export const AI_SDD_SOURCE_REVISION = "768a64f";
+export const AI_SDD_SOURCE_REVISION = "913f984";
+export const AI_SDD_TEMPLATE_REVISION = "a4610cf";
+
+const homeAlt = {
+  es: "Inicio de OpenSpec Viewer con las HU, specs, contexto y archivo de una demo ficticia.",
+  en: "OpenSpec Viewer home showing user stories, specs, context and archives from a fictional demo.",
+};
+const graphAlt = {
+  es: "Grafo del S0 demo con las relaciones entre HU, specs, contexto, componentes y plantilla.",
+  en: "Demo S0 graph showing relationships between user stories, specs, context, components and template.",
+};
 
 export const AI_SDD_CASE = {
   id: "poc-ai-sdd",
   categories: ["personal", "platform", "poc"],
-  img: diagram,
-  media: "diagram",
-  alt: {
-    es: "Diagrama conceptual: una plantilla prepara el S0 del sistema; la IA implementa en los repositorios tras revisión humana y un visor local permite leer los documentos de S0.",
-    en: "Conceptual diagram: a template prepares the system's S0; AI implements in code repositories after human review, while a local viewer displays S0 documents.",
+  img: viewerHome,
+  media: "viewer",
+  alt: homeAlt,
+  gallery: [
+    { img: viewerHome, alt: homeAlt },
+    { img: viewerGraph, alt: graphAlt },
+  ],
+  fullSizeMedia: true,
+  mediaNote: {
+    es: "Capturas originales de OpenSpec Viewer 0.3.2, aportadas el 11 de octubre de 2026. La demo usa datos ficticios; el grafo es una vista derivada de sus documentos.",
+    en: "Original OpenSpec Viewer 0.3.2 screenshots, supplied on October 11, 2026. The demo uses fictional data; the graph is a view derived from its documents.",
   },
   kicker: { es: "PROYECTO PERSONAL · BETA", en: "PERSONAL PROJECT · BETA" },
   title: { es: "OpenSpec S0 + Viewer", en: "OpenSpec S0 + Viewer" },
   summary: {
-    es: "Una plantilla para planificar cambios antes de programar y un visor de VS Code para explorar sus especificaciones, tareas y diagramas.",
-    en: "A template to plan changes before coding and a VS Code viewer to explore their specifications, tasks and diagrams.",
+    es: "Un S0 por sistema para planificar cambios y un visor independiente de VS Code para explorar HU, especificaciones, tareas y relaciones documentales.",
+    en: "One S0 per system for planning changes, with an independent VS Code viewer for exploring user stories, specifications, tasks and document relationships.",
   },
   tags: ["OpenSpec", "VS Code", "Human-in-the-loop"],
   context: {
-    es: "Quería hacer más sencillo el trabajo con especificaciones y agentes IA. Cada sistema tiene un S0: su repositorio de planificación con contexto, HU, especificaciones y tareas. El código conserva su ubicación, sea un proyecto simple, un monorepo o varios repositorios. No requiere Brain ni Obsidian.",
-    en: "I wanted to make specifications and AI agents easier to work with. Each system has an S0: its planning repository for context, user stories, specifications and tasks. Code stays in its existing location, whether in a single project, a monorepo or several repositories. Brain and Obsidian are not required.",
+    es: "Quería hacer más sencillo el trabajo con especificaciones y agentes IA. SDD Workspace prepara un S0 por sistema con contexto, HU, especificaciones y tareas. El código conserva su ubicación, sea un proyecto simple, un monorepo o varios repositorios. OpenSpec Viewer permite consultar ese S0 desde VS Code y se distribuye por separado.",
+    en: "I wanted to make specifications and AI agents easier to work with. SDD Workspace prepares one S0 per system with context, user stories, specifications and tasks. Code stays in its existing location, whether in a single project, a monorepo or several repositories. OpenSpec Viewer lets you read that S0 in VS Code and is distributed separately.",
   },
   role: {
-    es: "Diseñé el flujo y simplifiqué la preparación por proyecto. Con asistencia de IA, desarrollé el creador de S0 y el visor local, adapté la documentación y revisé las pruebas. La integración conserva las skills oficiales de OpenSpec y las revisiones humanas antes de implementar.",
-    en: "I designed the workflow and simplified project setup. With AI assistance, I developed the S0 creator and local viewer, adapted the documentation and reviewed the tests. The integration preserves official OpenSpec skills and human reviews before implementation.",
+    es: "Diseñé el flujo y el creador de S0. Con asistencia de IA, desarrollé el visor, la búsqueda local y el grafo documental, y separé la extensión en su propio repositorio con motor y VSIX. Revisé la documentación y las pruebas, conservando las revisiones humanas antes de implementar.",
+    en: "I designed the workflow and S0 creator. With AI assistance, I developed the viewer, local search and document graph, and separated the extension into its own repository with its engine and VSIX. I reviewed documentation and tests while preserving human reviews before implementation.",
   },
   result: {
-    es: "Beta personal con plantilla genérica, creación de S0 independientes y visor instalable como VSIX. Validación en Windows con perfiles aislados y un ciclo OpenSpec que incluye cambio de requisito. La usabilidad con otro desarrollador y el impacto en productividad siguen por medir.",
-    en: "Personal beta with a generic template, independent S0 creation and an installable VSIX viewer. Validated on Windows with isolated profiles and an OpenSpec cycle that includes a requirement change. Usability with another developer and productivity impact remain to be measured.",
+    es: "Beta personal con plantilla genérica y OpenSpec Viewer 0.3.2 instalable como VSIX: navegación de HU y specs, búsqueda local, Mermaid y grafo del S0. El visor lee archivos locales y funciona sin cuenta IA ni servidor. La validación documentada usa Windows y perfiles aislados; la adopción y el impacto en productividad siguen por medir.",
+    en: "Personal beta with a generic template and OpenSpec Viewer 0.3.2 installable as a VSIX: user-story and spec navigation, local search, Mermaid and an S0 graph. The viewer reads local files and works without an AI account or server. Documented validation uses Windows and isolated profiles; adoption and productivity impact remain to be measured.",
   },
-  stack: ["OpenSpec 1.13.2", "Node.js", "Markdown", "Git", "VS Code Extension API", "Mermaid", "Codex", "Claude Code"],
-  // No public repository link: unauthenticated access returned 404.
-  link: "",
+  stack: ["OpenSpec 1.13.2", "OpenSpec Viewer 0.3.2", "Node.js", "Markdown", "Git", "VS Code Extension API", "Mermaid", "Codex", "Claude Code"],
+  link: "https://github.com/fdelvalle01/sdd-openspec-view",
+  linkLabel: "projects.repo",
 };
 
 export const AI_SDD_STEPS = [
   {
     title: { es: "Preparar S0 y conocer el proyecto", en: "Prepare S0 and understand the project" },
-    detail: { es: "Crear S0 desde la plantilla, indicar el código al agente y revisar el mapa que documenta con fuentes comprobadas.", en: "Create S0 from the template, point the agent to the code and review the map it documents from verified sources." },
+    detail: { es: "Crear S0 con la plantilla de SDD Workspace, indicar el código al agente y revisar el mapa que documenta con fuentes comprobadas.", en: "Create S0 with the SDD Workspace template, point the agent to the code and review the map it documents from verified sources." },
     artifact: { es: "S0 + contexto + repositorios vinculados", en: "S0 + context + linked repositories" },
   },
   {

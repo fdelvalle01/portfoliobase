@@ -26,22 +26,32 @@ del escenario local con datos sintéticos y acceso directo a la
 [repositorio](https://github.com/fdelvalle01/market-depth-fix-lab).
 La ficha también se puede abrir con `/#market-depth-fix-lab`.
 
-## POC: AI-Assisted Spec-Driven Development
+## OpenSpec S0 + Viewer
 
-Nuevo caso ES/EN en «Casos», con filtro POC / Ingeniería y enlace directo
-`/#poc-ai-sdd`. Conserva Trading Workstation y su galería. El contenido vive en
-`src/site/data/aiSdd.js`; `AiSddStudy.jsx` presenta el flujo y separa evidencias de
-limitaciones. La portada SVG es un diagrama conceptual, no una captura de una app.
+Caso ES/EN en «Casos», con filtro POC / Ingeniería y enlace directo
+`/#poc-ai-sdd`. El contenido vive en `src/site/data/aiSdd.js`; `AiSddStudy.jsx`
+presenta arquitectura, flujo, evidencia y límites.
 
-La ficha resume el informe de evidencia de Brain Projects en la revisión `eb0bdf3`.
-La documentación no tiene acceso público (GitHub devuelve 404 sin autenticación), por lo
-que se omiten enlaces inaccesibles; no se cambia la visibilidad del repositorio.
-No afirma mejoras de productividad, adopción de equipo ni conexión con Jira.
-Las pruebas de la POC se citan desde ese informe; no son pruebas ejecutadas por el portfolio.
+SDD Workspace mantiene la plantilla y el creador de S0. El agente consulta S0 y
+ejecuta cambios autorizados en los repositorios de código después de las revisiones.
+[OpenSpec Viewer](https://github.com/fdelvalle01/sdd-openspec-view) es una extensión
+independiente de sólo lectura con motor y VSIX propios. La figura `ai-sdd.svg`
+explica esa separación; el grafo del Viewer es una vista derivada de documentos.
 
-La rama `feat/ai-assisted-sdd-poc` parte de `main` después del merge de Trading Workstation
-(PR #2). Un push a esta rama no acredita un despliegue de producción: depende de la
-configuración de previews de Netlify y de la integración a la rama de producción.
+La portada y la galería usan dos capturas originales aportadas el 2026-10-11:
+`openspec-viewer-home.png` y `openspec-viewer-graph.png`. Muestran la demo ficticia
+de Viewer 0.3.2, no sistemas reales ni aceptación de una HU. Pueden abrirse a tamaño
+completo desde la ficha.
+
+La evidencia se cita desde `VALIDACION.md` de SDD Workspace (`a4610cf`, 2026-10-10)
+y [docs/validacion.md del Viewer](https://github.com/fdelvalle01/sdd-openspec-view/blob/913f984/docs/validacion.md)
+(`913f984`, pruebas del 2026-10-08 y revalidación UI posterior). Son resultados
+documentados de sus distribuciones; no se repitieron para actualizar el portfolio.
+No se afirma mejora de productividad ni adopción por terceros. SDD Workspace
+requiere acceso; el enlace público de la ficha lleva al repositorio oficial del Viewer.
+
+Los cambios del portfolio se validan en `development` y se integran a `main` para
+activar el despliegue configurado en Netlify.
 
 ## Incorporación de Trading Workstation
 
@@ -100,9 +110,9 @@ Al actualizarlo, se debe conservar este nombre para no romper el enlace público
 ## Instalación y scripts
 
 ```bash
-npm install
+npm ci --ignore-scripts --no-audit --no-fund
 npm start                       # servidor de desarrollo en http://localhost:3000
-npm test -- --watchAll=false    # tests
+npm test -- --watchAll=false --runInBand    # tests
 npm run build                   # build de producción en build/
 ```
 
@@ -121,8 +131,9 @@ Se puede desplegar conectando el repositorio, o arrastrando la carpeta `build` a
 - **Formulario de contacto**: hoy abre el cliente de correo del visitante mediante `mailto:`. Si en
   el futuro se quiere envío real desde el navegador, hay que conectar Formspree, EmailJS o una
   función serverless.
-- **Dominio**: `public/index.html` apunta a `https://franciscodelvalle.netlify.app/` en `og:url`;
-  actualizar si se configura un dominio propio.
+
+El dominio vigente es `https://franciscodelvalle-it.netlify.app/`; `public/index.html`
+lo declara en la URL canónica y en `og:url`.
 
 ## Código heredado
 

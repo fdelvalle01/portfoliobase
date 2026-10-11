@@ -123,16 +123,16 @@ Los casos se pueden filtrar por producción, trading, plataforma, proyectos pers
 - **Categoría:** Proyecto personal · beta. Disponible en ES/EN y en el filtro POC / Ingeniería.
 - **Enlace para compartir:** `/#poc-ai-sdd` abre directamente la ficha.
 - **Problema:** Simplificar el uso de especificaciones y agentes IA, mantener el contexto de cada sistema y revisar los cambios antes de programar.
-- **Propuesta:** Una plantilla genérica prepara un S0 independiente por sistema. S0 conserva contexto, HU, specs, diseños, tareas y evidencias; el código permanece en sus repositorios. Brain y Obsidian no son requisitos.
+- **Propuesta:** SDD Workspace mantiene una plantilla y un creador que preparan un S0 independiente por sistema. S0 conserva contexto, HU, specs, diseños, tareas y evidencias; el código permanece en sus repositorios. OpenSpec Viewer se distribuye y mantiene por separado.
 - **Rol:** Diseño del flujo y simplificación de la preparación; desarrollo del creador y visor con asistencia de IA, documentación y revisión de las pruebas. Se conservan las skills oficiales de OpenSpec.
 - **Uso inicial:** `npm run crear-s0` → abrir el S0 → indicar el proyecto al agente → revisar el mapa. Admite código nuevo o existente, monorepos y multirrepos.
 - **Flujo de HU:** Petición → análisis y propuesta/specs → revisión funcional → diseño/tareas → revisión técnica → ejecución autorizada en componentes → pruebas y aceptación → archivo en S0. Un cambio de requisitos renueva las revisiones afectadas.
-- **Visor:** Extensión personal de VS Code instalable como VSIX, de sólo lectura: HU, especificaciones, tareas y diagramas Mermaid. Puede abrir un S0 desde la ventana donde está el código. No ejecuta agentes ni registra stores.
-- **Visuales:** Portada vectorial conceptual y diagrama responsive con texto accesible. No son capturas ni registros de una ejecución.
-- **Evidencia:** `VALIDACION.md` de la distribución personal, revisión `768a64f`, pruebas del 2026-10-01: 46 comprobaciones de creador/plantilla/ciclo OpenSpec, 28 unitarias del visor y 8 en el host VS Code; también recorrido UI y VSIX. Incluye reproceso tras aprobación simulada. No se repitieron esas pruebas para actualizar el sitio.
+- **Visor:** OpenSpec Viewer 0.3.2, extensión independiente de VS Code instalable como VSIX, con fuente, motor vendorizado y pruebas propios. Sólo lectura: HU, specs, tareas, contexto, búsqueda local, Mermaid y grafo de relaciones documentales. Lee el S0 seleccionado sin ejecutar sus scripts; funciona sin cuenta IA, OpenSpec CLI ni servidor.
+- **Visuales:** Portada y galería con las capturas originales de Inicio y Grafo del S0, aportadas el 2026-10-11. Muestran la demo ficticia; el grafo deriva de sus documentos y no acredita arquitectura validada. La figura de arquitectura dentro de la ficha explica plantilla → S0, agente → código autorizado y Viewer → lectura de S0. Incluye texto ES/EN y acceso a capturas completas.
+- **Evidencia:** SDD Workspace `a4610cf`, `VALIDACION.md` del 2026-10-10: 10 pruebas de creador y 106 de plantilla. Viewer `913f984`, `docs/validacion.md`: 110 unitarias, 31 UI Edge y 16 host VS Code del 2026-10-08, más revalidación UI posterior de 31 casos tras ajustar el helper. No se repitieron esas suites para actualizar el sitio. Las aprobaciones del ciclo de laboratorio son simuladas.
 - **Límites:** Comprobado en Windows con perfiles aislados. Usabilidad con otro desarrollador, validación Linux/macOS e impacto en productividad pendientes. Jira y controles obligatorios PR/CI fuera de esta beta; las revisiones humanas son reglas del flujo, no bloqueos nativos.
 - **Fuente editorial del sitio:** `src/site/data/aiSdd.js` y `src/site/components/AiSddStudy.jsx`.
-- **Acceso:** La rama personal `feat/s0-template-viewer-personal` de `fdelvalle01/sdd-workspace` devuelve 404 sin autenticación al 2026-10-02. La ficha no ofrece un enlace público inaccesible ni publica los registros originales; la visibilidad del repositorio permanece intacta.
+- **Acceso:** El repositorio oficial del Viewer es público: https://github.com/fdelvalle01/sdd-openspec-view. La ficha enlaza su fuente y validación. SDD Workspace requiere acceso al comprobarlo el 2026-10-11; se describe la plantilla sin ofrecer un enlace público inaccesible.
 
 #### Market Depth FIX Lab
 

@@ -68,7 +68,7 @@ export default function CaseStudyModal({ project, onClose }) {
         aria-labelledby="case-title"
       >
         <div
-          className={`modal__media${project.media === "app" ? " modal__media--app" : ""}${project.media === "diagram" ? " modal__media--diagram" : ""}`}
+          className={`modal__media${project.media === "app" ? " modal__media--app" : ""}${project.media === "diagram" ? " modal__media--diagram" : ""}${project.media === "viewer" ? " modal__media--viewer" : ""}`}
           style={project.mediaBg ? { background: project.mediaBg } : undefined}
         >
           <img src={selectedImage.img} alt={L(selectedImage.alt)} style={project.mediaPosition ? { objectPosition: project.mediaPosition } : undefined} />
@@ -101,6 +101,7 @@ export default function CaseStudyModal({ project, onClose }) {
                 ))}
               </div>
               <p>{L(selectedImage.alt)}</p>
+              {project.fullSizeMedia && <a className="case-gallery__full-size" href={selectedImage.img} target="_blank" rel="noreferrer">{L({ es: "Abrir captura completa", en: "Open full-size screenshot" })} <PiArrowUpRight aria-hidden="true" /></a>}
               <small>{L(project.mediaNote)}</small>
             </div>
           )}

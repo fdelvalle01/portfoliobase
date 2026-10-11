@@ -48,7 +48,7 @@ export default function Projects() {
         {visibleCases.map(({ project, index }) => <React.Fragment key={project.title.es}>
           {filter === "all" && CASE_GROUPS.find((group) => group.indexes[0] === index) ? <div className="case-group__label">{L(CASE_GROUPS.find((group) => group.indexes[0] === index).label)}</div> : null}
           <button type="button" className="project-card" onClick={() => openCase(index)}>
-            <div className={`project-card__media${project.media === "app" ? " project-card__media--app" : ""}${project.media === "diagram" ? " project-card__media--diagram" : ""}`} style={project.mediaBg ? { background: project.mediaBg } : undefined}>
+            <div className={`project-card__media${project.media === "app" ? " project-card__media--app" : ""}${project.media === "diagram" ? " project-card__media--diagram" : ""}${project.media === "viewer" ? " project-card__media--viewer" : ""}`} style={project.mediaBg ? { background: project.mediaBg } : undefined}>
               <img src={project.img} alt={L(project.alt)} style={project.mediaPosition ? { objectPosition: project.mediaPosition } : undefined} />
             </div>
             <div className="project-card__body">

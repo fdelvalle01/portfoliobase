@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { I18nProvider } from "../context/I18nContext";
 import Projects from "./Projects";
 import { CASES } from "../data/content";
+import { AI_SDD_CASE, AI_SDD_SOURCE_REVISION } from "../data/aiSdd";
 
 beforeEach(() => {
   localStorage.clear();
@@ -73,9 +74,18 @@ test("opens a shareable POC with both reviews, evidence and limitations; Escape 
   expect(within(steps).getByText("Revisión funcional explícita")).toBeInTheDocument();
   expect(within(steps).getByText("Revisión técnica explícita")).toBeInTheDocument();
   expect(within(dialog).getByText(/todavía sin línea base comparativa/)).toBeInTheDocument();
-  expect(within(dialog).getByText("768a64f")).toBeInTheDocument();
-  expect(within(dialog).getByText(/El repositorio requiere acceso/)).toBeInTheDocument();
-  expect(within(dialog).queryByRole("link")).not.toBeInTheDocument();
+  expect(within(dialog).getByRole("heading", { name: "Dos distribuciones, un S0 por sistema" })).toBeInTheDocument();
+  expect(within(dialog).getByText(AI_SDD_SOURCE_REVISION)).toBeInTheDocument();
+  expect(within(dialog).getByRole("link", { name: "Ver el repositorio" }))
+    .toHaveAttribute("href", "https://github.com/fdelvalle01/sdd-openspec-view");
+  const gallery = within(dialog).getByRole("button", { name: AI_SDD_CASE.gallery[1].alt.es });
+  expect(gallery).toHaveAttribute("aria-pressed", "false");
+  userEvent.click(gallery);
+  expect(gallery).toHaveAttribute("aria-pressed", "true");
+  expect(within(dialog).getByRole("img", { name: AI_SDD_CASE.gallery[1].alt.es }))
+    .toHaveAttribute("src", AI_SDD_CASE.gallery[1].img);
+  expect(within(dialog).getByRole("link", { name: "Abrir captura completa" }))
+    .toHaveAttribute("href", AI_SDD_CASE.gallery[1].img);
   fireEvent.keyDown(dialog, { key: "Escape" });
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   expect(window.location.hash).toBe("#casos");
@@ -92,7 +102,10 @@ test("opens the direct link in English and closes when the hash changes", () => 
   expect(within(dialog).getByText("Explicit functional review")).toBeInTheDocument();
   expect(within(dialog).getByText("Explicit technical review")).toBeInTheDocument();
   expect(within(dialog).getByText("What remains to be demonstrated")).toBeInTheDocument();
-  expect(within(dialog).getByText(/The repository requires access/)).toBeInTheDocument();
+  expect(within(dialog).getByRole("heading", { name: "Two distributions, one S0 per system" })).toBeInTheDocument();
+  expect(within(dialog).getByRole("img", { name: AI_SDD_CASE.gallery[0].alt.en })).toBeInTheDocument();
+  expect(within(dialog).getByRole("link", { name: "View the repository" }))
+    .toHaveAttribute("href", "https://github.com/fdelvalle01/sdd-openspec-view");
   window.history.replaceState(null, "", "#casos");
   fireEvent(window, new HashChangeEvent("hashchange"));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -102,10 +115,11 @@ test("keeps keyboard focus within the POC dialog", () => {
   window.history.replaceState(null, "", "#poc-ai-sdd");
   renderProjects();
   const dialog = screen.getByRole("dialog");
-  const close = within(dialog).getByRole("button");
+  const close = within(dialog).getByRole("button", { name: "Cerrar" });
+  const last = within(dialog).getByRole("link", { name: "Ver el repositorio" });
   expect(close).toHaveFocus();
   fireEvent.keyDown(close, { key: "Tab", shiftKey: true });
-  expect(close).toHaveFocus();
-  fireEvent.keyDown(close, { key: "Tab" });
+  expect(last).toHaveFocus();
+  fireEvent.keyDown(last, { key: "Tab" });
   expect(close).toHaveFocus();
 });
